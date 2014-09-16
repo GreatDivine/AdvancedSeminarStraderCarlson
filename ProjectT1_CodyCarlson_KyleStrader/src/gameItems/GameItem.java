@@ -1,32 +1,49 @@
 package gameItems;
 
-import graphics.GraphicsWindow;
-
+import java.awt.Graphics;
 import java.awt.geom.Point2D;
 
 public class GameItem {
 	
-	private Point2D mPos;
-	
+	protected int mPosX;
+	protected int mPosY;
+	protected int mWidth;
+	protected int mHeight;
 	
 	GameItem()
 	{
-		mPos.setLocation(0,0);
+		mPosX = 0;
+		mPosY = 0;
+		mWidth = 0;
+		mHeight = 0;
 	}
 	
-	GameItem(double x, double y)
+	GameItem(int x, int y, int w, int h)
 	{
-		mPos.setLocation(x, y);
+		mPosX = x;
+		mPosY = y;
+		mWidth = w;
+		mHeight = h;
 	}
 	
-	GameItem(Point2D pos)
+	public int getX()
 	{
-		mPos.setLocation(pos);
+		return mPosX;
 	}
 	
-	public Point2D getPos()
+	public int getY()
 	{
-		return mPos;
+		return mPosY;
+	}
+	
+	public int getWidth()
+	{
+		return mWidth;
+	}
+	
+	public int getHeight()
+	{
+		return mHeight;
 	}
 	
 	public void update(long timeNs)
@@ -34,7 +51,7 @@ public class GameItem {
 		
 	}
 	
-	public void draw(GraphicsWindow g)
+	public void paint(Graphics g)
 	{
 		
 	}
