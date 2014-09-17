@@ -40,13 +40,13 @@ public class WaveManager {
 			mWaveSet = mWaveCount / NUM_ZOMBIE_TYPES;
 			
 			switch(tmp){
-			case 1:
+			case 0:
 				createWavePop(wave, Wave.mZombieType.WALKER, mWaveSet);
 				break;
-			case 2:
+			case 1:
 				createWavePop(wave, Wave.mZombieType.RUNNER, mWaveSet);
 				break;
-			case 3:
+			case 2:
 				createWavePop(wave, Wave.mZombieType.FATTY, mWaveSet);
 				break;
 			}
@@ -62,7 +62,7 @@ public class WaveManager {
 		public void update(long timeNS){
 			mPrevTime = mCurTime;
 			mCurTime = (double)System.nanoTime() / GameSettings.NANOSECONDS_TO_SECONDS;
-			mTimePassed += (mCurTime - mPrevTime) - mStartTime;
+			mTimePassed += mCurTime - mPrevTime;
 			System.out.println(mTimePassed);
 			
 			if(mTimePassed > 1){

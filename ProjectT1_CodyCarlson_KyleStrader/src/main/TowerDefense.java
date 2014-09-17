@@ -8,13 +8,8 @@ public class TowerDefense {
 	
 	private static Game game;
 	
-	private double timePassed;
-	private double deltaTime;
-	
 	TowerDefense()
 	{
-		timePassed = 0;
-		deltaTime = GameSettings.UPDATE_TIME;
 	}
 	
 	public static void gameLoop()
