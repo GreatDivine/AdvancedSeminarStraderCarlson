@@ -27,5 +27,4 @@ public class Tower extends GameItem {
 	{
 		g.drawOval(xCenter-r, yCenter-r, 2*r, 2*r);
 	}
-
 }
