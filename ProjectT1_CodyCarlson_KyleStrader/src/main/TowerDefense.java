@@ -2,11 +2,11 @@ package main;
 
 import graphics.Game;
 
+import util.GameSettings;
+
 public class TowerDefense {
 	
 	private static Game game;
-	private static final double UPDATE_TIME = 33.3 / 1000.0;
-	private static final double SECONDS_CONVERSION = 1000000000.0;
 	
 	private double timePassed;
 	private double deltaTime;
@@ -14,19 +14,19 @@ public class TowerDefense {
 	TowerDefense()
 	{
 		timePassed = 0;
-		deltaTime = UPDATE_TIME;
+		deltaTime = GameSettings.UPDATE_TIME;
 	}
 	
 	public static void gameLoop()
 	{
-		double nextTime = (double)System.nanoTime() / SECONDS_CONVERSION;
+		double nextTime = (double)System.nanoTime() / GameSettings.NANOSECONDS_TO_SECONDS;
 		while(game.keepGoing)
 		{
-			double curTime = (double)System.nanoTime() / SECONDS_CONVERSION;
+			double curTime = (double)System.nanoTime() / GameSettings.NANOSECONDS_TO_SECONDS;
 			if (curTime >= nextTime)
 			{
-				nextTime += UPDATE_TIME;
-				game.update((long)UPDATE_TIME);
+				nextTime += GameSettings.UPDATE_TIME;
+				game.update((long)GameSettings.UPDATE_TIME);
 				game.repaint();
 			}
 			else
@@ -49,7 +49,7 @@ public class TowerDefense {
 	
 	public static void main(String[] args)
 	{
-		game = new Game(512, 512);
+		game = new Game();
 		game.init();
 		
 		gameLoop();

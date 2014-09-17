@@ -5,22 +5,20 @@ import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
 
+import util.GameSettings;
+
 public class GraphicsWindow extends JFrame {
-	private final int frameWidth;
-	private final int frameHeight;
 	
 	public Graphics2D g;
 	
-	public GraphicsWindow(int width, int height)
+	public GraphicsWindow()
 	{
-		this.frameWidth = width;
-		this.frameHeight = height;
 	}
 	
 	public void init()
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(new Dimension(frameWidth, frameHeight));
+		setSize(new Dimension(GameSettings.FRAME_WIDTH, GameSettings.FRAME_HEIGHT));
 		setVisible(true);
 	}
 	

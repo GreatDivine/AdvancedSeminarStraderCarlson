@@ -65,5 +65,9 @@ public class Zombie extends GameItem {
 		g.setColor(mColor);
 		g.fillOval(mPosX, mPosY, mWidth, mHeight);
 	}
+	
+	public int getHp(){
+		return mHP;
+	}
 
 }

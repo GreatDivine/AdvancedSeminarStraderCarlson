@@ -5,21 +5,17 @@ import java.util.Timer;
 
 import javax.swing.JFrame;
 
+import util.GameSettings;
+
 public class Game extends JFrame {
-	private final int frameWidth;
-	private final int frameHeight;
 	
 	private Room mRoom;
 	
 	public boolean keepGoing;
 	
-	public Game(int width, int height)
+	public Game()
 	{
-		this.frameWidth = width;
-		this.frameHeight = height;
-		
 		mRoom = new Room();
-		
 		keepGoing = true;
 	}
 	
@@ -27,12 +23,9 @@ public class Game extends JFrame {
 	{
 		add(mRoom);
 		mRoom.addTower(300, 100, 20, 20, 200, 1);
-		mRoom.addFatty(10, 200);
-		mRoom.addWalker(10, 150);
-		mRoom.addRunner(10, 250);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(new Dimension(frameWidth, frameHeight));
+		setSize(new Dimension(GameSettings.FRAME_WIDTH, GameSettings.FRAME_HEIGHT));
 		setVisible(true);
 	}
 	
