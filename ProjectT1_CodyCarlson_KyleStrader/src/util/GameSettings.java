@@ -8,6 +8,5 @@ public class GameSettings {
 	public static final int TIME_BETWEEN_WAVE = 1; //seconds
 	public static final int FRAME_WIDTH = 512; //pixels
 	public static final int FRAME_HEIGHT = 512; //pixels
-	public static final double WAVE_DELAY = 1.0; //seconds
 
 }

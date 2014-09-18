@@ -7,7 +7,7 @@ import java.awt.geom.Point2D;
 public class Projectile extends GameItem {
 	
 	protected final static int PROJECTILE_SIZE = 3;
-	protected final static int PROJECTILE_SPEED = 3;
+	protected final static int PROJECTILE_SPEED = 7;
 	protected final static Color PROJECTILE_COLOR = Color.black;
 	
 	private Point2D.Float mVelocity; //normalized velocity vector

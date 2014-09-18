@@ -5,27 +5,26 @@ import gameItems.Tower;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
 
+import util.TowerManager;
 import util.WaveManager;
 
 public class Room extends JPanel {
-	
-	private List<GameItem> gameItems;
-	private WaveManager waveManager;
+	private WaveManager mWaveManager;
+	private TowerManager mTowerManager;
 	
 	public Room()
 	{
-		gameItems = new ArrayList<GameItem>();
-		waveManager = new WaveManager();
+		mTowerManager = new TowerManager();
+		mWaveManager = new WaveManager();
 	}
 	
-	public void addTower(int x, int y, int w, int h, int r, int delay)
+	public void addTower(int x, int y, int w, int h, int r, float delay)
 	{
-		gameItems.add(new Tower(x, y, w, h, r, delay));
+		mTowerManager.addTower(x, y, w, h, r, delay);
 	}
 	
 	@Override
@@ -33,24 +32,14 @@ public class Room extends JPanel {
 	{
 		//g.fillRect(0,0,100,100);
 		
-		waveManager.paint(g);
-
-		g.setColor(Color.red);
-		
-		for(GameItem i: gameItems)
-		{
-			i.paint(g);
-		}
+		mWaveManager.paint(g);
+		mTowerManager.paint(g);
 	}
 	
 	public void updateItems(long timeNS)
 	{
-		waveManager.update(timeNS);
-		
-		for(GameItem i: gameItems)
-		{
-			i.update(timeNS);
-		}
+		mWaveManager.update(timeNS);
+		mTowerManager.update(timeNS);
 	}
 
 }

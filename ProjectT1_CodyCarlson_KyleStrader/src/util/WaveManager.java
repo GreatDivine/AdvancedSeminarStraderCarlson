@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Random;
 
 public class WaveManager {	
+	
+	public static final double WAVE_DELAY = 1.0; //seconds
+	
 	private List<Wave> mWaves;
 	private int mWaveCount;
 	private double mTimePassed;
@@ -50,9 +53,9 @@ public class WaveManager {
 		mTimePassed += mCurTime - mPrevTime;
 		System.out.println(mTimePassed);
 		
-		if(mTimePassed > GameSettings.WAVE_DELAY){
+		if(mTimePassed > WAVE_DELAY){
 			addWave();
-			mTimePassed -= GameSettings.WAVE_DELAY;
+			mTimePassed -= WAVE_DELAY;
 		}
 		
 		for(Wave w:mWaves){
@@ -64,5 +67,9 @@ public class WaveManager {
 		for(Wave w:mWaves){
 			w.paint(g);
 		}
+	}
+	
+	public Wave getWave(int index){
+		return mWaves.get(index);
 	}
 }

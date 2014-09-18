@@ -56,4 +56,8 @@ public class Wave {
 	public int getNumZombies(){
 		return mZombies.size();
 	}
+	
+	public Zombie getZombie(int index){
+		return mZombies.get(index);
+	}
 }
