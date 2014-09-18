@@ -5,8 +5,8 @@ import java.awt.geom.Point2D;
 
 public class GameItem {
 	
-	protected int mPosX;
-	protected int mPosY;
+	protected float mPosX;
+	protected float mPosY;
 	protected int mWidth;
 	protected int mHeight;
 	
@@ -26,12 +26,12 @@ public class GameItem {
 		mHeight = h;
 	}
 	
-	public int getX()
+	public float getX()
 	{
 		return mPosX;
 	}
 	
-	public int getY()
+	public float getY()
 	{
 		return mPosY;
 	}
