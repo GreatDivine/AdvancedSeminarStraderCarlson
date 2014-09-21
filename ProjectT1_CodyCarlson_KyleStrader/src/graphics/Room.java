@@ -41,5 +41,10 @@ public class Room extends JPanel {
 		mWaveManager.update(timeNS);
 		mTowerManager.update(timeNS);
 	}
+	
+	public int getNumTowers()
+	{
+		return mTowerManager.getNumTowers();
+	}
 
 }

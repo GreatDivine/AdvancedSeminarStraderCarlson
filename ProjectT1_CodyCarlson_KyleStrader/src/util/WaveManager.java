@@ -28,14 +28,16 @@ public class WaveManager {
 		addWave();
 	}
 	
-	private void addWave(){
+	public Wave addWave(){
 		mWaveCount++;
 		Wave tmpWave = new Wave();
 		populateWave(tmpWave);
 		mWaves.add(tmpWave);
+		
+		return tmpWave;
 	}
 	
-	private void populateWave(Wave wave){
+	public void populateWave(Wave wave){
 		createWavePop(wave, Wave.mZombieType.FATTY);
 		createWavePop(wave, Wave.mZombieType.RUNNER);
 		createWavePop(wave, Wave.mZombieType.WALKER);
@@ -71,5 +73,10 @@ public class WaveManager {
 	
 	public Wave getWave(int index){
 		return mWaves.get(index);
+	}
+	
+	public int getNumWavesSpawned()
+	{
+		return mWaveCount;
 	}
 }

@@ -9,6 +9,9 @@ public class Zombie extends GameItem {
 	protected int mSpeed;
 	protected Color mColor;
 	
+	protected boolean isDead;
+	protected boolean isTarget;
+	
 	public Zombie(int x, int y)
 	{
 		mPosX = x;
@@ -16,6 +19,7 @@ public class Zombie extends GameItem {
 		mWidth = 10;
 	    mHeight = 10;
 	    mColor = Color.black;
+	    isDead = false;
 	}
 	
 	public Zombie(int x, int y, int w, int h, int hp, int spd)
@@ -68,6 +72,32 @@ public class Zombie extends GameItem {
 	
 	public int getHp(){
 		return mHP;
+	}
+	
+	public void takeDamage(int dmg)
+	{
+		mHP -= dmg;
+	}
+	
+	public void setIsTargeted(boolean v)
+	{
+		isTarget = v;
+	}
+	
+	public boolean getIsTargeted()
+	{
+		return isTarget;
+	}
+	
+	public boolean checkIsDead()
+	{
+		if (mHP <= 0)
+		{
+			isDead = true;
+		}
+		else isDead = false;
+		
+		return isDead;
 	}
 
 }

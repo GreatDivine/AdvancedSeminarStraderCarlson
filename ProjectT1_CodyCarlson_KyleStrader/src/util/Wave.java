@@ -27,18 +27,24 @@ public class Wave {
 		mZombies.add(new Zombie(x, y, w, h, hp, spd));
 	}
 	
-	public void addZombie(int x, int y, mZombieType zType){
+	public Zombie addZombie(int x, int y, mZombieType zType){
 		
 		switch(zType){
 			case WALKER:
-				mZombies.add(new Walker(x, y));
-				break;
+				Walker tmpW = new Walker(x,y);
+				mZombies.add(tmpW);
+				return tmpW;
 			case RUNNER:
-				mZombies.add(new Runner(x, y));
-				break;
+				Runner tmpR = new Runner(x,y);
+				mZombies.add(tmpR);
+				return tmpR;
 			case FATTY:
-				mZombies.add(new Fatty(x, y));
+				Fatty tmpF = new Fatty(x,y);
+				mZombies.add(tmpF);
+				return tmpF;
 		}
+		
+		return null; // if we get here we must have somehow gotten an incorrect zType
 	}
 	
 	public void update(long timeNS){
