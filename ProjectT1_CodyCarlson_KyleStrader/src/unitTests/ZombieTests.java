@@ -8,6 +8,7 @@ import gameItems.Zombie;
 
 import org.junit.Test;
 
+import util.GameSettings;
 import util.Wave;
 
 public class ZombieTests {
@@ -104,5 +105,29 @@ public class ZombieTests {
 		t.checkForTarget(w);
 		
 		assertEquals(w.getIsTargeted(), true);
+	}
+	
+	@Test
+	public void testZombieRemoval()
+	{
+		Wave w = new Wave();
+		
+		w.addZombie(GameSettings.FRAME_WIDTH - 1, 0, Wave.mZombieType.WALKER); // add a walker at the edge of the frame width, any movement should push us off
+		
+		assertEquals(w.getNumZombies(), 1);
+		
+		w.update(1); // update the wave, causing the walker to step off screen and get deleted
+		
+		assertEquals(w.getNumZombies(), 0);
+		
+		Walker tmpWalker = (Walker)w.addZombie(0, 0, Wave.mZombieType.WALKER); // create another walker
+		
+		assertEquals (w.getNumZombies(), 1);
+		
+		tmpWalker.takeDamage(100); // kill the walker
+		
+		w.update(1); // update wave so it sees that the walker is dead
+		
+		assertEquals(w.getNumZombies(), 0); // now that the only zombie has been killed it should have been removed and we should have 0
 	}
 }

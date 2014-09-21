@@ -30,6 +30,12 @@ public class ProjectileManager {
 	public void update(long timeNS){
 		for(Projectile p:mProjectiles){
 			p.update(timeNS);
+			
+			if (p.isOffscreen)
+			{
+				removeProjectile(p);
+				break;
+			}
 		}
 	}
 	
@@ -41,6 +47,12 @@ public class ProjectileManager {
 	
 	public Projectile getProjectile(int index){
 		return mProjectiles.get(index);
+	}
+	
+	public void removeProjectile(Projectile pr)
+	{
+		mProjectiles.remove(pr);
+		//System.out.println("removed projectile");
 	}
 	
 	public int getNumProjectiles(){

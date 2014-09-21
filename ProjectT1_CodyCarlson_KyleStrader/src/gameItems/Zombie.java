@@ -3,6 +3,8 @@ package gameItems;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import util.GameSettings;
+
 public class Zombie extends GameItem {
 	
 	protected int mHP;
@@ -11,6 +13,7 @@ public class Zombie extends GameItem {
 	
 	protected boolean isDead;
 	protected boolean isTarget;
+	public boolean isOffscreen;
 	
 	public Zombie(int x, int y)
 	{
@@ -61,6 +64,7 @@ public class Zombie extends GameItem {
 	public void update(long timeNS)
 	{
 		move("right");
+		checkOffscreen();
 	}
 	
 	@Override
@@ -98,6 +102,15 @@ public class Zombie extends GameItem {
 		else isDead = false;
 		
 		return isDead;
+	}
+	
+	public void checkOffscreen()
+	{
+		if (mPosX > GameSettings.FRAME_WIDTH || mPosY > GameSettings.FRAME_HEIGHT || mPosX < 0 || mPosY < 0)
+		{
+			isOffscreen = true;
+		}
+		else isOffscreen = false;
 	}
 
 }

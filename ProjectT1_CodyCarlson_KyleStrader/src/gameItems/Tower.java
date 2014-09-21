@@ -5,13 +5,14 @@ import java.awt.Graphics;
 import java.awt.geom.Point2D;
 
 import util.GameSettings;
+import util.ProjectileManager;
 
 public class Tower extends GameItem {
 	
 	private int mFireRadius;
 	private Zombie currentTarget;
 	private float mShotDelay;
-	//private ProjectileManager mProjectileManager;
+	private ProjectileManager mProjectileManager;
 	private double mTimePassed;
 	private double mCurTime;
 	private double mPrevTime;
@@ -24,7 +25,7 @@ public class Tower extends GameItem {
 		
 		mFireRadius = fireRad;
 		mShotDelay = shotDelay;
-		//mProjectileManager = new ProjectileManager();
+		mProjectileManager = new ProjectileManager();
 		mTimePassed = 0;
 		mStartTime = (double)System.nanoTime() / GameSettings.NANOSECONDS_TO_SECONDS;
 		mCurTime = mStartTime;

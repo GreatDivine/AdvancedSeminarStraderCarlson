@@ -29,4 +29,9 @@ public class TowerManager {
 			t.paint(g);
 		}
 	}
+	
+	public int getNumTowers()
+	{
+		return mTowers.size();
+	}
 }

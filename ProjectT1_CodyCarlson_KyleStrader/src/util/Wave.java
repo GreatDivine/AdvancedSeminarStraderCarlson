@@ -50,6 +50,12 @@ public class Wave {
 	public void update(long timeNS){
 		for(Zombie z:mZombies){
 			z.update(timeNS);
+			
+			if (z.isOffscreen || z.checkIsDead())
+			{
+				removeZombie(z);
+				break;
+			}
 		}
 	}
 	
@@ -65,5 +71,11 @@ public class Wave {
 	
 	public Zombie getZombie(int index){
 		return mZombies.get(index);
+	}
+	
+	public void removeZombie(Zombie z)
+	{
+		mZombies.remove(z);
+		//System.out.println("zombie removed");
 	}
 }

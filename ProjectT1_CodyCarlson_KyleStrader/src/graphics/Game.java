@@ -37,7 +37,7 @@ public class Game extends JFrame {
 	public void update(long timeNS)
 	{
 		mRoom.updateItems(timeNS);
-		System.out.println("update tick");
+		//System.out.println("update tick");
 	}
 	
 	public void drawToFrame()

@@ -53,7 +53,7 @@ public class WaveManager {
 		mPrevTime = mCurTime;
 		mCurTime = (double)System.nanoTime() / GameSettings.NANOSECONDS_TO_SECONDS;
 		mTimePassed += mCurTime - mPrevTime;
-		System.out.println(mTimePassed);
+		//System.out.println(mTimePassed);
 		
 		if(mTimePassed > WAVE_DELAY){
 			addWave();
