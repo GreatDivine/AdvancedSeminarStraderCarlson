@@ -16,13 +16,15 @@ public class Projectile extends GameItem {
 	
 	private Point2D.Float mVelocity; //normalized velocity vector
 	
-	public Projectile(int xPos, int yPos, float xVel, float yVel){
+	public Projectile(int xPos, int yPos, float xVel, float yVel)
+	{
 		super(xPos, yPos, PROJECTILE_SIZE, PROJECTILE_SIZE);
 		mVelocity = new Point2D.Float(xVel, yVel);
 	}
 	
 	@Override
-	public void update(long timeNS){
+	public void update(long timeNS)
+	{
 		mPosX += mVelocity.getX() * PROJECTILE_SPEED;
 		mPosY += mVelocity.getY() * PROJECTILE_SPEED;
 		
@@ -39,7 +41,8 @@ public class Projectile extends GameItem {
 	}
 	
 	@Override
-	public void paint(Graphics g){
+	public void paint(Graphics g)
+	{
 		g.setColor(PROJECTILE_COLOR);
 		g.fillOval((int)mPosX, (int)mPosY, mWidth, mHeight);
 	}

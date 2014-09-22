@@ -24,10 +24,9 @@ public class ZombieTests {
 		
 		w.move("right"); // move the walker to the right WALKER_SPEED pixels
 		
-		int expectedX = w.WALKER_SPEED;
 		wX = (int)w.getX();
 		
-		assertEquals(wX, expectedX);
+		assertEquals(wX, Walker.WALKER_SPEED);
 	}
 	
 	@Test

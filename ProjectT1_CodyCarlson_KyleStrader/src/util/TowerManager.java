@@ -10,22 +10,28 @@ public class TowerManager {
 	
 	private List<Tower> mTowers;
 	
-	public TowerManager(){
+	public TowerManager()
+	{
 		mTowers = new ArrayList<Tower>();
 	}
 	
-	public void addTower(int x, int y, int w, int h, int fireRad, float shotDelay){
+	public void addTower(int x, int y, int w, int h, int fireRad, float shotDelay)
+	{
 		mTowers.add(new Tower(x, y, w, h, fireRad, shotDelay));
 	}
 	
-	public void update(long timeNS){
-		for(Tower t:mTowers){
+	public void update(long timeNS)
+	{
+		for(Tower t:mTowers)
+		{
 			t.update(timeNS);
 		}
 	}
 	
-	public void paint(Graphics g){
-		for(Tower t:mTowers){
+	public void paint(Graphics g)
+	{
+		for(Tower t:mTowers)
+		{
 			t.paint(g);
 		}
 	}

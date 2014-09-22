@@ -2,7 +2,6 @@ package gameItems;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.geom.Point2D;
 
 import util.GameSettings;
 import util.ProjectileManager;
@@ -34,13 +33,14 @@ public class Tower extends GameItem {
 	}
 	
 	@Override
-	public void update(long timeNS){
+	public void update(long timeNS)
+	{
 		mPrevTime = mCurTime;
 		mCurTime = (double)System.nanoTime() / GameSettings.NANOSECONDS_TO_SECONDS;
 		mTimePassed += mCurTime - mPrevTime;
 		
 		if(mTimePassed > mShotDelay){	
-			mProjectileManager.addProjectile((int)mPosX, (int)mPosY, 0.23f, 0.75f);
+			//mProjectileManager.addProjectile((int)mPosX, (int)mPosY, 0.23f, 0.75f);
 			mTimePassed -= mShotDelay;
 		}
 		
@@ -96,7 +96,8 @@ public class Tower extends GameItem {
 		g.drawOval(xCenter-r, yCenter-r, 2*r, 2*r);
 	}
 	
-	public ProjectileManager getProjectileManager(){
+	public ProjectileManager getProjectileManager()
+	{
 		return mProjectileManager;
 	}
 }

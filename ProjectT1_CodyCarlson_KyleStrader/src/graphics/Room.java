@@ -1,17 +1,13 @@
 package graphics;
 
-import gameItems.GameItem;
-import gameItems.Tower;
-
-import java.awt.Color;
 import java.awt.Graphics;
-import java.util.List;
 
 import javax.swing.JPanel;
 
 import util.TowerManager;
 import util.WaveManager;
 
+@SuppressWarnings("serial")
 public class Room extends JPanel {
 	private WaveManager mWaveManager;
 	private TowerManager mTowerManager;

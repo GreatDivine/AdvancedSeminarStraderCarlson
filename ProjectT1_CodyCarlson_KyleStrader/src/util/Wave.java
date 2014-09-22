@@ -13,23 +13,27 @@ public class Wave {
 	
 	private List<Zombie> mZombies;
 	
-	public Wave(){
+	public Wave()
+	{
 		mZombies = new ArrayList<Zombie>();
 	}
 	
-	public enum mZombieType{
+	public enum mZombieType
+	{
 		WALKER,
 		RUNNER,
 		FATTY
 	}
 	
-	public void addZombie(int x, int y, int w, int h, int hp, int spd){
+	public void addZombie(int x, int y, int w, int h, int hp, int spd)
+	{
 		mZombies.add(new Zombie(x, y, w, h, hp, spd));
 	}
 	
-	public Zombie addZombie(int x, int y, mZombieType zType){
-		
-		switch(zType){
+	public Zombie addZombie(int x, int y, mZombieType zType)
+	{
+		switch(zType)
+		{
 			case WALKER:
 				Walker tmpW = new Walker(x,y);
 				mZombies.add(tmpW);
@@ -47,29 +51,37 @@ public class Wave {
 		return null; // if we get here we must have somehow gotten an incorrect zType
 	}
 	
-	public void update(long timeNS){
-		for(Zombie z:mZombies){
+	public void update(long timeNS)
+	{
+		for (int i = 0; i < mZombies.size(); i++)
+		{
+			Zombie z = mZombies.get(i);
+			
 			z.update(timeNS);
 			
 			if (z.isOffscreen || z.checkIsDead())
 			{
 				removeZombie(z);
-				break;
+			    i--;
 			}
 		}
 	}
 	
-	public void paint(Graphics g){
-		for(Zombie z:mZombies){
+	public void paint(Graphics g)
+	{
+		for(Zombie z:mZombies)
+		{
 			z.paint(g);
 		}
 	}
 	
-	public int getNumZombies(){
+	public int getNumZombies()
+	{
 		return mZombies.size();
 	}
 	
-	public Zombie getZombie(int index){
+	public Zombie getZombie(int index)
+	{
 		return mZombies.get(index);
 	}
 	

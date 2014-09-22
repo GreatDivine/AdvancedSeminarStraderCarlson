@@ -1,12 +1,12 @@
 package graphics;
 
 import java.awt.Dimension;
-import java.util.Timer;
 
 import javax.swing.JFrame;
 
 import util.GameSettings;
 
+@SuppressWarnings("serial")
 public class Game extends JFrame {
 	
 	private Room mRoom;

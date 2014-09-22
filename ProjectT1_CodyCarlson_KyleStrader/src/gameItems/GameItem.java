@@ -1,7 +1,6 @@
 package gameItems;
 
 import java.awt.Graphics;
-import java.awt.geom.Point2D;
 
 public class GameItem {
 	

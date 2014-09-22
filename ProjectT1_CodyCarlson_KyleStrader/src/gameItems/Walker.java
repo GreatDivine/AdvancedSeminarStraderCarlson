@@ -1,7 +1,6 @@
 package gameItems;
 
 import java.awt.Color;
-import java.awt.Graphics;
 
 public class Walker extends Zombie {
 	

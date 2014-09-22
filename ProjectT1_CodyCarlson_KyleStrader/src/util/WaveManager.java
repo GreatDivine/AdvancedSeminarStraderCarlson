@@ -17,61 +17,80 @@ public class WaveManager {
 	private double mStartTime;
 	private Random mRand;
 	
-	public WaveManager(){
+	private int waveSize;
+	
+	public WaveManager()
+	{
 		mWaves = new ArrayList<Wave>();
 		mWaveCount = 0;
 		mTimePassed = 0;
 		mStartTime = (double)System.nanoTime() / GameSettings.NANOSECONDS_TO_SECONDS;
 		mCurTime = mStartTime;
 		mPrevTime = 0;
+		waveSize = 1;
 		mRand = new Random();
 		addWave();
 	}
 	
-	public Wave addWave(){
+	public Wave addWave()
+	{
 		mWaveCount++;
 		Wave tmpWave = new Wave();
 		populateWave(tmpWave);
 		mWaves.add(tmpWave);
 		
+		if (mWaveCount % GameSettings.WAVES_BEFORE_INCREASE == 0)
+		{
+			waveSize++;
+		}
+		
 		return tmpWave;
 	}
 	
-	public void populateWave(Wave wave){
+	public void populateWave(Wave wave)
+	{
 		createWavePop(wave, Wave.mZombieType.FATTY);
 		createWavePop(wave, Wave.mZombieType.RUNNER);
 		createWavePop(wave, Wave.mZombieType.WALKER);
 	}
 	
-	private void createWavePop(Wave wave, Wave.mZombieType zType){		
-		for(int i = 0; i < mWaveCount; i++){
+	private void createWavePop(Wave wave, Wave.mZombieType zType)
+	{		
+		for(int i = 0; i < waveSize; i++)
+		{
 			wave.addZombie(mRand.nextInt((40 - 0) + 1) + 0, mRand.nextInt((140 - 100) + 1) + 100, zType); //fix location generation
 		}
 	}
 	
-	public void update(long timeNS){
+	public void update(long timeNS)
+	{
 		mPrevTime = mCurTime;
 		mCurTime = (double)System.nanoTime() / GameSettings.NANOSECONDS_TO_SECONDS;
 		mTimePassed += mCurTime - mPrevTime;
 		//System.out.println(mTimePassed);
 		
-		if(mTimePassed > WAVE_DELAY){
+		if(mTimePassed > WAVE_DELAY)
+		{
 			addWave();
 			mTimePassed -= WAVE_DELAY;
 		}
 		
-		for(Wave w:mWaves){
+		for(Wave w:mWaves)
+		{
 			w.update(timeNS);
 		}
 	}
 	
-	public void paint(Graphics g){
-		for(Wave w:mWaves){
+	public void paint(Graphics g)
+	{
+		for(Wave w:mWaves)
+		{
 			w.paint(g);
 		}
 	}
 	
-	public Wave getWave(int index){
+	public Wave getWave(int index)
+	{
 		return mWaves.get(index);
 	}
 	

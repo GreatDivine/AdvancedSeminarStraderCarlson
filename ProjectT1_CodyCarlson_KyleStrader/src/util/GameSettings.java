@@ -9,5 +9,6 @@ public class GameSettings {
 	public static final int FRAME_WIDTH = 512; //pixels
 	public static final int FRAME_HEIGHT = 512; //pixels
 	public static final int TOWER_SHOT_DAMAGE = 100; // tower damage per shot
+	public static final int WAVES_BEFORE_INCREASE = 4; //number of waves that will pass before the waves become larger
 
 }
