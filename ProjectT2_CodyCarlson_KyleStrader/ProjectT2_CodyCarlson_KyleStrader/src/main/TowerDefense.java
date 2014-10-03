@@ -45,7 +45,7 @@ public class TowerDefense
 	{
 		game = new Game();
 		game.init();
-		
+		System.out.println(GameSettings.NUM_TILES);
 		gameLoop();
 	}
 

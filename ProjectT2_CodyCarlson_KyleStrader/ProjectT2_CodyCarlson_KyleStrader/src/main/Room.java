@@ -6,6 +6,8 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import tiles.Level;
+import tiles.Tile;
 import waves.WaveManager;
 
 @SuppressWarnings("serial")
@@ -15,10 +17,14 @@ public class Room extends JPanel
 	private WaveManager mWaveManager;
 	private TowerManager mTowerManager;
 	
+	private Level testLevel;
+	
 	public Room()
 	{
 		mTowerManager = new TowerManager();
 		mWaveManager = new WaveManager();
+		
+		testLevel = new Level();
 	}
 	
 	public void addTower(int x, int y, int w, int h, int r, float delay)
@@ -31,6 +37,8 @@ public class Room extends JPanel
 	{
 		mWaveManager.paint(g);
 		mTowerManager.paint(g);
+		
+		testLevel.paint(g);
 	}
 	
 	public void updateItems(long timeNS)
