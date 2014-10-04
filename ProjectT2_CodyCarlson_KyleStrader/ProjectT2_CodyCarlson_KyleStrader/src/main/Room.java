@@ -27,9 +27,14 @@ public class Room extends JPanel
 		testLevel = new Level();
 	}
 	
-	public void addTower(int x, int y, int w, int h, int r, float delay)
+	public void addMGTower(int x, int y, int w, int h, int r)
 	{
-		mTowerManager.addTower(x, y, w, h, r, delay);
+		mTowerManager.addMGTower(x, y, w, h, r);
+	}
+	
+	public void addRocketTower(int x, int y, int w, int h, int r)
+	{
+		mTowerManager.addRocketTower(x, y, w, h, r);
 	}
 	
 	@Override

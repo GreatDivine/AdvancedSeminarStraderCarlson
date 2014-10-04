@@ -14,9 +14,14 @@ public class TowerManager
 		mTowers = new ArrayList<Tower>();
 	}
 	
-	public void addTower(int x, int y, int w, int h, int fireRad, float shotDelay)
+	public void addMGTower(int x, int y, int w, int h, int fireRad)
 	{
-		mTowers.add(new Tower(x, y, w, h, fireRad, shotDelay));
+		mTowers.add(new MachineGunTower(x, y, w, h, fireRad));
+	}
+	
+	public void addRocketTower(int x, int y, int w, int h, int fireRad)
+	{
+		mTowers.add(new RocketTower(x, y, w, h, fireRad));
 	}
 	
 	public void update(long timeNS)

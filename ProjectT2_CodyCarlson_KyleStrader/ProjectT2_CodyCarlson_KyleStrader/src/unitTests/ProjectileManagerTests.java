@@ -20,7 +20,7 @@ public class ProjectileManagerTests
 		
 		assertEquals(pm.getNumProjectiles(), 0);
 		
-		pm.addProjectile(0, 0, 1, 1);
+		pm.addProjectile(0, 0, 1, 1, 0);
 		
 		assertEquals(pm.getNumProjectiles(), 1);
 	}
@@ -28,7 +28,7 @@ public class ProjectileManagerTests
 	@Test
 	public void testProjectileMovement()
 	{
-		Projectile p = new Projectile(0,0,1,0); // create a projectile that is moving directly right (velocity of (1,0))
+		Projectile p = new Projectile(0,0,1,0, 0); // create a projectile that is moving directly right (velocity of (1,0))
 		
 		// since p's starting pos is 0, the default proj speed is 7, and p is moving right, one movement tick through
 		// update should move p to the pos (7,0)
@@ -43,7 +43,7 @@ public class ProjectileManagerTests
 	{
 		ProjectileManager pm = new ProjectileManager();
 		
-		pm.addProjectile(0, 0, 0, 0);
+		pm.addProjectile(0, 0, 0, 0, 0);
 		
 		assertEquals(pm.getNumProjectiles(), 1);
 		
@@ -58,7 +58,7 @@ public class ProjectileManagerTests
 	{
 		ProjectileManager pm = new ProjectileManager();
 		
-		pm.addProjectile(GameSettings.FRAME_WIDTH - 1, 0, 1, 0); // add a projectile that is right next to the edge of the screen with a rightward velocity
+		pm.addProjectile(GameSettings.FRAME_WIDTH - 1, 0, 1, 0, 0); // add a projectile that is right next to the edge of the screen with a rightward velocity
 		
 		assertEquals(pm.getNumProjectiles(), 1);
 		
@@ -76,7 +76,7 @@ public class ProjectileManagerTests
 	{
 		ProjectileManager pm = new ProjectileManager();
 		
-		pm.addProjectile(10, 10, 0, 0);
+		pm.addProjectile(10, 10, 0, 0, 50);
 		
 		Walker w = new Walker(10,10);
 		

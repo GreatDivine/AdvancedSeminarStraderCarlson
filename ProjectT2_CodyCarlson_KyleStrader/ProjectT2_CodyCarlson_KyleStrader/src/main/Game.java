@@ -23,7 +23,7 @@ public class Game extends JFrame
 	public void init()
 	{
 		add(mRoom);
-		mRoom.addTower(300, 100, 20, 20, 200, 0.07f);
+		mRoom.addRocketTower(300, 100, 20, 20, 200);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(new Dimension(GameSettings.FRAME_WIDTH, GameSettings.FRAME_HEIGHT));

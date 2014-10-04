@@ -15,14 +15,21 @@ public class Projectile extends GameItem
 	public final static int PROJECTILE_SPEED = 20;
 	protected final static Color PROJECTILE_COLOR = Color.black;
 	
+	private int projDamage;
 	public boolean isOffscreen;
 	
 	private Point2D.Float mVelocity; //normalized velocity vector
 	
-	public Projectile(int xPos, int yPos, float xVel, float yVel)
+	public Projectile(int xPos, int yPos, float xVel, float yVel, int dmg)
 	{
 		super(xPos, yPos, PROJECTILE_SIZE, PROJECTILE_SIZE);
+		projDamage = dmg;
 		mVelocity = new Point2D.Float(xVel, yVel);
+	}
+	
+	public int getDamage()
+	{
+		return projDamage;
 	}
 	
 	@Override

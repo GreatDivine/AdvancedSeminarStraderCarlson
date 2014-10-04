@@ -18,9 +18,9 @@ public class ProjectileManager
 		mProjectiles = new ArrayList<Projectile>();
 	}
 	
-	public void addProjectile(int xPos, int yPos, float xVel, float yVel)
+	public void addProjectile(int xPos, int yPos, float xVel, float yVel, int dmg)
 	{
-		mProjectiles.add(new Projectile(xPos, yPos, xVel, yVel));
+		mProjectiles.add(new Projectile(xPos, yPos, xVel, yVel, dmg));
 	}
 	
 	public void update(long timeNS, Zombie currentTarget)
@@ -51,7 +51,7 @@ public class ProjectileManager
 		
 		if (dist < zRad + pRad)
 		{
-			z.takeDamage(GameSettings.TOWER_SHOT_DAMAGE);
+			z.takeDamage(p.getDamage());
 		}
 	}
 	
