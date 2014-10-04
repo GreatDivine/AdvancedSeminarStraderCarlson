@@ -54,6 +54,6 @@ public class Projectile extends GameItem
 	public void paint(Graphics g)
 	{
 		g.setColor(PROJECTILE_COLOR);
-		g.fillOval((int)mPosX, (int)mPosY, mWidth, mHeight);
+		g.fillOval((int)mPosX, (int)mPosY, projDamage / 15, projDamage / 15);
 	}
 }

@@ -31,7 +31,7 @@ public class ProjectileManager
 			
 			if (currentTarget != null)
 			{
-				checkBulletCollision(currentTarget, p);
+				if (checkBulletCollision(currentTarget, p)) break;
 			}
 			
 			if (p.isOffscreen)
@@ -42,7 +42,7 @@ public class ProjectileManager
 		}
 	}
 	
-	public void checkBulletCollision(Zombie z, Projectile p)
+	public boolean checkBulletCollision(Zombie z, Projectile p)
 	{
 		float zRad = z.getWidth() / 2;
 		float pRad = p.getWidth() / 2;
@@ -52,7 +52,11 @@ public class ProjectileManager
 		if (dist < zRad + pRad)
 		{
 			z.takeDamage(p.getDamage());
+			removeProjectile(p);
+			return true;
 		}
+		
+		return false;
 	}
 	
 	public void paint(Graphics g)
