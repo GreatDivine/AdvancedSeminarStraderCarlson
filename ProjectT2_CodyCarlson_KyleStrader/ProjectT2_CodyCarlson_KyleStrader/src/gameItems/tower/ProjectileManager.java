@@ -6,8 +6,6 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.GameSettings;
-
 public class ProjectileManager 
 {
 	

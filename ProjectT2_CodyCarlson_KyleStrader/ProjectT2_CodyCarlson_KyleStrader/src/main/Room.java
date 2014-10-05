@@ -6,16 +6,19 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import player.Player;
+import player.PlayerUI;
 import tiles.Level;
-import tiles.Tile;
 import waves.WaveManager;
 
 @SuppressWarnings("serial")
 public class Room extends JPanel 
 {
-	
 	private WaveManager mWaveManager;
 	private TowerManager mTowerManager;
+	
+	private Player mPlayer;
+	private PlayerUI mUI;
 	
 	private Level testLevel;
 	
@@ -23,6 +26,11 @@ public class Room extends JPanel
 	{
 		mTowerManager = new TowerManager();
 		mWaveManager = new WaveManager();
+		
+		mPlayer = new Player();
+		mUI = new PlayerUI();
+		
+		mPlayer.addObserver(mUI);
 		
 		testLevel = new Level();
 	}
@@ -42,6 +50,8 @@ public class Room extends JPanel
 	{
 		mWaveManager.paint(g);
 		mTowerManager.paint(g);
+		
+		mUI.paint(g);
 		
 		testLevel.paint(g);
 	}

@@ -12,7 +12,7 @@ public class Projectile extends GameItem
 {
 	
 	protected final static int PROJECTILE_SIZE = 3;
-	public final static int PROJECTILE_SPEED = 20;
+	public final static int PROJECTILE_SPEED = 25;
 	protected final static Color PROJECTILE_COLOR = Color.black;
 	
 	private int projDamage;

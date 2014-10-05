@@ -17,10 +17,12 @@ public class GameSettings
 	public static final int WAVES_BEFORE_INCREASE = 4; //number of waves that will pass before the waves become larger
 	
 	public static final Font FONT = new Font("Courrier", Font.BOLD, 18);
-	public static final Color LIFE_COLOR = Color.yellow;
-	public static final String LIFE_PREFIX = "\u2764";
+	public static final Color LIFE_COLOR = Color.red;
+	public static final String LIFE_PREFIX = "\u2764  ";
 	public static final Color CASH_COLOR = Color.green;
 	public static final String CASH_PREFIX = " $  ";
+	public static final int START_HP = 100;
+	public static final int START_CASH = 500;
 	
 	public static final int TILE_SIZE = 32;
 	public static final int NUM_TILES = (FRAME_WIDTH * FRAME_HEIGHT)  / TILE_SIZE;
