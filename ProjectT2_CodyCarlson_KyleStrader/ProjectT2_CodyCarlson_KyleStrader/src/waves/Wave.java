@@ -1,6 +1,6 @@
 package waves;
 
-import gameItems.tower.Tower;
+import gameItems.tower.TowerManager;
 import gameItems.zombie.Fatty;
 import gameItems.zombie.Imp;
 import gameItems.zombie.Runner;
@@ -76,7 +76,7 @@ public class Wave
 		}
 	}
 	
-	public void update(long timeNS, Tower tower)
+	public void update(long timeNS, TowerManager towerManager)
 	{
 		ListIterator<Zombie> iter = mZombies.listIterator();
 		
@@ -86,7 +86,11 @@ public class Wave
 			
 			z.update(timeNS);
 			
-			tower.checkIfTargettable(z);
+			int numTowers = towerManager.getNumTowers();
+			for(int i = 0; i < numTowers; i++)
+			{
+				towerManager.getTower(i).checkIfTargettable(z);
+			}
 			
 			if (z.isOffscreen() || z.isDead())
 			{

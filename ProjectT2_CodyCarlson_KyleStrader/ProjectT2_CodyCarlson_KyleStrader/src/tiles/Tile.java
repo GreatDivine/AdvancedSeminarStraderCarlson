@@ -7,12 +7,10 @@ import util.GameSettings;
 
 public class Tile {
 	
-	private int mPosX;
-	private int mPosY;
-	private int mWidth;
-	private int mHeight;
-	
-	private boolean mIsPath;
+	protected int mPosX;
+	protected int mPosY;
+	protected int mWidth;
+	protected int mHeight;
 	
 	public Tile(int x, int y)
 	{
@@ -27,5 +25,15 @@ public class Tile {
 	{
 		g.setColor(Color.black);
 		g.drawRect(mPosX, mPosY, mWidth, mHeight);
+	}
+	
+	public int getXPos()
+	{
+		return mPosX;
+	}
+	
+	public int getYPos()
+	{
+		return mPosY;
 	}
 }

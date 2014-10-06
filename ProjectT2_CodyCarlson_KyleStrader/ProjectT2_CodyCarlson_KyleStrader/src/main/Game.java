@@ -10,7 +10,7 @@ import util.GameSettings;
 public class Game extends JFrame 
 {
 	
-	private Room mRoom;
+	public static Room mRoom;
 	
 	public boolean keepGoing;
 	
@@ -23,10 +23,11 @@ public class Game extends JFrame
 	public void init()
 	{
 		add(mRoom);
-		mRoom.addRocketTower(300, 100, 20, 20, 200);
+		mRoom.addMGTowerOnTile(1, 6, 20, 20, 200);
+		mRoom.addRocketTowerOnTile(5, 4, 20, 20, 200);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(new Dimension(GameSettings.FRAME_WIDTH, GameSettings.FRAME_HEIGHT));
+		setSize(new Dimension(GameSettings.FRAME_WIDTH + 16, GameSettings.FRAME_HEIGHT + 6));
 		setVisible(true);
 	}
 	

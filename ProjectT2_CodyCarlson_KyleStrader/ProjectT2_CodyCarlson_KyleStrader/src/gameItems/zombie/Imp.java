@@ -6,7 +6,7 @@ public class Imp extends Zombie {
 	
 	protected final static int IMP_SIZE = 10;
 	protected final static int IMP_HP = 80;
-	protected final static int IMP_SPEED = 2;
+	protected final static int IMP_SPEED = 1;
 	protected final static Color IMP_COLOR = Color.orange;
 	
 	public Imp(int x, int y)

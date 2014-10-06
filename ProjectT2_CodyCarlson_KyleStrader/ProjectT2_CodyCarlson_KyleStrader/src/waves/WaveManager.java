@@ -1,12 +1,13 @@
 package waves;
 
-import gameItems.tower.Tower;
+import gameItems.tower.TowerManager;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import tiles.Level;
 import util.GameSettings;
 
 public class WaveManager 
@@ -54,9 +55,9 @@ public class WaveManager
 	
 	public void populateWave(Wave wave)
 	{
-		//createWaveZombies(wave, Wave.mZombieType.FATTY);
-		//createWaveZombies(wave, Wave.mZombieType.RUNNER);
-		//createWaveZombies(wave, Wave.mZombieType.WALKER);
+		createWaveZombies(wave, Wave.mZombieType.FATTY);
+		createWaveZombies(wave, Wave.mZombieType.RUNNER);
+		createWaveZombies(wave, Wave.mZombieType.WALKER);
 		createWaveZombies(wave, Wave.mZombieType.IMP);
 	}
 	
@@ -64,11 +65,11 @@ public class WaveManager
 	{		
 		for(int i = 0; i < waveSize; i++)
 		{
-			wave.addZombie(mRand.nextInt((40 - 0) + 1) + 0, mRand.nextInt((140 - 100) + 1) + 100, zType); //fix location generation
+			wave.addZombie(0, 100, zType); //fix location generation
 		}
 	}
 	
-	public void update(long timeNS, Tower tower)
+	public void update(long timeNS, TowerManager towerManager)
 	{
 		mPrevTime = mCurTime;
 		mCurTime = (double)System.nanoTime() / GameSettings.NANOSECONDS_TO_SECONDS;
@@ -82,7 +83,7 @@ public class WaveManager
 		
 		for(Wave w:mWaves)
 		{
-			w.update(timeNS, tower);
+			w.update(timeNS, towerManager);
 		}
 	}
 	

@@ -36,7 +36,7 @@ public class Zombie extends GameItem
 	
 	public Zombie(int x, int y, int w, int h, int hp, int spd)
 	{
-		super(x, y, w, h);
+		super(x - (w/2), y - (h/2), w, h);
 		
 		mHP = hp;
 		mSpeed = spd;
