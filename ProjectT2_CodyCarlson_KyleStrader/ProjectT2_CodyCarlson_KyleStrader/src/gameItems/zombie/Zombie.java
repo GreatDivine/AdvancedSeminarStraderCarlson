@@ -5,10 +5,14 @@ import gameItems.GameItem;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.List;
 
+import player.Observable;
+import player.Observer;
 import util.GameSettings;
 
-public class Zombie extends GameItem 
+public class Zombie extends GameItem implements Observable 
 {
 	
 	protected int mHP;
@@ -21,6 +25,10 @@ public class Zombie extends GameItem
 	protected int mPathIndex;
 	protected int m_xTarget;
 	protected int m_yTarget;
+	private int mPlayerHPMod;
+	private int mPlayerGoldMod;
+	
+	private List<Observer> mObservers;
 	
 	private final static int ZOMBIE_SIZE = 10;
 	
@@ -36,11 +44,14 @@ public class Zombie extends GameItem
 	{
 		super(x, y, ZOMBIE_SIZE, ZOMBIE_SIZE);
 
+		mObservers = new ArrayList<Observer>();
 	    mColor = Color.black;
 		mIsPathFinder = false;
 		mPathIndex = 0;
 		m_xTarget = x;
 		m_yTarget = y;
+		mPlayerHPMod = 0;
+		mPlayerGoldMod = 0;
 	}
 	
 	public Zombie(int x, int y, int w, int h, int hp, int spd)
@@ -53,6 +64,11 @@ public class Zombie extends GameItem
 		mPathIndex = 0;
 		m_xTarget = x;
 		m_yTarget = y;
+	}
+	
+	public void addObserver(Observer o)
+	{
+		mObservers.add(o);
 	}
 	
 	public void setTarget(int x, int y)
@@ -178,13 +194,28 @@ public class Zombie extends GameItem
 		if (mPosX > GameSettings.FRAME_WIDTH || mPosY > GameSettings.FRAME_HEIGHT || mPosX < 0 || mPosY < 0)
 		{
 			mIsOffscreen = true;
+			mPlayerHPMod = GameSettings.ZOMBIE_DAMAGE * -1;
+			sendMessage();
+			mPlayerHPMod = 0;
 		}
 		else mIsOffscreen = false;
 	}
 	
 	public boolean isOffscreen()
 	{
+		mPlayerGoldMod = GameSettings.ZOMBIE_WORTH;
+		sendMessage();
+		mPlayerGoldMod = 0;
 		return mIsOffscreen;
+	}
+	
+	@Override
+	public void sendMessage() 
+	{
+		for(Observer o: mObservers)
+		{
+			o.process(mPlayerHPMod, mPlayerGoldMod);
+		}
 	}
 
 }

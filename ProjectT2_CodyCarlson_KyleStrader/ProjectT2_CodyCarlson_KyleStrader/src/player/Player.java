@@ -3,7 +3,9 @@ package player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements Observable {
+import util.GameSettings;
+
+public class Player implements Observable, Observer {
 	
 	int mHP;
 	int mCash;
@@ -27,6 +29,13 @@ public class Player implements Observable {
 		{
 			o.process(mHP, mCash);
 		}
+	}
+	
+	@Override
+	public void process(int hp, int cash) 
+	{
+		mHP += hp;
+		mCash += cash;
 	}
 
 }

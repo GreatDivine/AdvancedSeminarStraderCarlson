@@ -102,7 +102,12 @@ public class Wave
 				towerManager.getTower(i).checkIfTargettable(z);
 			}
 			
-			if (z.isOffscreen() || z.isDead())
+			if (z.isOffscreen())
+			{
+				iter.remove();
+			}
+			
+			if (z.isDead())
 			{
 				iter.remove();
 			}

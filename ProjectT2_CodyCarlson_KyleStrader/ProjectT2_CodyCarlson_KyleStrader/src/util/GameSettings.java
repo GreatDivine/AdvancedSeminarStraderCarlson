@@ -23,6 +23,8 @@ public class GameSettings
 	public static final String CASH_PREFIX = " $  ";
 	public static final int START_HP = 100;
 	public static final int START_CASH = 500;
+	public static final int ZOMBIE_DAMAGE = 1;
+	public static final int ZOMBIE_WORTH = 20;
 	
 	public static final int TILE_SIZE = 32;
 	public static final int NUM_TILES = (FRAME_WIDTH * FRAME_HEIGHT)  / TILE_SIZE;
