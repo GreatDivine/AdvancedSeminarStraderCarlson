@@ -36,4 +36,14 @@ public class Tile {
 	{
 		return mPosY;
 	}
+	
+	public int getXOrig()
+	{
+		return mPosX + GameSettings.TILE_SIZE/2;
+	}
+	
+	public int getYOrig()
+	{
+		return mPosY + GameSettings.TILE_SIZE/2;
+	}
 }

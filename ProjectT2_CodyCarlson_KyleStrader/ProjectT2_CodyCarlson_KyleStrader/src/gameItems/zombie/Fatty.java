@@ -10,7 +10,7 @@ public class Fatty extends Zombie
 	protected final static int FATTY_SIZE = 15;
 	protected final static int FATTY_HP = 200;
 	protected final static int FATTY_SPEED = 1;
-	protected final static Color FATTY_COLOR = Color.gray;
+	protected final static Color FATTY_COLOR = Color.CYAN;
 	
 	public Fatty(int x, int y)
 	{
@@ -21,6 +21,7 @@ public class Fatty extends Zombie
 		mHP = FATTY_HP;
 		mSpeed = FATTY_SPEED;
 		mColor = FATTY_COLOR;
+		mIsPathFinder = true;
 	}
 
 }

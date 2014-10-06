@@ -24,6 +24,11 @@ public class Game extends JFrame
 	{
 		add(mRoom);
 		mRoom.addMGTowerOnTile(1, 6, 20, 20, 200);
+		mRoom.addMGTowerOnTile(0, 6, 20, 20, 200);
+		mRoom.addMGTowerOnTile(1, 5, 20, 20, 200);
+		mRoom.addMGTowerOnTile(1, 4, 20, 20, 200);
+		mRoom.addMGTowerOnTile(1, 3, 20, 20, 200);
+		mRoom.addMGTowerOnTile(1, 2, 20, 20, 200);
 		mRoom.addRocketTowerOnTile(5, 4, 20, 20, 200);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

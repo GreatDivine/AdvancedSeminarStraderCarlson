@@ -12,9 +12,6 @@ import util.GameSettings;
 
 public class WaveManager 
 {	
-	
-	public static final double WAVE_DELAY = 1.0; //seconds
-	
 	private List<Wave> mWaves;
 	private int mWaveCount;
 	private double mTimePassed;
@@ -22,11 +19,13 @@ public class WaveManager
 	private double mPrevTime;
 	private double mStartTime;
 	private Random mRand;
+	private Level mLevel;
 	
 	private int waveSize;
 	
-	public WaveManager()
+	public WaveManager(Level level)
 	{
+		mLevel = level;
 		mWaves = new ArrayList<Wave>();
 		mWaveCount = 0;
 		mTimePassed = 0;
@@ -65,7 +64,8 @@ public class WaveManager
 	{		
 		for(int i = 0; i < waveSize; i++)
 		{
-			wave.addZombie(0, 100, zType); //fix location generation
+			wave.addZombie(mLevel.getPathIndexed(0).getXPos() + (GameSettings.TILE_SIZE/2), mLevel.getPathIndexed(0).getYPos() + (GameSettings.TILE_SIZE/2), zType); //fix location generation
+			//wave.addZombie(0, 100, zType); //fix location generation
 		}
 	}
 	
@@ -75,15 +75,15 @@ public class WaveManager
 		mCurTime = (double)System.nanoTime() / GameSettings.NANOSECONDS_TO_SECONDS;
 		mTimePassed += mCurTime - mPrevTime;
 		
-		if(mTimePassed > WAVE_DELAY)
+		if(mTimePassed > GameSettings.TIME_BETWEEN_WAVE)
 		{
 			addWave();
-			mTimePassed -= WAVE_DELAY;
+			mTimePassed -= GameSettings.TIME_BETWEEN_WAVE;
 		}
 		
 		for(Wave w:mWaves)
 		{
-			w.update(timeNS, towerManager);
+			w.update(timeNS, towerManager, mLevel);
 		}
 	}
 	

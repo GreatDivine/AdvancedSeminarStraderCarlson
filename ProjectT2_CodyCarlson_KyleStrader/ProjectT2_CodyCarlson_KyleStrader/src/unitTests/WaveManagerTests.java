@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import tiles.Level;
 import waves.Wave;
 import waves.WaveManager;
 
@@ -13,7 +14,8 @@ public class WaveManagerTests
 	@Test
 	public void testAddWaves()
 	{
-		WaveManager wm = new WaveManager();
+		Level level = new Level();
+		WaveManager wm = new WaveManager(level);
 		
 		assertEquals(wm.getNumWavesSpawned(), 1); // we have a brand new wave manager, which automatically spawns a wave when it is first created, so our wave count should be 1
 		
@@ -29,7 +31,8 @@ public class WaveManagerTests
 	@Test
 	public void testPopulateWave()
 	{
-		WaveManager wm = new WaveManager();
+		Level level = new Level();
+		WaveManager wm = new WaveManager(level);
 		
 		Wave w = new Wave();
 		
@@ -37,13 +40,14 @@ public class WaveManagerTests
 		
 		wm.populateWave(w); //populating the wave should add one zombie of each type
 		
-		assertEquals(w.getNumZombies(), 3); // check to make sure that the wave now has 3 total zombies in it
+		assertEquals(w.getNumZombies(), 4); // check to make sure that the wave now has 4 total zombies in it
 	}
 	
 	@Test
 	public void testGetWave()
 	{
-		WaveManager wm = new WaveManager();
+		Level level = new Level();
+		WaveManager wm = new WaveManager(level);
 		
 		Wave w = wm.addWave();
 		

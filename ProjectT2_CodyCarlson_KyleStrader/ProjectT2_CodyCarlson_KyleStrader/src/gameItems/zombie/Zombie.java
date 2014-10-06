@@ -4,6 +4,7 @@ import gameItems.GameItem;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.geom.Point2D;
 
 import util.GameSettings;
 
@@ -16,6 +17,10 @@ public class Zombie extends GameItem
 	
 	protected boolean mIsTarget;
 	private boolean mIsOffscreen;
+	protected boolean mIsPathFinder;
+	protected int mPathIndex;
+	protected int m_xTarget;
+	protected int m_yTarget;
 	
 	private final static int ZOMBIE_SIZE = 10;
 	
@@ -32,6 +37,10 @@ public class Zombie extends GameItem
 		super(x, y, ZOMBIE_SIZE, ZOMBIE_SIZE);
 
 	    mColor = Color.black;
+		mIsPathFinder = false;
+		mPathIndex = 0;
+		m_xTarget = x;
+		m_yTarget = y;
 	}
 	
 	public Zombie(int x, int y, int w, int h, int hp, int spd)
@@ -40,6 +49,36 @@ public class Zombie extends GameItem
 		
 		mHP = hp;
 		mSpeed = spd;
+		mIsPathFinder = false;
+		mPathIndex = 0;
+		m_xTarget = x;
+		m_yTarget = y;
+	}
+	
+	public void setTarget(int x, int y)
+	{
+		m_xTarget = x;
+		m_yTarget = y;
+	}
+	
+	public int getXTarget()
+	{
+		return m_xTarget;
+	}
+	
+	public int getYTarget()
+	{
+		return m_yTarget;
+	}
+	
+	public void incrementPathIndex()
+	{
+		mPathIndex++;
+	}
+	
+	public int getPathIndex()
+	{
+		return mPathIndex;
 	}
 	
 	public void move(MoveDirections dir)
@@ -72,7 +111,34 @@ public class Zombie extends GameItem
 	@Override
 	public void update(long timeNS)
 	{
-		move(MoveDirections.RIGHT);
+		if(mIsPathFinder)
+		{
+			if(m_xTarget > mPosX)
+			{
+				move(MoveDirections.RIGHT);
+			}
+			else if(m_xTarget < mPosX)
+			{
+				move(MoveDirections.LEFT);
+			}
+			else if(m_yTarget > mPosY)
+			{
+				move(MoveDirections.DOWN);
+			}
+			else if(m_yTarget < mPosY)
+			{
+				move(MoveDirections.UP);
+			}	
+			else
+			{
+				move(MoveDirections.RIGHT);
+			}
+		}
+		
+		else
+		{
+			move(MoveDirections.RIGHT);
+		}
 		checkIsOffscreen();
 	}
 	

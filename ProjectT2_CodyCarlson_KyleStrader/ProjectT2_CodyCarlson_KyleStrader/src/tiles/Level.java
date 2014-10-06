@@ -29,7 +29,6 @@ public class Level {
 			}
 		}
 
-		mTilePath.add(new PathTile(-1 * GameSettings.TILE_SIZE, 7 * GameSettings.TILE_SIZE));
 		mTilePath.add(new PathTile(0 * GameSettings.TILE_SIZE, 7 * GameSettings.TILE_SIZE));
 		mTilePath.add(new PathTile(1 * GameSettings.TILE_SIZE, 7 * GameSettings.TILE_SIZE));
 		mTilePath.add(new PathTile(2 * GameSettings.TILE_SIZE, 7 * GameSettings.TILE_SIZE));
@@ -58,6 +57,7 @@ public class Level {
 		mTilePath.add(new PathTile(13 * GameSettings.TILE_SIZE, 3 * GameSettings.TILE_SIZE));
 		mTilePath.add(new PathTile(14 * GameSettings.TILE_SIZE, 3 * GameSettings.TILE_SIZE));
 		mTilePath.add(new PathTile(15 * GameSettings.TILE_SIZE, 3 * GameSettings.TILE_SIZE));
+		mTilePath.add(new PathTile(16 * GameSettings.TILE_SIZE, 3 * GameSettings.TILE_SIZE));
 	}
 
 	public void paint(Graphics g)

@@ -25,15 +25,14 @@ public class Room extends JPanel
 	
 	public Room()
 	{
+		testLevel = new Level();
 		mTowerManager = new TowerManager();
-		mWaveManager = new WaveManager();
+		mWaveManager = new WaveManager(testLevel);
 		
 		mPlayer = new Player();
 		mUI = new PlayerUI();
 		
 		mPlayer.addObserver(mUI);
-		
-		testLevel = new Level();
 	}
 	
 	public void addMGTower(int x, int y, int w, int h, int r)

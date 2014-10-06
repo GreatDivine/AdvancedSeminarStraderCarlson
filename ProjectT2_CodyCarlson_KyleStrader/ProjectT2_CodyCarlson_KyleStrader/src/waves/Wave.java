@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import tiles.Level;
+
 public class Wave 
 {
 	
@@ -76,15 +78,23 @@ public class Wave
 		}
 	}
 	
-	public void update(long timeNS, TowerManager towerManager)
+	public void update(long timeNS, TowerManager towerManager, Level level)
 	{
 		ListIterator<Zombie> iter = mZombies.listIterator();
 		
 		while (iter.hasNext())
 		{
 			Zombie z = iter.next();
-			
+
 			z.update(timeNS);
+			
+			if (z.getX() == z.getXTarget() && z.getY() == z.getYTarget())
+			{
+				z.incrementPathIndex();
+				
+				if (z.getPathIndex() < level.getPathLength())
+					z.setTarget(level.getPathIndexed(z.getPathIndex()).getXOrig(), level.getPathIndexed(z.getPathIndex()).getYOrig());
+			}
 			
 			int numTowers = towerManager.getNumTowers();
 			for(int i = 0; i < numTowers; i++)

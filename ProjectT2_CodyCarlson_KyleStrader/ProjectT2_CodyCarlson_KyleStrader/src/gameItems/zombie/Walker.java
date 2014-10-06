@@ -19,6 +19,7 @@ public class Walker extends Zombie
 		mHP = WALKER_HP;
 		mSpeed = WALKER_SPEED;
 		mColor = WALKER_COLOR;
+		mIsPathFinder = true;
 	}
 
 }
