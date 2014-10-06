@@ -1,0 +1,120 @@
+package waves;
+
+import gameItems.tower.Tower;
+import gameItems.zombie.Fatty;
+import gameItems.zombie.Imp;
+import gameItems.zombie.Runner;
+import gameItems.zombie.Walker;
+import gameItems.zombie.Zombie;
+
+import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
+public class Wave 
+{
+	
+	private List<Zombie> mZombies;
+	
+	public Wave()
+	{
+		mZombies = new ArrayList<Zombie>();
+	}
+	
+	public enum mZombieType
+	{
+		WALKER,
+		RUNNER,
+		FATTY,
+		IMP
+	}
+	
+	public void addZombie(int x, int y, int w, int h, int hp, int spd)
+	{
+		mZombies.add(new Zombie(x, y, w, h, hp, spd));
+	}
+	
+	public Zombie addZombie(int x, int y, mZombieType zType)
+	{
+		switch(zType)
+		{
+			case WALKER:
+				Walker tmpW = new Walker(x,y);
+				mZombies.add(tmpW);
+				return tmpW;
+			case RUNNER:
+				Runner tmpR = new Runner(x,y);
+				mZombies.add(tmpR);
+				return tmpR;
+			case FATTY:
+				Fatty tmpF = new Fatty(x,y);
+				mZombies.add(tmpF);
+				return tmpF;
+			case IMP:
+				Imp tmpI = new Imp(x,y);
+				mZombies.add(tmpI);
+				return tmpI;
+		}
+		
+		return null; // if we get here we must have somehow gotten an incorrect zType
+	}
+	
+	public void update(long timeNS)
+	{
+		for (int i = 0; i < mZombies.size(); i++)
+		{
+			Zombie z = mZombies.get(i);
+			
+			z.update(timeNS);
+			
+			if (z.isOffscreen() || z.isDead())
+			{
+				removeZombie(z);
+			    i--;
+			}
+		}
+	}
+	
+	public void update(long timeNS, Tower tower)
+	{
+		ListIterator<Zombie> iter = mZombies.listIterator();
+		
+		while (iter.hasNext())
+		{
+			Zombie z = iter.next();
+			
+			z.update(timeNS);
+			
+			tower.checkIfTargettable(z);
+			
+			if (z.isOffscreen() || z.isDead())
+			{
+				iter.remove();
+			}
+		}
+	}
+	
+	public void paint(Graphics g)
+	{
+		for(Zombie z:mZombies)
+		{
+			z.paint(g);
+		}
+	}
+	
+	public int getNumZombies()
+	{
+		return mZombies.size();
+	}
+	
+	public Zombie getZombie(int index)
+	{
+		return mZombies.get(index);
+	}
+	
+	public void removeZombie(Zombie z)
+	{
+		mZombies.remove(z);
+	}
+}
