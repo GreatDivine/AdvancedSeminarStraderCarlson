@@ -3,20 +3,23 @@ package gameItems.tower;
 import gameItems.GameItem;
 import gameItems.zombie.Zombie;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.geom.Point2D;
 
 import util.GameSettings;
 
-public abstract class Tower extends GameItem{
+public class Tower extends GameItem 
+{
 	
-	protected int mFireRadius;
-	protected Zombie mCurrentTarget;
-	protected float mShotDelay;
-	protected ProjectileManager mProjectileManager;
-	protected double mTimePassed;
-	protected double mCurTime;
-	protected double mPrevTime;
-	protected double mStartTime;
+	private int mFireRadius;
+	private Zombie mCurrentTarget;
+	private float mShotDelay;
+	private ProjectileManager mProjectileManager;
+	private double mTimePassed;
+	private double mCurTime;
+	private double mPrevTime;
+	private double mStartTime;
 	
 	public Tower(int x, int y, int w, int h, int fireRad, float shotDelay)
 	{
@@ -31,9 +34,48 @@ public abstract class Tower extends GameItem{
 		mPrevTime = 0;
 	}
 	
-	public abstract void update(long timens);
-	public abstract void paint(Graphics g);
-	public abstract void shootAtCurrentTarget();
+	@Override
+	public void update(long timeNS)
+	{
+		mPrevTime = mCurTime;
+		mCurTime = (double)System.nanoTime() / GameSettings.NANOSECONDS_TO_SECONDS;
+		mTimePassed += mCurTime - mPrevTime;
+		
+		if(mTimePassed > mShotDelay)
+		{	
+			shootAtCurrentTarget();
+			mTimePassed -= mShotDelay;
+		}
+		
+		mProjectileManager.update(timeNS);
+	}
+	
+	public void shootAtCurrentTarget()
+	{
+		if(mCurrentTarget != null)
+		{	
+			// get direction vector b/w target and tower
+			float aimDirX = mCurrentTarget.getX() - mPosX;
+			float aimDirY = mCurrentTarget.getY() - mPosY;
+			
+			// normalize direction vector
+			aimDirX /= Point2D.distance(mPosX, mPosY, mCurrentTarget.getX(), mCurrentTarget.getY());
+			aimDirY /= Point2D.distance(mPosX, mPosY, mCurrentTarget.getX(), mCurrentTarget.getY());
+			
+			// fire projectile in direction
+			mProjectileManager.addProjectile((int)mPosX, (int)mPosY, aimDirX, aimDirY);
+		}
+	}
+	
+	@Override
+	public void paint(Graphics g)
+	{
+		g.setColor(Color.red);
+		g.fillOval((int)mPosX-(mWidth/2), (int)mPosY-(mHeight/2), mWidth, mHeight);
+		drawTargettingRadius(g, (int)mPosX, (int)mPosY, mFireRadius);
+		
+		mProjectileManager.paint(g);
+	}
 	
 	public void checkIfTargettable(Zombie z)
 	{
@@ -70,5 +112,4 @@ public abstract class Tower extends GameItem{
 	{
 		return mProjectileManager;
 	}
-
 }

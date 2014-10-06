@@ -10,7 +10,7 @@ import util.GameSettings;
 public class Game extends JFrame 
 {
 	
-	private Room mRoom;
+	public static Room mRoom; //Used to make global calls to this object (needs getter)
 	
 	public boolean keepGoing;
 	
@@ -23,7 +23,7 @@ public class Game extends JFrame
 	public void init()
 	{
 		add(mRoom);
-		mRoom.addRocketTower(300, 100, 20, 20, 200);
+		mRoom.addTower(300, 100, 20, 20, 200, 0.07f);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(new Dimension(GameSettings.FRAME_WIDTH, GameSettings.FRAME_HEIGHT));
@@ -38,5 +38,10 @@ public class Game extends JFrame
 	public void update(long timeNS)
 	{
 		mRoom.updateItems(timeNS);
+	}
+	
+	public Room getRoom()
+	{
+		return mRoom;
 	}
 }

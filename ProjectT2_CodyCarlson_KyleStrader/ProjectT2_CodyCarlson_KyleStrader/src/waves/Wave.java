@@ -2,7 +2,6 @@ package waves;
 
 import gameItems.tower.Tower;
 import gameItems.zombie.Fatty;
-import gameItems.zombie.Imp;
 import gameItems.zombie.Runner;
 import gameItems.zombie.Walker;
 import gameItems.zombie.Zombie;
@@ -26,8 +25,7 @@ public class Wave
 	{
 		WALKER,
 		RUNNER,
-		FATTY,
-		IMP
+		FATTY
 	}
 	
 	public void addZombie(int x, int y, int w, int h, int hp, int spd)
@@ -51,10 +49,6 @@ public class Wave
 				Fatty tmpF = new Fatty(x,y);
 				mZombies.add(tmpF);
 				return tmpF;
-			case IMP:
-				Imp tmpI = new Imp(x,y);
-				mZombies.add(tmpI);
-				return tmpI;
 		}
 		
 		return null; // if we get here we must have somehow gotten an incorrect zType

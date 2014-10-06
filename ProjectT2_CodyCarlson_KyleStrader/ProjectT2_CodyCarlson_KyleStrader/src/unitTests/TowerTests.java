@@ -1,7 +1,7 @@
 package unitTests;
 
 import static org.junit.Assert.assertEquals;
-import gameItems.tower.MachineGunTower;
+import gameItems.tower.Tower;
 import gameItems.zombie.Walker;
 import gameItems.zombie.Zombie.MoveDirections;
 import main.Room;
@@ -19,7 +19,7 @@ public class TowerTests
 		
 		assertEquals(r.getNumTowers(), 0);
 		
-		r.addMGTower(0, 0, 20, 20, 50);
+		r.addTower(0, 0, 20, 20, 50, 20);
 		
 		assertEquals(r.getNumTowers(), 1);
 	}
@@ -29,7 +29,7 @@ public class TowerTests
 	public void testTargetAcquired()
 	{
 		int towerRadius = 100;
-		MachineGunTower t = new MachineGunTower(0,0,20,20,towerRadius);
+		Tower t = new Tower(0,0,20,20,towerRadius,100);
 		
 		Walker w = new Walker(10,10); // spawn a new walker within towers target radius
 		
@@ -43,7 +43,7 @@ public class TowerTests
 	public void testTargetLost()
 	{
 		int towerRadius = 100;
-		MachineGunTower t = new MachineGunTower(0,0,20,20,towerRadius);
+		Tower t = new Tower(0,0,20,20,towerRadius,100);
 		
 		Walker w = new Walker(99,0); // spawn a walker at x = 99. Since the walker y is equal to the towers, moving right 2 units will place the walker out of the target radius
 		
@@ -61,7 +61,7 @@ public class TowerTests
 	public void testSwitchTarget()
 	{
 		int towerRadius = 100;
-		MachineGunTower t = new MachineGunTower(0,0,20,20,towerRadius);
+		Tower t = new Tower(0,0,20,20,towerRadius,100);
 		
 		Walker w = new Walker(99,0); //spawn 2 walkers, both in range of the tower
 		Walker w2 = new Walker(80, 0);
@@ -90,7 +90,7 @@ public class TowerTests
 	public void testDamageTarget()
 	{
 		int towerRadius = 100;
-		MachineGunTower t = new MachineGunTower(0,0,20,20,towerRadius);
+		Tower t = new Tower(0,0,20,20,towerRadius,100);
 		
 		Walker w = new Walker(10,10);
 		t.checkIfTargettable(w);

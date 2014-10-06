@@ -6,19 +6,16 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import player.Player;
-import player.PlayerUI;
 import tiles.Level;
+import tiles.Tile;
 import waves.WaveManager;
 
 @SuppressWarnings("serial")
 public class Room extends JPanel 
 {
-	private WaveManager mWaveManager;
-	private TowerManager mTowerManager;
 	
-	private Player mPlayer;
-	private PlayerUI mUI;
+	private static WaveManager mWaveManager;
+	private static TowerManager mTowerManager;
 	
 	private Level testLevel;
 	
@@ -27,22 +24,12 @@ public class Room extends JPanel
 		mTowerManager = new TowerManager();
 		mWaveManager = new WaveManager();
 		
-		mPlayer = new Player();
-		mUI = new PlayerUI();
-		
-		mPlayer.addObserver(mUI);
-		
 		testLevel = new Level();
 	}
 	
-	public void addMGTower(int x, int y, int w, int h, int r)
+	public void addTower(int x, int y, int w, int h, int r, float delay)
 	{
-		mTowerManager.addMGTower(x, y, w, h, r);
-	}
-	
-	public void addRocketTower(int x, int y, int w, int h, int r)
-	{
-		mTowerManager.addRocketTower(x, y, w, h, r);
+		mTowerManager.addTower(x, y, w, h, r, delay);
 	}
 	
 	@Override
@@ -50,8 +37,6 @@ public class Room extends JPanel
 	{
 		mWaveManager.paint(g);
 		mTowerManager.paint(g);
-		
-		mUI.paint(g);
 		
 		testLevel.paint(g);
 	}
@@ -65,6 +50,11 @@ public class Room extends JPanel
 	public int getNumTowers()
 	{
 		return mTowerManager.getNumTowers();
+	}
+	
+	public WaveManager getWaveManager()
+	{
+		return mWaveManager;
 	}
 
 }

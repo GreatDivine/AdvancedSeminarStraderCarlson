@@ -54,10 +54,9 @@ public class WaveManager
 	
 	public void populateWave(Wave wave)
 	{
-		//createWaveZombies(wave, Wave.mZombieType.FATTY);
-		//createWaveZombies(wave, Wave.mZombieType.RUNNER);
-		//createWaveZombies(wave, Wave.mZombieType.WALKER);
-		createWaveZombies(wave, Wave.mZombieType.IMP);
+		createWaveZombies(wave, Wave.mZombieType.FATTY);
+		createWaveZombies(wave, Wave.mZombieType.RUNNER);
+		createWaveZombies(wave, Wave.mZombieType.WALKER);
 	}
 	
 	private void createWaveZombies(Wave wave, Wave.mZombieType zType)

@@ -1,7 +1,7 @@
 package unitTests;
 
 import static org.junit.Assert.assertEquals;
-import gameItems.tower.MachineGunTower;
+import gameItems.tower.Tower;
 import gameItems.zombie.Fatty;
 import gameItems.zombie.Walker;
 import gameItems.zombie.Zombie.MoveDirections;
@@ -89,7 +89,7 @@ public class ZombieTests
 	public void testIsTargeted()
 	{
 		int towerRadius = 100;
-		MachineGunTower t = new MachineGunTower(0,0,20,20,towerRadius);
+		Tower t = new Tower(0,0,20,20,towerRadius,100);
 		
 		Walker w = new Walker(10,10);
 		
