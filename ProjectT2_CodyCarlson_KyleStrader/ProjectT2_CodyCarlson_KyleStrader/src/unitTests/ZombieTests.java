@@ -8,6 +8,7 @@ import gameItems.zombie.Zombie.MoveDirections;
 
 import org.junit.Test;
 
+import player.Player;
 import util.GameSettings;
 import waves.Wave;
 
@@ -34,10 +35,10 @@ public class ZombieTests
 	public void testAddZombie()
 	{
 		Wave w = new Wave();
-		
+		Player p = new Player();
 		assertEquals(w.getNumZombies(), 0);
 		
-		w.addZombie(0, 0, Wave.mZombieType.WALKER);
+		w.addZombie(0, 0, Wave.mZombieType.WALKER, p);
 		
 		assertEquals(w.getNumZombies(), 1);
 	}
@@ -46,8 +47,9 @@ public class ZombieTests
 	public void testGetZombie()
 	{
 		Wave w = new Wave();
+		Player p = new Player();
 		
-		Fatty f = (Fatty)w.addZombie(0,0, Wave.mZombieType.FATTY);
+		Fatty f = (Fatty)w.addZombie(0,0, Wave.mZombieType.FATTY, p);
 		Fatty differentFatty = new Fatty(100,100);
 		
 		boolean checkZombSame = (f == w.getZombie(0));
@@ -102,8 +104,9 @@ public class ZombieTests
 	public void testZombieRemoval()
 	{
 		Wave w = new Wave();
+		Player p = new Player();
 		
-		w.addZombie(GameSettings.FRAME_WIDTH - 1, 0, Wave.mZombieType.WALKER); // add a walker at the edge of the frame width, any movement should push us off
+		w.addZombie(GameSettings.FRAME_WIDTH - 1, 0, Wave.mZombieType.WALKER, p); // add a walker at the edge of the frame width, any movement should push us off
 		
 		assertEquals(w.getNumZombies(), 1);
 		
@@ -111,7 +114,7 @@ public class ZombieTests
 		
 		assertEquals(w.getNumZombies(), 0);
 		
-		Walker tmpWalker = (Walker)w.addZombie(0, 0, Wave.mZombieType.WALKER); // create another walker
+		Walker tmpWalker = (Walker)w.addZombie(0, 0, Wave.mZombieType.WALKER, p); // create another walker
 		
 		assertEquals (w.getNumZombies(), 1);
 		

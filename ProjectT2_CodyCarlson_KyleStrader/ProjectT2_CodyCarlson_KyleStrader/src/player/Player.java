@@ -15,6 +15,24 @@ public class Player implements Observable, Observer {
 	public Player()
 	{
 		mObservers = new ArrayList<Observer>();
+		mHP = GameSettings.START_HP;
+		mCash = GameSettings.START_CASH;
+	}
+	
+	public int getHP()
+	{
+		return mHP;
+	}
+	
+	public int getCash()
+	{
+		return mCash;
+	}
+	
+	public void modCash(int val)
+	{
+		mCash += val;
+		sendMessage();
 	}
 	
 	public void addObserver(Observer o)
@@ -36,6 +54,8 @@ public class Player implements Observable, Observer {
 	{
 		mHP += hp;
 		mCash += cash;
+		
+		sendMessage();
 	}
 
 }

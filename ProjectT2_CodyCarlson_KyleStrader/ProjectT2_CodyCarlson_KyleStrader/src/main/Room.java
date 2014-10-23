@@ -3,17 +3,20 @@ package main;
 import gameItems.tower.TowerManager;
 
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
 import player.Player;
 import player.PlayerUI;
 import tiles.Level;
+import tiles.Tile;
 import util.GameSettings;
 import waves.WaveManager;
 
 @SuppressWarnings("serial")
-public class Room extends JPanel 
+public class Room extends JPanel implements MouseListener
 {
 	private WaveManager mWaveManager;
 	private TowerManager mTowerManager;
@@ -27,12 +30,17 @@ public class Room extends JPanel
 	{
 		testLevel = new Level();
 		mTowerManager = new TowerManager();
-		mWaveManager = new WaveManager(testLevel);
+		
 		
 		mPlayer = new Player();
 		mUI = new PlayerUI();
 		
+		mWaveManager = new WaveManager(testLevel, mPlayer);
+		
 		mPlayer.addObserver(mUI);
+		
+		addMouseListener(this);
+		this.add(testLevel);
 	}
 	
 	public void addMGTower(int x, int y, int w, int h, int r)
@@ -48,11 +56,32 @@ public class Room extends JPanel
 	public void addMGTowerOnTile(int x, int y, int w, int h, int r)
 	{
 		mTowerManager.addMGTower(((x * GameSettings.TILE_SIZE) + GameSettings.TILE_SIZE/2), ((y * GameSettings.TILE_SIZE) + GameSettings.TILE_SIZE/2), w, h, r);
+		
+		for(Tile t: testLevel.getTiles())
+		{
+			if(t.containsPoint(x * GameSettings.TILE_SIZE, y * GameSettings.TILE_SIZE))
+			{
+				t.setHasTower(true);
+			}
+		}
 	}
 	
 	public void addRocketTowerOnTile(int x, int y, int w, int h, int r)
 	{
 		mTowerManager.addRocketTower(((x * GameSettings.TILE_SIZE) + GameSettings.TILE_SIZE/2), ((y * GameSettings.TILE_SIZE) + GameSettings.TILE_SIZE/2), w, h, r);
+		
+		for(Tile t: testLevel.getTiles())
+		{
+			if(t.containsPoint(x * GameSettings.TILE_SIZE, y * GameSettings.TILE_SIZE))
+			{
+				t.setHasTower(true);
+			}
+		}
+	}
+	
+	public Player getPlayer()
+	{
+		return mPlayer;
 	}
 	
 	@Override
@@ -79,6 +108,43 @@ public class Room extends JPanel
 	public Level getLevel()
 	{
 		return testLevel;
+	}
+	
+	private void mouseClickedEvent(int x, int y)
+	{
+		testLevel.checkTileClick(x, y);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) 
+	{
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) 
+	{
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) 
+	{
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) 
+	{
+		int mouseX = e.getX();
+		int mouseY = e.getY();
+		mouseClickedEvent(mouseX, mouseY);
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) 
+	{
+
 	}
 
 }

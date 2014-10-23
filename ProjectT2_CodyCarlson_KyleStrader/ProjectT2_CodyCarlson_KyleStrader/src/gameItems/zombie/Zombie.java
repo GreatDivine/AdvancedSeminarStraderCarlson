@@ -66,6 +66,21 @@ public class Zombie extends GameItem implements Observable
 		m_yTarget = y;
 	}
 	
+	public Zombie(int x, int y, int w, int h, int hp, int spd, Color color, int hpMod, int goldMod)
+	{
+		super(x, y, w, h);
+		
+		mObservers = new ArrayList<Observer>();
+		mHP = hp;
+		mSpeed = spd;
+		mPathIndex = 0;
+		m_xTarget = x;
+		m_yTarget = y;
+		mColor = color;
+		mPlayerHPMod = hpMod;
+		mPlayerGoldMod = goldMod;
+	}
+	
 	public void addObserver(Observer o)
 	{
 		mObservers.add(o);
@@ -194,27 +209,37 @@ public class Zombie extends GameItem implements Observable
 		if (mPosX > GameSettings.FRAME_WIDTH || mPosY > GameSettings.FRAME_HEIGHT || mPosX < 0 || mPosY < 0)
 		{
 			mIsOffscreen = true;
-			mPlayerHPMod = GameSettings.ZOMBIE_DAMAGE * -1;
-			sendMessage();
-			mPlayerHPMod = 0;
+			//mPlayerHPMod = GameSettings.ZOMBIE_DAMAGE * -1;
+			//sendMessage();
+			//mPlayerHPMod = 0;
 		}
 		else mIsOffscreen = false;
 	}
 	
 	public boolean isOffscreen()
 	{
-		mPlayerGoldMod = GameSettings.ZOMBIE_WORTH;
-		sendMessage();
-		mPlayerGoldMod = 0;
+		//mPlayerGoldMod = GameSettings.ZOMBIE_WORTH;
+		//sendMessage();
+		//mPlayerGoldMod = 0;
 		return mIsOffscreen;
 	}
 	
 	@Override
 	public void sendMessage() 
 	{
-		for(Observer o: mObservers)
+		if (isDead())
 		{
-			o.process(mPlayerHPMod, mPlayerGoldMod);
+			for(Observer o: mObservers)
+			{
+				o.process(0, mPlayerGoldMod);
+			}
+		}
+		else if (isOffscreen())
+		{
+			for(Observer o: mObservers)
+			{
+				o.process(mPlayerHPMod *-1, 0);
+			}
 		}
 	}
 

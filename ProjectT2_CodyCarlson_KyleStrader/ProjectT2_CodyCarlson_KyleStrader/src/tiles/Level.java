@@ -4,10 +4,12 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JPanel;
+
 import util.GameSettings;
 
 
-public class Level {
+public class Level extends JPanel{
 	
 	private List<Tile> mTiles;
 	private List<Tile> mTilePath;
@@ -25,7 +27,9 @@ public class Level {
 		{
 			for (int j = 0; j < 16; j++)
 			{
-				mTiles.add(new Tile(j * GameSettings.TILE_SIZE, i * GameSettings.TILE_SIZE));
+				Tile tmp = new Tile(j * GameSettings.TILE_SIZE, i * GameSettings.TILE_SIZE);
+				mTiles.add(tmp);
+				this.add(tmp);
 			}
 		}
 
@@ -58,6 +62,22 @@ public class Level {
 		mTilePath.add(new PathTile(14 * GameSettings.TILE_SIZE, 3 * GameSettings.TILE_SIZE));
 		mTilePath.add(new PathTile(15 * GameSettings.TILE_SIZE, 3 * GameSettings.TILE_SIZE));
 		mTilePath.add(new PathTile(16 * GameSettings.TILE_SIZE, 3 * GameSettings.TILE_SIZE));
+	}
+	
+	public void checkTileClick(int x, int y)
+	{
+		for(Tile t: mTiles)
+		{
+			if (t.containsPoint(x, y))
+			{
+				t.buttonClicked();
+			}
+		}
+	}
+	
+	public List<Tile> getTiles()
+	{
+		return mTiles;
 	}
 
 	public void paint(Graphics g)

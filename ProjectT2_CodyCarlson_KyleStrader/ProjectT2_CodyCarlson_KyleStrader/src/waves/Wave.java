@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import player.Player;
 import tiles.Level;
 
 public class Wave 
@@ -37,24 +38,28 @@ public class Wave
 		mZombies.add(new Zombie(x, y, w, h, hp, spd));
 	}
 	
-	public Zombie addZombie(int x, int y, mZombieType zType)
+	public Zombie addZombie(int x, int y, mZombieType zType, Player p)
 	{
 		switch(zType)
 		{
 			case WALKER:
 				Walker tmpW = new Walker(x,y);
+				tmpW.addObserver(p);
 				mZombies.add(tmpW);
 				return tmpW;
 			case RUNNER:
 				Runner tmpR = new Runner(x,y);
+				tmpR.addObserver(p);
 				mZombies.add(tmpR);
 				return tmpR;
 			case FATTY:
 				Fatty tmpF = new Fatty(x,y);
+				tmpF.addObserver(p);
 				mZombies.add(tmpF);
 				return tmpF;
 			case IMP:
 				Imp tmpI = new Imp(x,y);
+				tmpI.addObserver(p);
 				mZombies.add(tmpI);
 				return tmpI;
 		}
@@ -104,11 +109,13 @@ public class Wave
 			
 			if (z.isOffscreen())
 			{
+				z.sendMessage();
 				iter.remove();
 			}
 			
 			if (z.isDead())
 			{
+				z.sendMessage();
 				iter.remove();
 			}
 		}

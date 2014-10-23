@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import player.Player;
 import tiles.Level;
 import waves.Wave;
 import waves.WaveManager;
@@ -15,7 +16,8 @@ public class WaveManagerTests
 	public void testAddWaves()
 	{
 		Level level = new Level();
-		WaveManager wm = new WaveManager(level);
+		Player p = new Player();
+		WaveManager wm = new WaveManager(level,p);
 		
 		assertEquals(wm.getNumWavesSpawned(), 1); // we have a brand new wave manager, which automatically spawns a wave when it is first created, so our wave count should be 1
 		
@@ -28,11 +30,13 @@ public class WaveManagerTests
 		assertEquals(wm.getNumWavesSpawned(), 3);
 	}
 	
+	
 	@Test
 	public void testPopulateWave()
 	{
 		Level level = new Level();
-		WaveManager wm = new WaveManager(level);
+		Player p = new Player();
+		WaveManager wm = new WaveManager(level, p);
 		
 		Wave w = new Wave();
 		
@@ -47,7 +51,8 @@ public class WaveManagerTests
 	public void testGetWave()
 	{
 		Level level = new Level();
-		WaveManager wm = new WaveManager(level);
+		Player p = new Player();
+		WaveManager wm = new WaveManager(level, p);
 		
 		Wave w = wm.addWave();
 		

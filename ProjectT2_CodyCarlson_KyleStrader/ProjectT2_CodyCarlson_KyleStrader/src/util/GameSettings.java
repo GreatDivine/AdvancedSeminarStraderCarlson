@@ -26,6 +26,9 @@ public class GameSettings
 	public static final int ZOMBIE_DAMAGE = 1;
 	public static final int ZOMBIE_WORTH = 20;
 	
+	public static final int MG_TOWER_COST = 500;
+	public static final int ROCKET_TOWER_COST = 1000;
+	
 	public static final int TILE_SIZE = 32;
 	public static final int NUM_TILES = (FRAME_WIDTH * FRAME_HEIGHT)  / TILE_SIZE;
 }

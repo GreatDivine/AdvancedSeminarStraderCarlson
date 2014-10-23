@@ -9,16 +9,13 @@ public class Walker extends Zombie
 	public final static int WALKER_HP = 100;
 	public final static int WALKER_SPEED = 2;
 	protected final static Color WALKER_COLOR = Color.green;
+	private final static int WALKER_DAMAGE = 5;
+	private final static int WALKER_REWARD = 50;
 
 	public Walker(int x, int y)
 	{
-		super(x, y);
-		
-		mWidth = WALKER_SIZE;
-		mHeight = WALKER_SIZE;
-		mHP = WALKER_HP;
-		mSpeed = WALKER_SPEED;
-		mColor = WALKER_COLOR;
+		super(x, y, WALKER_SIZE, WALKER_SIZE, WALKER_HP, WALKER_SPEED, WALKER_COLOR, WALKER_DAMAGE, WALKER_REWARD);
+	
 		mIsPathFinder = true;
 	}
 

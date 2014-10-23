@@ -11,16 +11,13 @@ public class Fatty extends Zombie
 	protected final static int FATTY_HP = 200;
 	protected final static int FATTY_SPEED = 1;
 	protected final static Color FATTY_COLOR = Color.CYAN;
+	private final static int FATTY_DAMAGE = 10;
+	private final static int FATTY_REWARD = 100;
 	
 	public Fatty(int x, int y)
 	{
-		super(x, y);
-		
-		mWidth = FATTY_SIZE;
-		mHeight = FATTY_SIZE;
-		mHP = FATTY_HP;
-		mSpeed = FATTY_SPEED;
-		mColor = FATTY_COLOR;
+		super(x, y, FATTY_SIZE, FATTY_SIZE, FATTY_HP, FATTY_SPEED, FATTY_COLOR, FATTY_DAMAGE, FATTY_REWARD);
+
 		mIsPathFinder = true;
 	}
 
