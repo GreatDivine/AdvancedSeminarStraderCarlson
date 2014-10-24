@@ -1,14 +1,17 @@
 package unitTests;
 
 import static org.junit.Assert.assertEquals;
+
+import java.awt.geom.Point2D;
+
 import gameItems.tower.MachineGunTower;
 import gameItems.zombie.Fatty;
 import gameItems.zombie.Walker;
-import gameItems.zombie.Zombie.MoveDirections;
 
 import org.junit.Test;
 
 import player.Player;
+import tiles.Level;
 import util.GameSettings;
 import waves.Wave;
 
@@ -20,13 +23,13 @@ public class ZombieTests
 	{
 		Walker w = new Walker(0,0);
 		
-		int wX = (int)w.getX();
+		int wX = (int)w.getPosition().getX();
 		
 		assertEquals(wX, 0);
 		
-		w.move(MoveDirections.RIGHT); // move the walker to the right WALKER_SPEED pixels
+		w.move(new Point2D.Float(1, 0)); // move the walker to the right WALKER_SPEED pixels
 		
-		wX = (int)w.getX();
+		wX = (int)w.getPosition().getX();
 		
 		assertEquals(wX, Walker.WALKER_SPEED);
 	}
@@ -36,9 +39,11 @@ public class ZombieTests
 	{
 		Wave w = new Wave();
 		Player p = new Player();
+		Level level = new Level();
+		
 		assertEquals(w.getNumZombies(), 0);
 		
-		w.addZombie(0, 0, Wave.mZombieType.WALKER, p);
+		w.addZombie(0, 0, Wave.mZombieType.WALKER, p, level);
 		
 		assertEquals(w.getNumZombies(), 1);
 	}
@@ -48,8 +53,9 @@ public class ZombieTests
 	{
 		Wave w = new Wave();
 		Player p = new Player();
+		Level level = new Level();
 		
-		Fatty f = (Fatty)w.addZombie(0,0, Wave.mZombieType.FATTY, p);
+		Fatty f = (Fatty)w.addZombie(0,0, Wave.mZombieType.FATTY, p, level);
 		Fatty differentFatty = new Fatty(100,100);
 		
 		boolean checkZombSame = (f == w.getZombie(0));
@@ -105,16 +111,19 @@ public class ZombieTests
 	{
 		Wave w = new Wave();
 		Player p = new Player();
+		Level level = new Level();
 		
-		w.addZombie(GameSettings.FRAME_WIDTH - 1, 0, Wave.mZombieType.WALKER, p); // add a walker at the edge of the frame width, any movement should push us off
+		w.addZombie(GameSettings.FRAME_WIDTH - 1, 0, Wave.mZombieType.WALKER, p, level); // add a walker at the edge of the frame width, any movement should push us off
 		
 		assertEquals(w.getNumZombies(), 1);
+		
+		w.getZombie(0).move(new Point2D.Float(1, 0));
 		
 		w.update(1); // update the wave, causing the walker to step off screen and get deleted
 		
 		assertEquals(w.getNumZombies(), 0);
 		
-		Walker tmpWalker = (Walker)w.addZombie(0, 0, Wave.mZombieType.WALKER, p); // create another walker
+		Walker tmpWalker = (Walker)w.addZombie(0, 0, Wave.mZombieType.WALKER, p, level); // create another walker
 		
 		assertEquals (w.getNumZombies(), 1);
 		

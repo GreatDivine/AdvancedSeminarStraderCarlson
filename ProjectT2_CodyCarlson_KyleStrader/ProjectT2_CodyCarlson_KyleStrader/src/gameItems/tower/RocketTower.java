@@ -7,7 +7,7 @@ import java.awt.geom.Point2D;
 import util.GameSettings;
 
 public class RocketTower extends Tower {
-	private static final float ROCKET_SHOT_DELAY = 1.0f;
+	private static final float ROCKET_SHOT_DELAY = 2.0f;
 	
 	public RocketTower(int x, int y, int w, int h, int fireRad) 
 	{
@@ -34,8 +34,13 @@ public class RocketTower extends Tower {
 	public void paint(Graphics g) 
 	{
 		g.setColor(Color.blue);
-		g.fillOval((int)mPosX-(mWidth/2), (int)mPosY-(mHeight/2), mWidth, mHeight);
-		drawTargettingRadius(g, (int)mPosX, (int)mPosY, mFireRadius);
+		g.fillOval(
+				(int) (mPosition.getX()-(mDimensions.getX()/2)), 
+				(int) (mPosition.getY()-(mDimensions.getY()/2)), 
+				(int) mDimensions.getX(), 
+				(int) mDimensions.getY());
+		
+		drawTargettingRadius(g, (int)mPosition.getX(), (int)mPosition.getY(), mFireRadius);
 		
 		mProjectileManager.paint(g);
 	}
@@ -46,15 +51,18 @@ public class RocketTower extends Tower {
 		if(mCurrentTarget != null)
 		{	
 			// get direction vector b/w target and tower
-			float aimDirX = mCurrentTarget.getX() - mPosX;
-			float aimDirY = mCurrentTarget.getY() - mPosY;
+			Point2D.Float aimDir = new Point2D.Float((float) (mCurrentTarget.getPosition().getX() - mPosition.getX()), 
+					(float) (mCurrentTarget.getPosition().getY() - mPosition.getY()));
 			
 			// normalize direction vector
-			aimDirX /= Point2D.distance(mPosX, mPosY, mCurrentTarget.getX(), mCurrentTarget.getY());
-			aimDirY /= Point2D.distance(mPosX, mPosY, mCurrentTarget.getX(), mCurrentTarget.getY());
+			float length = (float) mPosition.distance(mCurrentTarget.getPosition());
+			aimDir.setLocation(aimDir.getX() / length, aimDir.getY() / length);
 			
 			// fire projectile in direction
-			mProjectileManager.addProjectile((int)mPosX, (int)mPosY, aimDirX, aimDirY, GameSettings.ROCKET_TOWER_SHOT_DAMAGE);
+			mProjectileManager.addProjectile((int)mPosition.getX(), 
+					(int)mPosition.getY(),  
+					GameSettings.ROCKET_TOWER_SHOT_DAMAGE,
+					mCurrentTarget);
 		}
 	}
 	

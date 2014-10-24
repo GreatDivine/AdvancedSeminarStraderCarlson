@@ -36,8 +36,10 @@ public abstract class Tower extends GameItem{
 	public abstract void shootAtCurrentTarget();
 	
 	public void checkIfTargettable(Zombie z)
-	{
-		float dist = (float)Math.sqrt(Math.pow((z.getX() - mPosX), 2) + Math.pow((z.getY() - mPosY), 2));
+	{		
+		float oppositeLength = (float) (z.getPosition().getY() - mPosition.getY());
+		float hypotenuseLength = (float) (z.getPosition().getX() - mPosition.getX());
+		float dist = (float)Math.sqrt(Math.pow(hypotenuseLength, 2) + Math.pow(oppositeLength, 2)); 
 		
 		if (dist < mFireRadius && mCurrentTarget == null)
 		{

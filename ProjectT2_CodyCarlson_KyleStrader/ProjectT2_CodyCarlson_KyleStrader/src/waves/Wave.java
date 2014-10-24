@@ -8,6 +8,7 @@ import gameItems.zombie.Walker;
 import gameItems.zombie.Zombie;
 
 import java.awt.Graphics;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -17,7 +18,7 @@ import tiles.Level;
 
 public class Wave 
 {
-	
+	public final int ZOMBIE_TARGET_EPSILON = 3;
 	private List<Zombie> mZombies;
 	
 	public Wave()
@@ -38,7 +39,7 @@ public class Wave
 		mZombies.add(new Zombie(x, y, w, h, hp, spd));
 	}
 	
-	public Zombie addZombie(int x, int y, mZombieType zType, Player p)
+	public Zombie addZombie(int x, int y, mZombieType zType, Player p, Level level)
 	{
 		switch(zType)
 		{
@@ -60,6 +61,7 @@ public class Wave
 			case IMP:
 				Imp tmpI = new Imp(x,y);
 				tmpI.addObserver(p);
+				tmpI.setpathIndex(level.getPathLength() - 1, level);
 				mZombies.add(tmpI);
 				return tmpI;
 		}
@@ -93,7 +95,13 @@ public class Wave
 
 			z.update(timeNS);
 			
-			if (z.getX() == z.getXTarget() && z.getY() == z.getYTarget())
+			Point2D zPos = new Point2D.Float((float) z.getPosition().getX(), (float) z.getPosition().getY());
+			
+			Point2D zTargetPos = new Point2D.Float((float)z.getTarget().getX(), (float)z.getTarget().getY());
+			
+			float distanceFromCenter = (float) zPos.distance(zTargetPos);
+			
+			if (distanceFromCenter <= ZOMBIE_TARGET_EPSILON)
 			{
 				z.incrementPathIndex();
 				

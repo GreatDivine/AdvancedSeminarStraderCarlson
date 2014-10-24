@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import util.GameSettings;
 
 
+@SuppressWarnings("serial")
 public class Level extends JPanel{
 	
 	private List<Tile> mTiles;

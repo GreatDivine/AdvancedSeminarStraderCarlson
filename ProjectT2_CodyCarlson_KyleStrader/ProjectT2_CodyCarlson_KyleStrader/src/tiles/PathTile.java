@@ -3,6 +3,7 @@ package tiles;
 import java.awt.Color;
 import java.awt.Graphics;
 
+@SuppressWarnings("serial")
 public class PathTile extends Tile
 {
 	PathTile(int x, int y)

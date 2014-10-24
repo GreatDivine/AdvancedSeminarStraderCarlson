@@ -10,6 +10,7 @@ import java.util.List;
 
 import player.Observable;
 import player.Observer;
+import tiles.Level;
 import util.GameSettings;
 
 public class Zombie extends GameItem implements Observable 
@@ -23,22 +24,13 @@ public class Zombie extends GameItem implements Observable
 	private boolean mIsOffscreen;
 	protected boolean mIsPathFinder;
 	protected int mPathIndex;
-	protected int m_xTarget;
-	protected int m_yTarget;
+	protected Point2D.Float mTarget;
 	private int mPlayerHPMod;
 	private int mPlayerGoldMod;
 	
 	private List<Observer> mObservers;
 	
 	private final static int ZOMBIE_SIZE = 10;
-	
-	public static enum MoveDirections
-	{
-		RIGHT,
-		LEFT,
-		UP,
-		DOWN
-	};
 	
 	public Zombie(int x, int y)
 	{
@@ -48,22 +40,20 @@ public class Zombie extends GameItem implements Observable
 	    mColor = Color.black;
 		mIsPathFinder = false;
 		mPathIndex = 0;
-		m_xTarget = x;
-		m_yTarget = y;
+		mTarget = new Point2D.Float(x, y);
 		mPlayerHPMod = 0;
 		mPlayerGoldMod = 0;
 	}
 	
 	public Zombie(int x, int y, int w, int h, int hp, int spd)
 	{
-		super(x - (w/2), y - (h/2), w, h);
+		super(x, y, w, h);
 		
 		mHP = hp;
 		mSpeed = spd;
 		mIsPathFinder = false;
 		mPathIndex = 0;
-		m_xTarget = x;
-		m_yTarget = y;
+		mTarget = new Point2D.Float(x, y);
 	}
 	
 	public Zombie(int x, int y, int w, int h, int hp, int spd, Color color, int hpMod, int goldMod)
@@ -74,8 +64,7 @@ public class Zombie extends GameItem implements Observable
 		mHP = hp;
 		mSpeed = spd;
 		mPathIndex = 0;
-		m_xTarget = x;
-		m_yTarget = y;
+		mTarget = new Point2D.Float(x, y);
 		mColor = color;
 		mPlayerHPMod = hpMod;
 		mPlayerGoldMod = goldMod;
@@ -88,18 +77,12 @@ public class Zombie extends GameItem implements Observable
 	
 	public void setTarget(int x, int y)
 	{
-		m_xTarget = x;
-		m_yTarget = y;
+		mTarget.setLocation(x, y);
 	}
 	
-	public int getXTarget()
+	public Point2D.Float getTarget()
 	{
-		return m_xTarget;
-	}
-	
-	public int getYTarget()
-	{
-		return m_yTarget;
+		return mTarget;
 	}
 	
 	public void incrementPathIndex()
@@ -112,31 +95,16 @@ public class Zombie extends GameItem implements Observable
 		return mPathIndex;
 	}
 	
-	public void move(MoveDirections dir)
+	public void setpathIndex(int index, Level level)
 	{
-		switch (dir)
-		{
-			case RIGHT:
-			{
-				mPosX += mSpeed;
-				break;
-			}
-			case LEFT:
-			{
-				mPosX -= mSpeed;
-				break;
-			}
-			case UP:
-			{
-				mPosY -= mSpeed;
-				break;
-			}
-			case DOWN:
-			{
-				mPosY += mSpeed;
-				break;
-			}
-		}
+		mPathIndex = index;
+		setTarget(level.getPathIndexed(mPathIndex).getXOrig(), level.getPathIndexed(mPathIndex).getYOrig());
+	}
+	
+	public void move(Point2D.Float dir)
+	{
+		Point2D move = new Point2D.Float((float)dir.getX() * mSpeed, (float)dir.getY() * mSpeed);
+		mPosition.setLocation(mPosition.getX() + move.getX(), mPosition.getY() + move.getY());
 	}
 	
 	@Override
@@ -144,31 +112,16 @@ public class Zombie extends GameItem implements Observable
 	{
 		if(mIsPathFinder)
 		{
-			if(m_xTarget > mPosX)
+			Point2D.Float locToTarget = new Point2D.Float((float)(mTarget.getX() - mPosition.getX()), 
+					(float)(mTarget.getY() - mPosition.getY()));
+			
+			float length = (float) mPosition.distance(mTarget);
+			
+			if (length > 0)
 			{
-				move(MoveDirections.RIGHT);
+				locToTarget.setLocation(locToTarget.getX() / length, locToTarget.getY() / length);
+				move(locToTarget);
 			}
-			else if(m_xTarget < mPosX)
-			{
-				move(MoveDirections.LEFT);
-			}
-			else if(m_yTarget > mPosY)
-			{
-				move(MoveDirections.DOWN);
-			}
-			else if(m_yTarget < mPosY)
-			{
-				move(MoveDirections.UP);
-			}	
-			else
-			{
-				move(MoveDirections.RIGHT);
-			}
-		}
-		
-		else
-		{
-			move(MoveDirections.RIGHT);
 		}
 		checkIsOffscreen();
 	}
@@ -176,8 +129,10 @@ public class Zombie extends GameItem implements Observable
 	@Override
 	public void paint(Graphics g)
 	{
+		g.setColor(Color.BLACK);
+		g.fillOval((int)mPosition.getX() - 2, (int)mPosition.getY() - 2, (int)mDimensions.getX() + 4, (int)mDimensions.getY() + 4);
 		g.setColor(mColor);
-		g.fillOval((int)mPosX, (int)mPosY, mWidth, mHeight);
+		g.fillOval((int)mPosition.getX(), (int)mPosition.getY(), (int)mDimensions.getX(), (int)mDimensions.getY());
 	}
 	
 	public int getHp(){
@@ -206,21 +161,18 @@ public class Zombie extends GameItem implements Observable
 	
 	public void checkIsOffscreen()
 	{
-		if (mPosX > GameSettings.FRAME_WIDTH || mPosY > GameSettings.FRAME_HEIGHT || mPosX < 0 || mPosY < 0)
+		if (mPosition.getX() > GameSettings.FRAME_WIDTH || 
+				mPosition.getY() > GameSettings.FRAME_HEIGHT || 
+				mPosition.getX() < 0 || 
+				mPosition.getY() < 0)
 		{
 			mIsOffscreen = true;
-			//mPlayerHPMod = GameSettings.ZOMBIE_DAMAGE * -1;
-			//sendMessage();
-			//mPlayerHPMod = 0;
 		}
 		else mIsOffscreen = false;
 	}
 	
 	public boolean isOffscreen()
 	{
-		//mPlayerGoldMod = GameSettings.ZOMBIE_WORTH;
-		//sendMessage();
-		//mPlayerGoldMod = 0;
 		return mIsOffscreen;
 	}
 	

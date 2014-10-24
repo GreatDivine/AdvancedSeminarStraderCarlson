@@ -2,8 +2,6 @@ package gameItems.zombie;
 
 import java.awt.Color;
 
-import tiles.Level;
-
 public class Fatty extends Zombie 
 {
 

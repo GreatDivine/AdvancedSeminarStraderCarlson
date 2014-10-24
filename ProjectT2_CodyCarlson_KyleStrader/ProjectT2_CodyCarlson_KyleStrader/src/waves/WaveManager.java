@@ -5,7 +5,6 @@ import gameItems.tower.TowerManager;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import player.Player;
 import tiles.Level;
@@ -19,7 +18,6 @@ public class WaveManager
 	private double mCurTime;
 	private double mPrevTime;
 	private double mStartTime;
-	private Random mRand;
 	private Level mLevel;
 	private Player mPlayer;
 	
@@ -35,7 +33,6 @@ public class WaveManager
 		mCurTime = mStartTime;
 		mPrevTime = 0;
 		waveSize = 1;
-		mRand = new Random();
 		mPlayer = player;
 		addWave();
 	}
@@ -65,11 +62,14 @@ public class WaveManager
 	
 	private void createWaveZombies(Wave wave, Wave.mZombieType zType)
 	{		
-		for(int i = 0; i < waveSize; i++)
-		{
-			wave.addZombie(mLevel.getPathIndexed(0).getXPos() + (GameSettings.TILE_SIZE/2), mLevel.getPathIndexed(0).getYPos() + (GameSettings.TILE_SIZE/2), zType, mPlayer); //fix location generation
-			//wave.addZombie(0, 100, zType); //fix location generation
-		}
+		//for(int i = 0; i < waveSize; i++)
+		//{
+			wave.addZombie(mLevel.getPathIndexed(0).getXPos() + (GameSettings.TILE_SIZE/2), 
+					mLevel.getPathIndexed(0).getYPos() + (GameSettings.TILE_SIZE/2), 
+					zType, 
+					mPlayer,
+					mLevel);
+		//}
 	}
 	
 	public void update(long timeNS, TowerManager towerManager)

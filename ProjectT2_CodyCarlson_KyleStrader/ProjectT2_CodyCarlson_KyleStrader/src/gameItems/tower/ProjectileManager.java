@@ -16,9 +16,9 @@ public class ProjectileManager
 		mProjectiles = new ArrayList<Projectile>();
 	}
 	
-	public void addProjectile(int xPos, int yPos, float xVel, float yVel, int dmg)
+	public void addProjectile(int xPos, int yPos,int dmg, Zombie target)
 	{
-		mProjectiles.add(new Projectile(xPos, yPos, xVel, yVel, dmg));
+		mProjectiles.add(new Projectile(xPos, yPos, dmg, target));
 	}
 	
 	public void update(long timeNS, Zombie currentTarget)
@@ -37,15 +37,25 @@ public class ProjectileManager
 				removeProjectile(p);
 				break;
 			}
+			
+			if (p.getVelocity().getX() == 0 && p.getVelocity().getY() == 0 )
+			{
+				removeProjectile(p);
+				break;
+			}
+			
+			//if (p.getOrigin().distance(p.getStartPosition()) > GameSettings.)
 		}
 	}
 	
 	public boolean checkBulletCollision(Zombie z, Projectile p)
 	{
-		float zRad = z.getWidth() / 2;
-		float pRad = p.getWidth() / 2;
+		float zRad = (float) z.getDimensions().getX() / 2;
+		float pRad = (float) p.getDimensions().getX() / 2;
 		
-		float dist = (float)Math.sqrt(Math.pow(z.getX() - p.getX(), 2) + Math.pow(z.getY() - p.getY(), 2)); 
+		float oppositeLength = (float) (z.getOrigin().getY() - p.getOrigin().getY());
+		float hypotenuseLength = (float) (z.getOrigin().getX() - p.getOrigin().getX());
+		float dist = (float)Math.sqrt(Math.pow(hypotenuseLength, 2) + Math.pow(oppositeLength, 2)); 
 		
 		if (dist < zRad + pRad)
 		{

@@ -1,49 +1,41 @@
 package gameItems;
 
 import java.awt.Graphics;
+import java.awt.geom.Point2D;
 
 public abstract class GameItem 
 {
 	
-	protected float mPosX;
-	protected float mPosY;
-	protected int mWidth;
-	protected int mHeight;
+	protected Point2D.Float mPosition;
+	protected Point2D.Float mDimensions;
 	
 	protected GameItem()
 	{
-		mPosX = 0;
-		mPosY = 0;
-		mWidth = 0;
-		mHeight = 0;
+		mPosition = new Point2D.Float(0, 0);
+		mDimensions = new Point2D.Float(0, 0);
 	}
 	
 	protected GameItem(int x, int y, int w, int h)
 	{
-		mPosX = x;
-		mPosY = y;
-		mWidth = w;
-		mHeight = h;
+		mPosition = new Point2D.Float(x, y);
+		mDimensions = new Point2D.Float(w, h);
 	}
 	
-	public float getX()
+	public Point2D.Float getPosition()
 	{
-		return mPosX;
+		return mPosition;
 	}
 	
-	public float getY()
+	public Point2D.Float getDimensions()
 	{
-		return mPosY;
+		return mDimensions;
 	}
 	
-	public int getWidth()
+	public Point2D.Float getOrigin()
 	{
-		return mWidth;
-	}
-	
-	public int getHeight()
-	{
-		return mHeight;
+		Point2D.Float origin = new Point2D.Float((float)(mPosition.getX() + (mDimensions.getX() / 2)), 
+				(float)(mPosition.getY() + (mDimensions.getY() / 2)));
+		return origin;
 	}
 	
 	public abstract void update(long timeNs);

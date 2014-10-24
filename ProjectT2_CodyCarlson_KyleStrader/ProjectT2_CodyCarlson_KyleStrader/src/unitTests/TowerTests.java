@@ -1,9 +1,11 @@
 package unitTests;
 
 import static org.junit.Assert.assertEquals;
+
+import java.awt.geom.Point2D;
+
 import gameItems.tower.MachineGunTower;
 import gameItems.zombie.Walker;
-import gameItems.zombie.Zombie.MoveDirections;
 import main.Room;
 
 import org.junit.Test;
@@ -49,7 +51,7 @@ public class TowerTests
 		
 		t.checkIfTargettable(w); // tower sees the walker and targets it
 		
-		w.move(MoveDirections.RIGHT); // walker moves 2 units right and out of tower radius
+		w.move(new Point2D.Float(1, 0)); // walker moves 2 units right and out of tower radius
 		
 		t.checkIfTargettable(w); // check for target, now not within distance, so set currentTarget to null
 		
