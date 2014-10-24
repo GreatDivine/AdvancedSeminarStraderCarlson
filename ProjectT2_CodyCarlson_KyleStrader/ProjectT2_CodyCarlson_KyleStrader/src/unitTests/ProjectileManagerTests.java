@@ -8,7 +8,11 @@ import gameItems.zombie.Zombie;
 
 import org.junit.Test;
 
+import player.Player;
+import tiles.Level;
 import util.GameSettings;
+import waves.Wave.mZombieType;
+import waves.WaveManager;
 
 public class ProjectileManagerTests 
 {
@@ -30,7 +34,7 @@ public class ProjectileManagerTests
 	@Test
 	public void testProjectileMovement()
 	{
-		Zombie z = new Zombie(1,0,0,0,0,0);
+		Zombie z = new Zombie(1,0,0,0,1,0);
 		
 		Projectile p = new Projectile(0,0,0,z); // create a projectile that is moving directly right (velocity of (1,0))
 		
@@ -62,6 +66,9 @@ public class ProjectileManagerTests
 	@Test
 	public void testOffScreen()
 	{
+		Level level = new Level();
+		Player p = new Player();
+		WaveManager wm = new WaveManager(level,p);
 		Zombie z = new Zombie(GameSettings.FRAME_WIDTH,0,0,0,0,0); // temporary zombie since pm.update wants a zombie passed to it
 		
 		ProjectileManager pm = new ProjectileManager();
@@ -70,7 +77,7 @@ public class ProjectileManagerTests
 		
 		assertEquals(pm.getNumProjectiles(), 1);
 		
-		pm.update(1, z); // update the manager to update every projectile it holds, in our case just the one
+		pm.update(1, z, wm); // update the manager to update every projectile it holds, in our case just the one
 		
 		// the update should have moved the proj 7 units right, putting it offscreen. Then the manager should notice this and delete.
 		
@@ -80,15 +87,20 @@ public class ProjectileManagerTests
 	@Test
 	public void testProjectileCollision()
 	{
+		Level level = new Level();
+		Player p = new Player();
+		WaveManager wm = new WaveManager(level,p);
+		wm.addTemplateWave();
+		wm.getWave(0).addZombie(10, 10, mZombieType.WALKER, p, level);
 		ProjectileManager pm = new ProjectileManager();
 		
-		Walker w = new Walker(10,10);
+		Zombie w = (Walker)wm.getWave(0).getZombie(0);
 		
 		pm.addProjectile(10, 10, 50, w);
 		
 		assertEquals(w.getHp(), 100); // before the collision check zombie has full 100 hp
 		
-		pm.checkBulletCollision(w, pm.getProjectile(0)); // check for collision and deal damage if it happens
+		pm.checkBulletCollision(wm, pm.getProjectile(0)); // check for collision and deal damage if it happens
 		
 		assertEquals(w.getHp(), 50); // shot does 50 damage, so zombie should be at 50 hp
 	}

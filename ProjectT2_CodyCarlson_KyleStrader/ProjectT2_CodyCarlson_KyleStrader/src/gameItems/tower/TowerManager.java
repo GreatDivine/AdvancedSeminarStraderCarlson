@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import waves.WaveManager;
+
 public class TowerManager 
 {
 	
@@ -14,14 +16,14 @@ public class TowerManager
 		mTowers = new ArrayList<Tower>();
 	}
 	
-	public void addMGTower(int x, int y, int w, int h, int fireRad)
+	public void addMGTower(int x, int y, int w, int h, int fireRad, WaveManager waves)
 	{
-		mTowers.add(new MachineGunTower(x, y, w, h, fireRad));
+		mTowers.add(new MachineGunTower(x, y, w, h, fireRad, waves));
 	}
 	
-	public void addRocketTower(int x, int y, int w, int h, int fireRad)
+	public void addRocketTower(int x, int y, int w, int h, int fireRad, WaveManager waves)
 	{
-		mTowers.add(new RocketTower(x, y, w, h, fireRad));
+		mTowers.add(new RocketTower(x, y, w, h, fireRad, waves));
 	}
 	
 	public void update(long timeNS)

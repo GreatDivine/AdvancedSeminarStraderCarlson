@@ -6,11 +6,13 @@ import gameItems.zombie.Zombie;
 import java.awt.Graphics;
 
 import util.GameSettings;
+import waves.WaveManager;
 
 public abstract class Tower extends GameItem{
 	
 	protected int mFireRadius;
 	protected Zombie mCurrentTarget;
+	protected WaveManager mWaves;
 	protected float mShotDelay;
 	protected ProjectileManager mProjectileManager;
 	protected double mTimePassed;
@@ -18,7 +20,7 @@ public abstract class Tower extends GameItem{
 	protected double mPrevTime;
 	protected double mStartTime;
 	
-	public Tower(int x, int y, int w, int h, int fireRad, float shotDelay)
+	public Tower(int x, int y, int w, int h, int fireRad, float shotDelay, WaveManager waves)
 	{
 		super(x, y, w, h);
 		
@@ -29,6 +31,7 @@ public abstract class Tower extends GameItem{
 		mStartTime = (double)System.nanoTime() / GameSettings.NANOSECONDS_TO_SECONDS;
 		mCurTime = mStartTime;
 		mPrevTime = 0;
+		mWaves = waves;
 	}
 	
 	public abstract void update(long timens);
@@ -51,7 +54,7 @@ public abstract class Tower extends GameItem{
 			mCurrentTarget = null;
 			z.setIsTargeted(false);
 		}
-		else if (mCurrentTarget == z && z.isDead() == true)
+		else if (mCurrentTarget == z && z.isDead())
 		{
 			mCurrentTarget = null;
 			z.setIsTargeted(false);

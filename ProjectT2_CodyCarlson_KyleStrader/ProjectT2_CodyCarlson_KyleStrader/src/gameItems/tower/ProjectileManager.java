@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import waves.WaveManager;
+
 public class ProjectileManager 
 {
 	
@@ -21,50 +23,67 @@ public class ProjectileManager
 		mProjectiles.add(new Projectile(xPos, yPos, dmg, target));
 	}
 	
-	public void update(long timeNS, Zombie currentTarget)
+	public void update(long timeNS, Zombie currentTarget, WaveManager waves)
 	{
-		for(Projectile p:mProjectiles)
+		int numProjectiles = mProjectiles.size();
+		for (int i = 0; i < numProjectiles;)
 		{
+			Projectile p = mProjectiles.get(i);
 			p.update(timeNS);
 			
-			if (currentTarget != null)
+			if (currentTarget != null && p != null)
 			{
-				if (checkBulletCollision(currentTarget, p)) break;
+				if (checkBulletCollision(waves, p))
+				{
+					 removeProjectile(p);
+					 numProjectiles--;
+					 continue;
+				}
 			}
 			
-			if (p.isOffscreen)
+			if (p.isOffscreen && p != null)
 			{
 				removeProjectile(p);
-				break;
+				numProjectiles--;
+				continue;
 			}
 			
-			if (p.getVelocity().getX() == 0 && p.getVelocity().getY() == 0 )
+			if (p.getVelocity().getX() == 0 && p.getVelocity().getY() == 0  && p != null)
 			{
 				removeProjectile(p);
-				break;
+				numProjectiles--;
+				continue;
 			}
 			
-			//if (p.getOrigin().distance(p.getStartPosition()) > GameSettings.)
+			i++;
 		}
 	}
 	
-	public boolean checkBulletCollision(Zombie z, Projectile p)
+	public boolean checkBulletCollision(WaveManager waves, Projectile p)
 	{
-		float zRad = (float) z.getDimensions().getX() / 2;
-		float pRad = (float) p.getDimensions().getX() / 2;
-		
-		float oppositeLength = (float) (z.getOrigin().getY() - p.getOrigin().getY());
-		float hypotenuseLength = (float) (z.getOrigin().getX() - p.getOrigin().getX());
-		float dist = (float)Math.sqrt(Math.pow(hypotenuseLength, 2) + Math.pow(oppositeLength, 2)); 
-		
-		if (dist < zRad + pRad)
+		boolean didCollide = false;
+		int numWaves = waves.getNumWavesSpawned();
+		for (int i = 0; i < numWaves; i++)
 		{
-			z.takeDamage(p.getDamage());
-			removeProjectile(p);
-			return true;
+			int numZombies = waves.getWave(i).getNumZombies();
+			for (int j = 0; j < numZombies; j++)
+			{
+				Zombie z = waves.getWave(i).getZombie(j);
+				float zRad = (float) z.getDimensions().getX() / 2;
+				float pRad = (float) p.getDimensions().getX() / 2;
+				
+				float oppositeLength = (float) (z.getOrigin().getY() - p.getOrigin().getY());
+				float hypotenuseLength = (float) (z.getOrigin().getX() - p.getOrigin().getX());
+				float dist = (float)Math.sqrt(Math.pow(hypotenuseLength, 2) + Math.pow(oppositeLength, 2)); 
+				
+				if (dist < zRad + pRad)
+				{
+					z.takeDamage(p.getDamage());
+					didCollide =  true;
+				}
+			}
 		}
-		
-		return false;
+		return didCollide;
 	}
 	
 	public void paint(Graphics g)

@@ -34,7 +34,6 @@ public class WaveManager
 		mPrevTime = 0;
 		waveSize = 1;
 		mPlayer = player;
-		addWave();
 	}
 	
 	public Wave addWave()
@@ -42,6 +41,20 @@ public class WaveManager
 		mWaveCount++;
 		Wave tmpWave = new Wave();
 		populateWave(tmpWave);
+		mWaves.add(tmpWave);
+		
+		if (mWaveCount % GameSettings.WAVES_BEFORE_INCREASE == 0)
+		{
+			waveSize++;
+		}
+		
+		return tmpWave;
+	}
+	
+	public Wave addTemplateWave()
+	{
+		mWaveCount++;
+		Wave tmpWave = new Wave();
 		mWaves.add(tmpWave);
 		
 		if (mWaveCount % GameSettings.WAVES_BEFORE_INCREASE == 0)

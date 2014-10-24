@@ -14,6 +14,7 @@ import player.Player;
 import tiles.Level;
 import util.GameSettings;
 import waves.Wave;
+import waves.WaveManager;
 
 public class ZombieTests 
 {
@@ -96,8 +97,11 @@ public class ZombieTests
 	@Test
 	public void testIsTargeted()
 	{
+		Level level = new Level();
+		Player p = new Player();
+		WaveManager wm = new WaveManager(level,p);
 		int towerRadius = 100;
-		MachineGunTower t = new MachineGunTower(0,0,20,20,towerRadius);
+		MachineGunTower t = new MachineGunTower(0,0,20,20,towerRadius, wm);
 		
 		Walker w = new Walker(10,10);
 		

@@ -45,17 +45,23 @@ public class Room extends JPanel implements MouseListener
 	
 	public void addMGTower(int x, int y, int w, int h, int r)
 	{
-		mTowerManager.addMGTower(x, y, w, h, r);
+		mTowerManager.addMGTower(x, y, w, h, r, mWaveManager);
 	}
 	
 	public void addRocketTower(int x, int y, int w, int h, int r)
 	{
-		mTowerManager.addRocketTower(x, y, w, h, r);
+		mTowerManager.addRocketTower(x, y, w, h, r, mWaveManager);
 	}	
 	
 	public void addMGTowerOnTile(int x, int y, int w, int h, int r)
 	{
-		mTowerManager.addMGTower(((x * GameSettings.TILE_SIZE) + GameSettings.TILE_SIZE/2), ((y * GameSettings.TILE_SIZE) + GameSettings.TILE_SIZE/2), w, h, r);
+		mTowerManager.addMGTower(
+				((x * GameSettings.TILE_SIZE) + GameSettings.TILE_SIZE/2), 
+				((y * GameSettings.TILE_SIZE) + GameSettings.TILE_SIZE/2), 
+				w, 
+				h, 
+				r, 
+				mWaveManager);
 		
 		for(Tile t: testLevel.getTiles())
 		{
@@ -68,7 +74,13 @@ public class Room extends JPanel implements MouseListener
 	
 	public void addRocketTowerOnTile(int x, int y, int w, int h, int r)
 	{
-		mTowerManager.addRocketTower(((x * GameSettings.TILE_SIZE) + GameSettings.TILE_SIZE/2), ((y * GameSettings.TILE_SIZE) + GameSettings.TILE_SIZE/2), w, h, r);
+		mTowerManager.addRocketTower(
+				((x * GameSettings.TILE_SIZE) + GameSettings.TILE_SIZE/2), 
+				((y * GameSettings.TILE_SIZE) + GameSettings.TILE_SIZE/2), 
+				w, 
+				h, 
+				r, 
+				mWaveManager);
 		
 		for(Tile t: testLevel.getTiles())
 		{

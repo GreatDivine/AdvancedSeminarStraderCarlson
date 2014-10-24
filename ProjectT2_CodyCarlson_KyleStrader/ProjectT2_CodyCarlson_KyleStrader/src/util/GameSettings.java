@@ -22,7 +22,7 @@ public class GameSettings
 	public static final Color CASH_COLOR = Color.green;
 	public static final String CASH_PREFIX = " $  ";
 	public static final int START_HP = 100;
-	public static final int START_CASH = 500;
+	public static final int START_CASH = 5000;
 	public static final int ZOMBIE_DAMAGE = 1;
 	public static final int ZOMBIE_WORTH = 20;
 	

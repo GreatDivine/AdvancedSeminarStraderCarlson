@@ -5,14 +5,15 @@ import java.awt.Graphics;
 import java.awt.geom.Point2D;
 
 import util.GameSettings;
+import waves.WaveManager;
 
 public class MachineGunTower extends Tower 
 {	
 	private static final float MACHINE_GUN_DELAY = .15f;
 	
-	public MachineGunTower(int x, int y, int w, int h, int fireRad)
+	public MachineGunTower(int x, int y, int w, int h, int fireRad, WaveManager waves)
 	{
-		super(x, y, w, h, fireRad, MACHINE_GUN_DELAY);
+		super(x, y, w, h, fireRad, MACHINE_GUN_DELAY, waves);
 	}
 	
 	@Override
@@ -28,7 +29,7 @@ public class MachineGunTower extends Tower
 			mTimePassed -= mShotDelay;
 		}
 		
-		mProjectileManager.update(timeNS, mCurrentTarget);
+		mProjectileManager.update(timeNS, mCurrentTarget, mWaves);
 	}
 	
 	@Override

@@ -10,6 +10,10 @@ import main.Room;
 
 import org.junit.Test;
 
+import player.Player;
+import tiles.Level;
+import waves.WaveManager;
+
 public class TowerTests 
 {
 	
@@ -30,8 +34,11 @@ public class TowerTests
 	@Test
 	public void testTargetAcquired()
 	{
+		Level level = new Level();
+		Player p = new Player();
+		WaveManager wm = new WaveManager(level,p);
 		int towerRadius = 100;
-		MachineGunTower t = new MachineGunTower(0,0,20,20,towerRadius);
+		MachineGunTower t = new MachineGunTower(0,0,20,20,towerRadius,wm);
 		
 		Walker w = new Walker(10,10); // spawn a new walker within towers target radius
 		
@@ -44,8 +51,11 @@ public class TowerTests
 	@Test
 	public void testTargetLost()
 	{
+		Level level = new Level();
+		Player p = new Player();
+		WaveManager wm = new WaveManager(level,p);
 		int towerRadius = 100;
-		MachineGunTower t = new MachineGunTower(0,0,20,20,towerRadius);
+		MachineGunTower t = new MachineGunTower(0,0,20,20,towerRadius,wm);
 		
 		Walker w = new Walker(99,0); // spawn a walker at x = 99. Since the walker y is equal to the towers, moving right 2 units will place the walker out of the target radius
 		
@@ -62,8 +72,11 @@ public class TowerTests
 	@Test
 	public void testSwitchTarget()
 	{
+		Level level = new Level();
+		Player p = new Player();
+		WaveManager wm = new WaveManager(level,p);
 		int towerRadius = 100;
-		MachineGunTower t = new MachineGunTower(0,0,20,20,towerRadius);
+		MachineGunTower t = new MachineGunTower(0,0,20,20,towerRadius,wm);
 		
 		Walker w = new Walker(99,0); //spawn 2 walkers, both in range of the tower
 		Walker w2 = new Walker(80, 0);
@@ -91,8 +104,11 @@ public class TowerTests
 	@Test
 	public void testDamageTarget()
 	{
+		Level level = new Level();
+		Player p = new Player();
+		WaveManager wm = new WaveManager(level,p);
 		int towerRadius = 100;
-		MachineGunTower t = new MachineGunTower(0,0,20,20,towerRadius);
+		MachineGunTower t = new MachineGunTower(0,0,20,20,towerRadius,wm);
 		
 		Walker w = new Walker(10,10);
 		t.checkIfTargettable(w);

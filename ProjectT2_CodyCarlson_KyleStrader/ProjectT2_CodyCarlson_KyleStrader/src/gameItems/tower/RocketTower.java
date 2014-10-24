@@ -5,13 +5,14 @@ import java.awt.Graphics;
 import java.awt.geom.Point2D;
 
 import util.GameSettings;
+import waves.WaveManager;
 
 public class RocketTower extends Tower {
 	private static final float ROCKET_SHOT_DELAY = 2.0f;
 	
-	public RocketTower(int x, int y, int w, int h, int fireRad) 
+	public RocketTower(int x, int y, int w, int h, int fireRad, WaveManager waves) 
 	{
-		super(x, y, w, h, fireRad, ROCKET_SHOT_DELAY);
+		super(x, y, w, h, fireRad, ROCKET_SHOT_DELAY, waves);
 	}
 
 	@Override
@@ -27,7 +28,7 @@ public class RocketTower extends Tower {
 			mTimePassed -= mShotDelay;
 		}
 		
-		mProjectileManager.update(timens, mCurrentTarget);
+		mProjectileManager.update(timens, mCurrentTarget, mWaves);
 	}
 
 	@Override
