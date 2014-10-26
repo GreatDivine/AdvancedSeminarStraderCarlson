@@ -18,5 +18,4 @@ public class Fatty extends Zombie
 
 		mIsPathFinder = true;
 	}
-
 }

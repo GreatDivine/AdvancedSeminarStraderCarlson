@@ -119,7 +119,6 @@ public class Wave
 			{
 				z.sendMessage();
 				iter.remove();
-				continue;
 			}
 			
 			if (z.isDead())

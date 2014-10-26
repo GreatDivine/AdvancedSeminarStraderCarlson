@@ -18,19 +18,22 @@ import util.GameSettings;
 @SuppressWarnings("serial")
 public class Tile extends JPanel {
 	
-	protected int mPosX;
-	protected int mPosY;
-	protected int mWidth;
-	protected int mHeight;
+	private int mPosX;
+	private int mPosY;
+	private int mWidth;
+	private int mHeight;
+	
+	private boolean mIsPath;
 	
 	private Rectangle mTileRect;
 	
 	private boolean mHasTower;
 	
-	public Tile(int x, int y)
+	public Tile(int x, int y, boolean path)
 	{
 		mPosX = x;
 		mPosY = y;
+		mIsPath = path;
 		
 		this.setLocation(mPosX, mPosY);
 		
@@ -59,7 +62,7 @@ public class Tile extends JPanel {
 	
 	public void buttonClicked()
 	{
-		if (!mHasTower)
+		if (!mHasTower && !mIsPath)
 		{
 			BuildMenu bm = new BuildMenu(this);
 		}
@@ -69,6 +72,12 @@ public class Tile extends JPanel {
 	
 	public void paint(Graphics g)
 	{
+		if(mIsPath)
+		{
+			g.setColor(Color.GRAY);
+			g.fillRect(mPosX, mPosY, mWidth, mHeight);
+		}
+		
 		g.setColor(Color.black);
 		g.drawRect(mPosX, mPosY, mWidth, mHeight);
 	}

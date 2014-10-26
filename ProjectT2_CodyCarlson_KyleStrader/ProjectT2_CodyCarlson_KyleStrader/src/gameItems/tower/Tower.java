@@ -44,7 +44,7 @@ public abstract class Tower extends GameItem{
 		float hypotenuseLength = (float) (z.getPosition().getX() - mPosition.getX());
 		float dist = (float)Math.sqrt(Math.pow(hypotenuseLength, 2) + Math.pow(oppositeLength, 2)); 
 		
-		if (dist < mFireRadius && mCurrentTarget == null)
+		if (dist <= mFireRadius && mCurrentTarget == null)
 		{
 			mCurrentTarget = z;
 			z.setIsTargeted(true);
@@ -54,7 +54,7 @@ public abstract class Tower extends GameItem{
 			mCurrentTarget = null;
 			z.setIsTargeted(false);
 		}
-		else if (mCurrentTarget == z && z.isDead())
+		else if (mCurrentTarget != null && (mCurrentTarget.isDead() || mCurrentTarget.isOffscreen()))
 		{
 			mCurrentTarget = null;
 			z.setIsTargeted(false);

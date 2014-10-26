@@ -9,7 +9,7 @@ import waves.WaveManager;
 
 public class MachineGunTower extends Tower 
 {	
-	private static final float MACHINE_GUN_DELAY = .15f;
+	private static final float MACHINE_GUN_DELAY = .3f;
 	
 	public MachineGunTower(int x, int y, int w, int h, int fireRad, WaveManager waves)
 	{
@@ -61,6 +61,14 @@ public class MachineGunTower extends Tower
 				(int) (mPosition.getY()-(mDimensions.getY()/2)), 
 				(int) mDimensions.getX(), 
 				(int) mDimensions.getY());
+		
+		if (mCurrentTarget != null && !mCurrentTarget.isDead())
+		{
+			g.drawLine((int) mPosition.getX(), 
+					(int) mPosition.getY(), 
+					(int) mCurrentTarget.getOrigin().getX(), 
+					(int) mCurrentTarget.getOrigin().getY());
+		}
 		
 		drawTargettingRadius(g, (int)mPosition.getX(), (int)mPosition.getY(), mFireRadius);
 		

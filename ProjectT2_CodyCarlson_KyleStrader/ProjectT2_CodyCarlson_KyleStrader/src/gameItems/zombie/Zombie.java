@@ -16,7 +16,8 @@ import util.GameSettings;
 public class Zombie extends GameItem implements Observable 
 {
 	
-	protected int mHP;
+	protected float mHP;
+	protected float mMaxHP;
 	protected int mSpeed;
 	protected Color mColor;
 	
@@ -50,6 +51,7 @@ public class Zombie extends GameItem implements Observable
 		super(x, y, w, h);
 		
 		mHP = hp;
+		mMaxHP = hp;
 		mSpeed = spd;
 		mIsPathFinder = false;
 		mPathIndex = 0;
@@ -62,6 +64,7 @@ public class Zombie extends GameItem implements Observable
 		
 		mObservers = new ArrayList<Observer>();
 		mHP = hp;
+		mMaxHP = hp;
 		mSpeed = spd;
 		mPathIndex = 0;
 		mTarget = new Point2D.Float(x, y);
@@ -131,11 +134,16 @@ public class Zombie extends GameItem implements Observable
 	{
 		g.setColor(Color.BLACK);
 		g.fillOval((int)mPosition.getX() - 2, (int)mPosition.getY() - 2, (int)mDimensions.getX() + 4, (int)mDimensions.getY() + 4);
+		
+		g.fillRect((int)mPosition.getX() - 4, (int)mPosition.getY() - 8, (int)mDimensions.getX() + 8, 6);
+		g.setColor(Color.RED);
+		g.fillRect((int)mPosition.getX() - 3, (int)mPosition.getY() - 7, ((int)((mDimensions.getX() + 7) * (mHP/mMaxHP))), 4);
+		
 		g.setColor(mColor);
 		g.fillOval((int)mPosition.getX(), (int)mPosition.getY(), (int)mDimensions.getX(), (int)mDimensions.getY());
 	}
 	
-	public int getHp(){
+	public float getHp(){
 		return mHP;
 	}
 	

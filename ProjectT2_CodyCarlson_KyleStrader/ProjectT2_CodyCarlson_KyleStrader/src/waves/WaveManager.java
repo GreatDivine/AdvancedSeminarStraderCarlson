@@ -75,14 +75,14 @@ public class WaveManager
 	
 	private void createWaveZombies(Wave wave, Wave.mZombieType zType)
 	{		
-		//for(int i = 0; i < waveSize; i++)
-		//{
+		for(int i = 0; i < waveSize; i++)
+		{
 			wave.addZombie(mLevel.getPathIndexed(0).getXPos() + (GameSettings.TILE_SIZE/2), 
 					mLevel.getPathIndexed(0).getYPos() + (GameSettings.TILE_SIZE/2), 
 					zType, 
 					mPlayer,
 					mLevel);
-		//}
+		}
 	}
 	
 	public void update(long timeNS, TowerManager towerManager)

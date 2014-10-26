@@ -14,7 +14,7 @@ public class GameSettings
 	public static final int FRAME_HEIGHT = 512; //pixels
 	public static final int MG_TOWER_SHOT_DAMAGE = 50; // tower damage per shot (machine gun)
 	public static final int ROCKET_TOWER_SHOT_DAMAGE = 200; // rocket tower damage per shot
-	public static final int WAVES_BEFORE_INCREASE = 4; //number of waves that will pass before the waves become larger
+	public static final int WAVES_BEFORE_INCREASE = 1; //number of waves that will pass before the waves become larger
 	
 	public static final Font FONT = new Font("Courrier", Font.BOLD, 18);
 	public static final Color LIFE_COLOR = Color.red;

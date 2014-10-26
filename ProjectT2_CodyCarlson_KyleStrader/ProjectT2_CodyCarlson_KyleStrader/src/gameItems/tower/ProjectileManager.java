@@ -31,7 +31,7 @@ public class ProjectileManager
 			Projectile p = mProjectiles.get(i);
 			p.update(timeNS);
 			
-			if (currentTarget != null && p != null)
+			if (p != null)
 			{
 				if (checkBulletCollision(waves, p))
 				{
