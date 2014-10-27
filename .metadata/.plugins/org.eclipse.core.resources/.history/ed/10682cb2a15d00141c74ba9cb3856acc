@@ -19,15 +19,15 @@ public class WaveManagerTests
 		Player p = new Player();
 		WaveManager wm = new WaveManager(level,p);
 		
-		assertEquals(wm.getNumWavesSpawned(), 0); // we have a brand new wave manager, which automatically spawns a wave when it is first created, so our wave count should be 1
+		assertEquals(wm.getNumWavesSpawned(), 1); // we have a brand new wave manager, which automatically spawns a wave when it is first created, so our wave count should be 1
 		
 		wm.addWave();
 		
-		assertEquals(wm.getNumWavesSpawned(), 1); // as we spawn more waves the wavesSpawned count should increase
+		assertEquals(wm.getNumWavesSpawned(), 2); // as we spawn more waves the wavesSpawned count should increase
 		
 		wm.addWave();
 		
-		assertEquals(wm.getNumWavesSpawned(), 2);
+		assertEquals(wm.getNumWavesSpawned(), 3);
 	}
 	
 	
@@ -55,10 +55,9 @@ public class WaveManagerTests
 		WaveManager wm = new WaveManager(level, p);
 		
 		Wave w = wm.addWave();
-		Wave w2 = wm.addWave();
 		
-		boolean wavesAreEqual = (w == wm.getWave(0)); // since the wavemanager adds a wave automatically, our new wave should be in the 2nd index, 1.
-		boolean wavesAreNotEqual = (w == wm.getWave(1)); // as such, the first index should not equal w
+		boolean wavesAreEqual = (w == wm.getWave(1)); // since the wavemanager adds a wave automatically, our new wave should be in the 2nd index, 1.
+		boolean wavesAreNotEqual = (w == wm.getWave(0)); // as such, the first index should not equal w
 		
 		assertEquals(wavesAreEqual, true);
 		assertEquals(wavesAreNotEqual, false);

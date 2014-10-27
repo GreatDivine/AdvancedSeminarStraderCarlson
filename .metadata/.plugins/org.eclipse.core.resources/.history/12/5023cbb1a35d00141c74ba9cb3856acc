@@ -117,7 +117,7 @@ public class ZombieTests
 		Player p = new Player();
 		Level level = new Level();
 		
-		w.addZombie(-1, 0, Wave.mZombieType.WALKER, p, level); // add a walker at the edge of the frame width, any movement should push us off
+		w.addZombie(GameSettings.FRAME_WIDTH - 1, 0, Wave.mZombieType.WALKER, p, level); // add a walker at the edge of the frame width, any movement should push us off
 		
 		assertEquals(w.getNumZombies(), 1);
 		

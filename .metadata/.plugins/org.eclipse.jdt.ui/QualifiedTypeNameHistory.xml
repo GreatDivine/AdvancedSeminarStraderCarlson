@@ -2,4 +2,5 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="gameItems.tower.FlameTower"/>
 <fullyQualifiedTypeName name="java.awt.geom.Point2D.Float"/>
+<fullyQualifiedTypeName name="waves.Wave.mZombieType"/>
 </qualifiedTypeNameHistroy>
