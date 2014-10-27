@@ -55,10 +55,10 @@ public class MachineGunTower extends Tower
 			aimDir.setLocation(aimDir.getX() / length, aimDir.getY() / length);
 			
 			// fire projectile in direction
-			mProjectileManager.addProjectile((int)mPosition.getX(), 
+			mProjectileManager.addProjectile(new MachineGunProjectile((int)mPosition.getX(), 
 				(int) mPosition.getY(), 
 				mDamage,
-				mCurrentTarget);
+				mCurrentTarget));
 		}
 	}
 	@Override

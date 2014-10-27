@@ -6,6 +6,8 @@ import gameItems.tower.ProjectileManager;
 import gameItems.zombie.Walker;
 import gameItems.zombie.Zombie;
 
+import java.awt.Color;
+
 import org.junit.Test;
 
 import player.Player;
@@ -26,7 +28,7 @@ public class ProjectileManagerTests
 		
 		assertEquals(pm.getNumProjectiles(), 0);
 		
-		pm.addProjectile(0, 0, 0, z);
+		pm.addProjectile(new Projectile(0, 0, 0, z, Color.BLUE, 3));
 		
 		assertEquals(pm.getNumProjectiles(), 1);
 	}
@@ -36,7 +38,7 @@ public class ProjectileManagerTests
 	{
 		Zombie z = new Zombie(1,0,0,0,1,0);
 		
-		Projectile p = new Projectile(0,0,0,z); // create a projectile that is moving directly right (velocity of (1,0))
+		Projectile p = new Projectile(0,0,0,z,Color.BLUE,3); // create a projectile that is moving directly right (velocity of (1,0))
 		
 		// since p's starting pos is 0, the default proj speed is 7, and p is moving right, one movement tick through
 		// update should move p to the pos (7,0)
@@ -53,7 +55,7 @@ public class ProjectileManagerTests
 		
 		ProjectileManager pm = new ProjectileManager();
 		
-		pm.addProjectile(0, 0, 0, z);
+		pm.addProjectile(new Projectile(0, 0, 0, z, Color.BLUE, 3));
 		
 		assertEquals(pm.getNumProjectiles(), 1);
 		
@@ -73,7 +75,7 @@ public class ProjectileManagerTests
 		
 		ProjectileManager pm = new ProjectileManager();
 		
-		pm.addProjectile(GameSettings.FRAME_WIDTH - 1, 0, 1, z); // add a projectile that is right next to the edge of the screen with a rightward velocity
+		pm.addProjectile(new Projectile(GameSettings.FRAME_WIDTH - 1, 0, 1, z, Color.BLUE, 3)); // add a projectile that is right next to the edge of the screen with a rightward velocity
 		
 		assertEquals(pm.getNumProjectiles(), 1);
 		
@@ -96,13 +98,13 @@ public class ProjectileManagerTests
 		
 		Zombie w = (Walker)wm.getWave(0).getZombie(0);
 		
-		pm.addProjectile(10, 10, 50, w);
+		pm.addProjectile(new Projectile(10, 10, 50, w, Color.BLUE, 3));
 		
-		assertEquals(w.getHp(), 100); // before the collision check zombie has full 100 hp
+		assertEquals(w.getHp(), 100.0f, 0); // before the collision check zombie has full 100 hp
 		
 		pm.checkBulletCollision(wm, pm.getProjectile(0)); // check for collision and deal damage if it happens
 		
-		assertEquals(w.getHp(), 50); // shot does 50 damage, so zombie should be at 50 hp
+		assertEquals(w.getHp(), 50.0f, 0); // shot does 50 damage, so zombie should be at 50 hp
 	}
 
 }

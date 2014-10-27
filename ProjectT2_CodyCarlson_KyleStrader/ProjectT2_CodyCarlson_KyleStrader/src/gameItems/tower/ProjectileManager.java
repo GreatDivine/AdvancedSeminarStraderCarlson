@@ -18,9 +18,9 @@ public class ProjectileManager
 		mProjectiles = new ArrayList<Projectile>();
 	}
 	
-	public void addProjectile(int xPos, int yPos,int dmg, Zombie target)
+	public void addProjectile(Projectile proj)
 	{
-		mProjectiles.add(new Projectile(xPos, yPos, dmg, target));
+		mProjectiles.add(proj);
 	}
 	
 	public void update(long timeNS, Zombie currentTarget, WaveManager waves)
