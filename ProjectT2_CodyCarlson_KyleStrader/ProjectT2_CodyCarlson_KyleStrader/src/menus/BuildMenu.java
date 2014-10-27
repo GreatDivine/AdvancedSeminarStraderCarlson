@@ -1,5 +1,6 @@
 package menus;
 
+import gameItems.tower.FlameTower;
 import gameItems.tower.MachineGunTower;
 import gameItems.tower.RocketTower;
 
@@ -57,8 +58,25 @@ public class BuildMenu extends Menu{
 				buttonClicked(e);
 			}
 		});
+		
+		JButton flameButton = new JButton("Build Flame Tower - $" + FlameTower.FLAME_BUY_COST);
+		flameButton.setActionCommand("buildFlame");
+		
+		if (mRoom.getPlayer().getCash() < FlameTower.FLAME_BUY_COST)
+		{
+			flameButton.setEnabled(false);
+		}
+		
+		flameButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				buttonClicked(e);
+			}
+		});
+		
 		mMenuPanel.add(mgButton);
 		mMenuPanel.add(rocketButton);
+		mMenuPanel.add(flameButton);
 	}
 	
 	private void buttonClicked(ActionEvent e)
@@ -75,7 +93,25 @@ public class BuildMenu extends Menu{
 				buildRocket();
 				break;
 			}
+			case("buildFlame"):
+			{
+				buildFlame();
+				break;
+			}
 		}
+	}
+	
+	private void buildFlame()
+	{
+		int xIndex = mParentTile.getXPos() / GameSettings.TILE_SIZE;
+		int yIndex = mParentTile.getYPos() / GameSettings.TILE_SIZE;
+		
+		mRoom.addFlameTowerOnTile(xIndex, yIndex, 20, 20, 200);
+		
+		mRoom.getPlayer().modCash(FlameTower.FLAME_BUY_COST * -1);
+		
+		mParentTile.setHasTower(true);
+		this.dispose();
 	}
 	
 	private void buildMG()

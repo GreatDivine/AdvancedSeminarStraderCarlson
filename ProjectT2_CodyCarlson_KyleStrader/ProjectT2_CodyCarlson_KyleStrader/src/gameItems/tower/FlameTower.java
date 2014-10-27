@@ -19,10 +19,16 @@ public class FlameTower extends Tower{
 	
 	public FlameTower(int x, int y, int w, int h, int fireRad, WaveManager waves)
 	{
-		super(x, y, w, h, fireRad, FIRE_DELAY, waves);
+		super(x, y, w, h, fireRad, FIRE_DELAY, waves, FLAME_DAMAGE, FLAME_UPGRADE_COST_START, FLAME_BUY_COST);
 		mRand = new Random();
 	}
 	
+	public FlameTower(Tower tmp) 
+	{
+		super(tmp);
+		mRand = new Random();
+	}
+
 	@Override
 	public void update(long timeNS)
 	{

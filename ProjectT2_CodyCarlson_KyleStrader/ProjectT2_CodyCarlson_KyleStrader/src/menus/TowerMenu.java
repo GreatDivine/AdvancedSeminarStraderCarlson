@@ -1,5 +1,6 @@
 package menus;
 
+import gameItems.tower.FlameTower;
 import gameItems.tower.MachineGunTower;
 import gameItems.tower.RocketTower;
 import gameItems.tower.Tower;
@@ -91,6 +92,11 @@ public class TowerMenu extends Menu {
 		{
 			tmp = new RocketTower(tmp);
 			mRoom.getTowerManager().addRocketTower((RocketTower)tmp);
+		}
+		else if (tmp instanceof FlameTower)
+		{
+			tmp = new FlameTower(tmp);
+			mRoom.getTowerManager().addFlameTower((FlameTower)tmp);
 		}
 		
 		mParentTile.setTower(tmp);

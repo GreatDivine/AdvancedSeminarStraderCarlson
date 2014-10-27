@@ -36,6 +36,16 @@ public class TowerManager
 		mTowers.add(tower);
 	}
 	
+	public void addFlameTower(int x, int y, int w, int h, int fireRad, WaveManager waves)
+	{
+		mTowers.add(new FlameTower(x, y, w, h, fireRad, waves));
+	}
+
+	public void addFlameTower(FlameTower tower)
+	{
+		mTowers.add(tower);
+	}
+	
 	public void update(long timeNS)
 	{
 		for(Tower t:mTowers)

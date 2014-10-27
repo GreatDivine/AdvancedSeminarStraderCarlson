@@ -1,5 +1,6 @@
 package main;
 
+import gameItems.tower.FlameTower;
 import gameItems.tower.MachineGunTower;
 import gameItems.tower.RocketTower;
 import gameItems.tower.TowerManager;
@@ -96,6 +97,28 @@ public class Room extends JPanel implements MouseListener
 			{
 				t.setHasTower(true);
 				t.setTower(rt);
+			}
+		}
+	}
+	
+	public void addFlameTowerOnTile(int x, int y, int w, int h, int r)
+	{
+		mTowerManager.addFlameTower(
+				((x * GameSettings.TILE_SIZE) + GameSettings.TILE_SIZE/2), 
+				((y * GameSettings.TILE_SIZE) + GameSettings.TILE_SIZE/2), 
+				w, 
+				h, 
+				r, 
+				mWaveManager);
+		
+		FlameTower ft = (FlameTower)mTowerManager.getTower(mTowerManager.getNumTowers() - 1);
+		
+		for(Tile t: testLevel.getTiles())
+		{
+			if(t.containsPoint(x * GameSettings.TILE_SIZE, y * GameSettings.TILE_SIZE))
+			{
+				t.setHasTower(true);
+				t.setTower(ft);
 			}
 		}
 	}
