@@ -1,18 +1,15 @@
 package tiles;
 
+import gameItems.tower.Tower;
+
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import menus.BuildMenu;
+import menus.TowerMenu;
 import util.GameSettings;
 
 @SuppressWarnings("serial")
@@ -28,6 +25,7 @@ public class Tile extends JPanel {
 	private Rectangle mTileRect;
 	
 	private boolean mHasTower;
+	private Tower mTower;
 	
 	public Tile(int x, int y, boolean path)
 	{
@@ -41,6 +39,7 @@ public class Tile extends JPanel {
 		mHeight = GameSettings.TILE_SIZE;
 		
 		mHasTower = false;
+		mTower = null;
 
 		mTileRect = new Rectangle(mPosX, mPosY, mWidth, mHeight);
 	}
@@ -66,8 +65,10 @@ public class Tile extends JPanel {
 		{
 			BuildMenu bm = new BuildMenu(this);
 		}
-		
-		System.out.println("Tile Clicked: " + mPosX + ", " + mPosY);
+		else if (!mIsPath && mHasTower)
+		{
+			TowerMenu tm = new TowerMenu(this);
+		}
 	}
 	
 	public void paint(Graphics g)
@@ -85,6 +86,16 @@ public class Tile extends JPanel {
 	public int getXPos()
 	{
 		return mPosX;
+	}
+	
+	public Tower getTower()
+	{
+		return mTower;
+	}
+	
+	public void setTower(Tower tower)
+	{
+		mTower = tower;
 	}
 	
 	public int getYPos()

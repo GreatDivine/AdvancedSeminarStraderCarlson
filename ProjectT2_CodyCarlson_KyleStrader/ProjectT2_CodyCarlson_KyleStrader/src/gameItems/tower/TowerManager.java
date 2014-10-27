@@ -21,9 +21,19 @@ public class TowerManager
 		mTowers.add(new MachineGunTower(x, y, w, h, fireRad, waves));
 	}
 	
+	public void addMGTower(MachineGunTower tower)
+	{
+		mTowers.add(tower);
+	}
+	
 	public void addRocketTower(int x, int y, int w, int h, int fireRad, WaveManager waves)
 	{
 		mTowers.add(new RocketTower(x, y, w, h, fireRad, waves));
+	}
+	
+	public void addRocketTower(RocketTower tower)
+	{
+		mTowers.add(tower);
 	}
 	
 	public void update(long timeNS)
@@ -31,6 +41,18 @@ public class TowerManager
 		for(Tower t:mTowers)
 		{
 			t.update(timeNS);
+		}
+	}
+	
+	public void removeTower(Tower tow)
+	{
+		for(Tower t:mTowers)
+		{
+			if (t == tow)
+			{
+				mTowers.remove(tow);
+				break;
+			}
 		}
 	}
 	

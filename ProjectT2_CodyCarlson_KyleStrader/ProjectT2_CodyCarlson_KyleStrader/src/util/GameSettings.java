@@ -16,6 +16,8 @@ public class GameSettings
 	public static final int ROCKET_TOWER_SHOT_DAMAGE = 200; // rocket tower damage per shot
 	public static final int WAVES_BEFORE_INCREASE = 1; //number of waves that will pass before the waves become larger
 	
+	public static final int TOWER_UPGRADE_COST = 300;
+	
 	public static final Font FONT = new Font("Courrier", Font.BOLD, 18);
 	public static final Color LIFE_COLOR = Color.red;
 	public static final String LIFE_PREFIX = "\u2764  ";

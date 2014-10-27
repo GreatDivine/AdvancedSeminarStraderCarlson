@@ -10,12 +10,20 @@ import waves.WaveManager;
 public class MachineGunTower extends Tower 
 {	
 	private static final float MACHINE_GUN_DELAY = .3f;
+	private static final int MG_DAMAGE = 50;
+	private static final int MG_UPGRADE_COST_START = 100;
+	public static final int MG_BUY_COST = 500;
 	
 	public MachineGunTower(int x, int y, int w, int h, int fireRad, WaveManager waves)
 	{
-		super(x, y, w, h, fireRad, MACHINE_GUN_DELAY, waves);
+		super(x, y, w, h, fireRad, MACHINE_GUN_DELAY, waves, MG_DAMAGE, MG_UPGRADE_COST_START, MG_BUY_COST);
 	}
 	
+	public MachineGunTower(Tower tmp) 
+	{
+		super(tmp);
+	}
+
 	@Override
 	public void update(long timeNS)
 	{
@@ -49,7 +57,7 @@ public class MachineGunTower extends Tower
 			// fire projectile in direction
 			mProjectileManager.addProjectile((int)mPosition.getX(), 
 				(int) mPosition.getY(), 
-				GameSettings.MG_TOWER_SHOT_DAMAGE,
+				mDamage,
 				mCurrentTarget);
 		}
 	}

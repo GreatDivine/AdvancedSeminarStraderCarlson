@@ -8,11 +8,20 @@ import util.GameSettings;
 import waves.WaveManager;
 
 public class RocketTower extends Tower {
+	
 	private static final float ROCKET_SHOT_DELAY = 2.0f;
+	private static final int ROCKET_DAMAGE = 200;
+	private static final int ROCKET_UPGRADE_COST_START = 200;
+	public static final int ROCKET_BUY_COST = 1000;
 	
 	public RocketTower(int x, int y, int w, int h, int fireRad, WaveManager waves) 
 	{
-		super(x, y, w, h, fireRad, ROCKET_SHOT_DELAY, waves);
+		super(x, y, w, h, fireRad, ROCKET_SHOT_DELAY, waves, ROCKET_DAMAGE, ROCKET_UPGRADE_COST_START, ROCKET_BUY_COST);
+	}
+
+	public RocketTower(Tower tmp) 
+	{
+		super(tmp);
 	}
 
 	@Override
@@ -62,7 +71,7 @@ public class RocketTower extends Tower {
 			// fire projectile in direction
 			mProjectileManager.addProjectile((int)mPosition.getX(), 
 					(int)mPosition.getY(),  
-					GameSettings.ROCKET_TOWER_SHOT_DAMAGE,
+					mDamage,
 					mCurrentTarget);
 		}
 	}

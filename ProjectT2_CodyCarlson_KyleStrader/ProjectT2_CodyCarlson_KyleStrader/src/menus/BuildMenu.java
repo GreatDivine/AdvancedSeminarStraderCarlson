@@ -1,5 +1,8 @@
 package menus;
 
+import gameItems.tower.MachineGunTower;
+import gameItems.tower.RocketTower;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -28,7 +31,7 @@ public class BuildMenu extends Menu{
 		JButton mgButton = new JButton("Build MG Tower");
 		mgButton.setActionCommand("buildMG");
 		
-		if (mRoom.getPlayer().getCash() < GameSettings.MG_TOWER_COST)
+		if (mRoom.getPlayer().getCash() < MachineGunTower.MG_BUY_COST)
 		{
 			mgButton.setEnabled(false);
 		}
@@ -43,7 +46,7 @@ public class BuildMenu extends Menu{
 		JButton rocketButton = new JButton("Build Rocket Tower");
 		rocketButton.setActionCommand("buildRocket");
 		
-		if (mRoom.getPlayer().getCash() < GameSettings.ROCKET_TOWER_COST)
+		if (mRoom.getPlayer().getCash() < RocketTower.ROCKET_BUY_COST)
 		{
 			rocketButton.setEnabled(false);
 		}
@@ -84,7 +87,7 @@ public class BuildMenu extends Menu{
 		
 		mRoom.addMGTowerOnTile(xIndex, yIndex, 20, 20, 200);
 		
-		mRoom.getPlayer().modCash(GameSettings.MG_TOWER_COST * -1);
+		mRoom.getPlayer().modCash(MachineGunTower.MG_BUY_COST * -1);
 		
 		mParentTile.setHasTower(true);
 		this.dispose();
@@ -97,7 +100,7 @@ public class BuildMenu extends Menu{
 		
 		mRoom.addRocketTowerOnTile(xIndex, yIndex, 20, 20, 200);
 		
-		mRoom.getPlayer().modCash(GameSettings.ROCKET_TOWER_COST * -1);
+		mRoom.getPlayer().modCash(RocketTower.ROCKET_BUY_COST * -1);
 		
 		mParentTile.setHasTower(true);
 		this.dispose();

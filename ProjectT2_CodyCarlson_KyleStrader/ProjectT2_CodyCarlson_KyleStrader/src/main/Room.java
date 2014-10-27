@@ -1,5 +1,7 @@
 package main;
 
+import gameItems.tower.MachineGunTower;
+import gameItems.tower.RocketTower;
 import gameItems.tower.TowerManager;
 
 import java.awt.Graphics;
@@ -63,11 +65,15 @@ public class Room extends JPanel implements MouseListener
 				r, 
 				mWaveManager);
 		
+		MachineGunTower mgt = (MachineGunTower)mTowerManager.getTower(mTowerManager.getNumTowers() - 1);
+
+		
 		for(Tile t: testLevel.getTiles())
 		{
 			if(t.containsPoint(x * GameSettings.TILE_SIZE, y * GameSettings.TILE_SIZE))
 			{
 				t.setHasTower(true);
+				t.setTower(mgt);
 			}
 		}
 	}
@@ -82,11 +88,14 @@ public class Room extends JPanel implements MouseListener
 				r, 
 				mWaveManager);
 		
+		RocketTower rt = (RocketTower)mTowerManager.getTower(mTowerManager.getNumTowers() - 1);
+		
 		for(Tile t: testLevel.getTiles())
 		{
 			if(t.containsPoint(x * GameSettings.TILE_SIZE, y * GameSettings.TILE_SIZE))
 			{
 				t.setHasTower(true);
+				t.setTower(rt);
 			}
 		}
 	}
@@ -110,6 +119,11 @@ public class Room extends JPanel implements MouseListener
 	{
 		mWaveManager.update(timeNS, mTowerManager);
 		mTowerManager.update(timeNS);
+	}
+	
+	public TowerManager getTowerManager()
+	{
+		return mTowerManager;
 	}
 	
 	public int getNumTowers()

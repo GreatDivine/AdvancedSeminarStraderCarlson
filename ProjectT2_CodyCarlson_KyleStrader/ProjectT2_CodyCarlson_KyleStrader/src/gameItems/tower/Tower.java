@@ -19,6 +19,9 @@ public abstract class Tower extends GameItem{
 	protected double mCurTime;
 	protected double mPrevTime;
 	protected double mStartTime;
+	protected int mBuyCost;
+	protected int mUpgradeCost;
+	protected int mDamage;
 	
 	public Tower(int x, int y, int w, int h, int fireRad, float shotDelay, WaveManager waves)
 	{
@@ -32,6 +35,41 @@ public abstract class Tower extends GameItem{
 		mCurTime = mStartTime;
 		mPrevTime = 0;
 		mWaves = waves;
+	}
+	
+	public Tower(int x, int y, int w, int h, int fireRad, float shotDelay, WaveManager waves, int damage, int upCost, int buyCost)
+	{
+		super(x, y, w, h);
+		
+		mFireRadius = fireRad;
+		mShotDelay = shotDelay;
+		mProjectileManager = new ProjectileManager();
+		mTimePassed = 0;
+		mStartTime = (double)System.nanoTime() / GameSettings.NANOSECONDS_TO_SECONDS;
+		mCurTime = mStartTime;
+		mPrevTime = 0;
+		mWaves = waves;
+		mUpgradeCost = upCost;
+		mBuyCost = buyCost;
+		mDamage = damage;
+	}
+	
+	// Constructor for decorator upgrading
+	public Tower(Tower originalTower)
+	{
+		super((int)originalTower.getPosition().getX(), (int)originalTower.getPosition().getY(), (int)originalTower.getDimensions().getX(), (int)originalTower.getDimensions().getY());
+		
+		mFireRadius = originalTower.mFireRadius;
+		mShotDelay = originalTower.mShotDelay;
+		mProjectileManager = originalTower.mProjectileManager;
+		mTimePassed = 0;
+		mStartTime = (double)System.nanoTime() / GameSettings.NANOSECONDS_TO_SECONDS;
+		mCurTime = mStartTime;
+		mPrevTime = 0;
+		mWaves = originalTower.mWaves;
+		mUpgradeCost = originalTower.mUpgradeCost * 2;
+		mBuyCost = originalTower.mBuyCost;
+		mDamage = (int) (originalTower.mDamage + (originalTower.mDamage * .25));
 	}
 	
 	public abstract void update(long timens);
@@ -64,6 +102,21 @@ public abstract class Tower extends GameItem{
 	public Zombie getCurrentTarget()
 	{
 		return mCurrentTarget;
+	}
+	
+	public int getDamage()
+	{
+		return mDamage;
+	}
+	
+	public int getCost()
+	{
+		return mBuyCost;
+	}
+	
+	public int getUpgradeCost()
+	{
+		return mUpgradeCost;
 	}
 	
 	public void drawTargettingRadius(Graphics g, int xCenter, int yCenter, int r)
