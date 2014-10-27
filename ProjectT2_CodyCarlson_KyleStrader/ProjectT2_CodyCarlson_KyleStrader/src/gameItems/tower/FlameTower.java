@@ -11,7 +11,7 @@ import waves.WaveManager;
 public class FlameTower extends Tower{
 	private static final float FIRE_DELAY = .01f;
 	private static final float CONE = 30.0f;
-	private static final int FLAME_DAMAGE = 5;
+	private static final int FLAME_DAMAGE = 2;
 	private static final int FLAME_UPGRADE_COST_START = 100;
 	public static final int FLAME_BUY_COST = 500;
 	

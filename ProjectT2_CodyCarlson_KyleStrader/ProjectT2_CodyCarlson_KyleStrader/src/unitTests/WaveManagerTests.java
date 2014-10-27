@@ -44,6 +44,8 @@ public class WaveManagerTests
 		
 		wm.populateWave(w); //populating the wave should add one zombie of each type
 		
+		w.forceSpawnZombies();
+		
 		assertEquals(w.getNumZombies(), 4); // check to make sure that the wave now has 4 total zombies in it
 	}
 	

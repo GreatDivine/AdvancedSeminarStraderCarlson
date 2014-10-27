@@ -95,6 +95,7 @@ public class ProjectileManagerTests
 		WaveManager wm = new WaveManager(level,p);
 		wm.addTemplateWave();
 		wm.getWave(0).addZombie(10, 10, mZombieType.WALKER, p, level);
+		wm.getWave(0).forceSpawnZombies();
 		ProjectileManager pm = new ProjectileManager();
 		
 		Zombie w = (Walker)wm.getWave(0).getZombie(0);

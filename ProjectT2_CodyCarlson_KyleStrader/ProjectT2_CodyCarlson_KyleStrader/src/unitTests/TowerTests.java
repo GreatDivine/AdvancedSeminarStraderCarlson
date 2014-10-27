@@ -112,6 +112,7 @@ public class TowerTests
 		WaveManager wm = new WaveManager(level,p);
 		wm.addTemplateWave();
 		wm.getWave(0).addZombie(7, 7, mZombieType.WALKER, p, level);
+		wm.getWave(0).forceSpawnZombies();
 		int towerRadius = 100;
 		MachineGunTower t = new MachineGunTower(0,0,20,20,towerRadius,wm);
 		t.checkIfTargettable(wm.getWave(0).getZombie(0));

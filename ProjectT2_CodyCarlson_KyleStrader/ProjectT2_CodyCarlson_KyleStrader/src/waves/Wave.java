@@ -9,21 +9,37 @@ import gameItems.zombie.Zombie;
 
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import player.Player;
 import tiles.Level;
+import util.GameSettings;
 
 public class Wave 
 {
 	public final int ZOMBIE_TARGET_EPSILON = 3;
-	private List<Zombie> mZombies;
+	private CopyOnWriteArrayList<Zombie> mZombies;
+	private CopyOnWriteArrayList<Zombie> mSpawnQueue;
+	private boolean mFinishedSpawning;
+	private double mTimePassed;
+	private double mCurTime;
+	private double mPrevTime;
+	private double mStartTime;
+	private Random mRand;
 	
 	public Wave()
 	{
-		mZombies = new ArrayList<Zombie>();
+		mZombies = new CopyOnWriteArrayList<Zombie>();
+		mSpawnQueue = new CopyOnWriteArrayList<Zombie>();
+		mFinishedSpawning = false;
+		mRand = new Random();
+		
+		//timing
+		mTimePassed = 0;
+		mStartTime = (double)System.nanoTime() / GameSettings.NANOSECONDS_TO_SECONDS;
+		mCurTime = mStartTime;
+		mPrevTime = 0;
 	}
 	
 	public enum mZombieType
@@ -34,9 +50,14 @@ public class Wave
 		IMP
 	}
 	
+	boolean getFinishedSpawning()
+	{
+		return mFinishedSpawning; 
+	}
+	
 	public void addZombie(int x, int y, int w, int h, int hp, int spd)
 	{
-		mZombies.add(new Zombie(x, y, w, h, hp, spd));
+		mSpawnQueue.add(new Zombie(x, y, w, h, hp, spd));
 	}
 	
 	public Zombie addZombie(int x, int y, mZombieType zType, Player p, Level level)
@@ -46,23 +67,23 @@ public class Wave
 			case WALKER:
 				Walker tmpW = new Walker(x,y);
 				tmpW.addObserver(p);
-				mZombies.add(tmpW);
+				mSpawnQueue.add(tmpW);
 				return tmpW;
 			case RUNNER:
 				Runner tmpR = new Runner(x,y);
 				tmpR.addObserver(p);
-				mZombies.add(tmpR);
+				mSpawnQueue.add(tmpR);
 				return tmpR;
 			case FATTY:
 				Fatty tmpF = new Fatty(x,y);
 				tmpF.addObserver(p);
-				mZombies.add(tmpF);
+				mSpawnQueue.add(tmpF);
 				return tmpF;
 			case IMP:
 				Imp tmpI = new Imp(x,y);
 				tmpI.addObserver(p);
 				tmpI.setpathIndex(level.getPathLength() - 1, level);
-				mZombies.add(tmpI);
+				mSpawnQueue.add(tmpI);
 				return tmpI;
 		}
 		
@@ -87,12 +108,25 @@ public class Wave
 	
 	public void update(long timeNS, TowerManager towerManager, Level level)
 	{
-		ListIterator<Zombie> iter = mZombies.listIterator();
+		mPrevTime = mCurTime;
+		mCurTime = (double)System.nanoTime() / GameSettings.NANOSECONDS_TO_SECONDS;
+		mTimePassed += mCurTime - mPrevTime;
 		
-		while (iter.hasNext())
+		if (mSpawnQueue.size() == 0)
 		{
-			Zombie z = iter.next();
-
+			mFinishedSpawning = true;
+		}
+		else 
+			mFinishedSpawning = false;
+		
+		if(mTimePassed > GameSettings.TIME_BETWEEN_SPAWN && !mFinishedSpawning)
+		{
+			mZombies.add(mSpawnQueue.remove(mRand.nextInt(mSpawnQueue.size())));
+			mTimePassed -= GameSettings.TIME_BETWEEN_SPAWN;
+		}
+		
+		for (Zombie z:mZombies)
+		{
 			z.update(timeNS);
 			
 			Point2D zPos = new Point2D.Float((float) z.getPosition().getX(), (float) z.getPosition().getY());
@@ -118,13 +152,13 @@ public class Wave
 			if (z.isOffscreen())
 			{
 				z.sendMessage();
-				iter.remove();
+				mZombies.remove(z);
 			}
 			
-			if (z.isDead())
+			else if (z.isDead())
 			{
 				z.sendMessage();
-				iter.remove();
+				mZombies.remove(z);
 			}
 		}
 	}
@@ -137,9 +171,24 @@ public class Wave
 		}
 	}
 	
+	public void forceSpawnZombies()
+	{
+		for (Zombie z:mSpawnQueue)
+		{
+			mZombies.add(z);
+		}
+		
+		mSpawnQueue.clear();
+	}
+	
 	public int getNumZombies()
 	{
 		return mZombies.size();
+	}
+	
+	public int getNumQueuedZombies()
+	{
+		return mSpawnQueue.size();
 	}
 	
 	public Zombie getZombie(int index)
@@ -147,8 +196,18 @@ public class Wave
 		return mZombies.get(index);
 	}
 	
+	public Zombie getQueuedZombie(int index)
+	{
+		return mSpawnQueue.get(index);
+	}
+	
 	public void removeZombie(Zombie z)
 	{
 		mZombies.remove(z);
+	}
+	
+	public void removeQueuedZombie(int index)
+	{
+		mSpawnQueue.remove(index);
 	}
 }

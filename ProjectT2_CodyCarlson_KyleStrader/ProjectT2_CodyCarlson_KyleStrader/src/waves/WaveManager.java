@@ -89,7 +89,11 @@ public class WaveManager
 	{
 		mPrevTime = mCurTime;
 		mCurTime = (double)System.nanoTime() / GameSettings.NANOSECONDS_TO_SECONDS;
-		mTimePassed += mCurTime - mPrevTime;
+		
+		if (mWaves.size() == 0 || mWaves.get(mWaves.size() - 1).getFinishedSpawning())
+		{
+			mTimePassed += mCurTime - mPrevTime;
+		}
 		
 		if(mTimePassed > GameSettings.TIME_BETWEEN_WAVE)
 		{

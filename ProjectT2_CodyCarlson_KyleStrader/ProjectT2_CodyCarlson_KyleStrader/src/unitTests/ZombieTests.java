@@ -44,6 +44,7 @@ public class ZombieTests
 		assertEquals(w.getNumZombies(), 0);
 		
 		w.addZombie(0, 0, Wave.mZombieType.WALKER, p, level);
+		w.forceSpawnZombies();
 		
 		assertEquals(w.getNumZombies(), 1);
 	}
@@ -56,6 +57,7 @@ public class ZombieTests
 		Level level = new Level();
 		
 		Fatty f = (Fatty)w.addZombie(0,0, Wave.mZombieType.FATTY, p, level);
+		w.forceSpawnZombies();
 		Fatty differentFatty = new Fatty(100,100);
 		
 		boolean checkZombSame = (f == w.getZombie(0));
@@ -117,6 +119,7 @@ public class ZombieTests
 		Level level = new Level();
 		
 		w.addZombie(-1, 0, Wave.mZombieType.WALKER, p, level); // add a walker at the edge of the frame width, any movement should push us off
+		w.forceSpawnZombies();
 		
 		assertEquals(w.getNumZombies(), 1);
 		
@@ -127,6 +130,7 @@ public class ZombieTests
 		assertEquals(w.getNumZombies(), 0);
 		
 		Walker tmpWalker = (Walker)w.addZombie(0, 0, Wave.mZombieType.WALKER, p, level); // create another walker
+		w.forceSpawnZombies();
 		
 		assertEquals (w.getNumZombies(), 1);
 		
