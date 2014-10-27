@@ -27,7 +27,7 @@ public class TowerMenu extends Menu {
 	
 	private void addButtons()
 	{
-		JButton ugButton = new JButton("Upgrade Tower");
+		JButton ugButton = new JButton("Upgrade Tower - $" + mParentTile.getTower().getUpgradeCost());
 		ugButton.setActionCommand("upgrade");
 		
 		if (mRoom.getPlayer().getCash() < mParentTile.getTower().getUpgradeCost())
@@ -42,7 +42,7 @@ public class TowerMenu extends Menu {
 			}
 		});
 		
-		JButton sellButton = new JButton("Sell Tower");
+		JButton sellButton = new JButton("Sell Tower - $" + (mParentTile.getTower().getCost() / 2));
 		sellButton.setActionCommand("sell");
 				
 		sellButton.addActionListener(new ActionListener(){
@@ -82,7 +82,6 @@ public class TowerMenu extends Menu {
 		
 		mRoom.getTowerManager().removeTower(tmp);
 		
-		System.out.println(tmp.getDamage());
 		if (tmp instanceof MachineGunTower)
 		{
 			tmp = new MachineGunTower(tmp);

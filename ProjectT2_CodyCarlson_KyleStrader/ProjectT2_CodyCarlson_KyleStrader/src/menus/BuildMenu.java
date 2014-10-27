@@ -28,7 +28,7 @@ public class BuildMenu extends Menu{
 	
 	private void addButtons()
 	{
-		JButton mgButton = new JButton("Build MG Tower");
+		JButton mgButton = new JButton("Build MG Tower - $" + MachineGunTower.MG_BUY_COST);
 		mgButton.setActionCommand("buildMG");
 		
 		if (mRoom.getPlayer().getCash() < MachineGunTower.MG_BUY_COST)
@@ -43,7 +43,7 @@ public class BuildMenu extends Menu{
 			}
 		});
 		
-		JButton rocketButton = new JButton("Build Rocket Tower");
+		JButton rocketButton = new JButton("Build Rocket Tower - $" + RocketTower.ROCKET_BUY_COST);
 		rocketButton.setActionCommand("buildRocket");
 		
 		if (mRoom.getPlayer().getCash() < RocketTower.ROCKET_BUY_COST)
@@ -68,13 +68,11 @@ public class BuildMenu extends Menu{
 			case("buildMG"):
 			{
 				buildMG();
-				System.out.println("Clicked Build MG Button");
 				break;
 			}
 			case("buildRocket"):
 			{
 				buildRocket();
-				System.out.println("Clicked Build Rocket Button");
 				break;
 			}
 		}
