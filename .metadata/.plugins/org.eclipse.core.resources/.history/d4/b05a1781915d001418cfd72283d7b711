@@ -58,8 +58,7 @@ public class MachineGunTower extends Tower
 			mProjectileManager.addProjectile(new MachineGunProjectile((int)mPosition.getX(), 
 				(int) mPosition.getY(), 
 				mDamage,
-				mCurrentTarget,
-				aimDir));
+				mCurrentTarget));
 		}
 	}
 	@Override

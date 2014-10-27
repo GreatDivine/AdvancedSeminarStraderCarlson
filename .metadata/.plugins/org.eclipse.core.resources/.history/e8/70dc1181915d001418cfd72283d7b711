@@ -9,7 +9,7 @@ import util.GameSettings;
 import waves.WaveManager;
 
 public class FlameTower extends Tower{
-	private static final float FIRE_DELAY = .01f;
+	private static final float FIRE_DELAY = .05f;
 	private static final float CONE = 60.0f;
 	private static final int FLAME_DAMAGE = 5;
 	private static final int FLAME_UPGRADE_COST_START = 100;
@@ -80,8 +80,7 @@ public class FlameTower extends Tower{
 				mProjectileManager.addProjectile(new FlameProjectile((int) mPosition.getX() - FlameProjectile.SIZE/2, 
 					(int) mPosition.getY() - FlameProjectile.SIZE/2, 
 					FLAME_DAMAGE,
-					mCurrentTarget,
-					aimDir));
+					mCurrentTarget));
 			}
 		}
 	}

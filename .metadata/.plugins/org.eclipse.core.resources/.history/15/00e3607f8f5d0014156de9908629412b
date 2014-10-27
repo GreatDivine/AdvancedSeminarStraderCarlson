@@ -9,7 +9,7 @@ import util.GameSettings;
 import waves.WaveManager;
 
 public class FlameTower extends Tower{
-	private static final float FIRE_DELAY = .01f;
+	private static final float FIRE_DELAY = .05f;
 	private static final float CONE = 60.0f;
 	private static final int FLAME_DAMAGE = 5;
 	private static final int FLAME_UPGRADE_COST_START = 100;
@@ -55,7 +55,7 @@ public class FlameTower extends Tower{
 					(float) (mCurrentTarget.getPosition().getX() - mPosition.getX()), 
 					(float) (mCurrentTarget.getPosition().getY() - mPosition.getY()));
 			
-			float angle = mRand.nextInt() % CONE / 2;
+			float angle = mRand.nextFloat() % CONE / 2;
 			if(mRand.nextInt() % 1 == 0)
 			{
 				angle *= -1.0f;
@@ -65,8 +65,8 @@ public class FlameTower extends Tower{
 			float cs = (float)Math.cos(angle);
 			float sn = (float)Math.sin(angle);
 			
-			float x = (float)((aimDir.getX() * cs) - (aimDir.getY() * sn));
-			float y = (float)((aimDir.getX() * sn) + (aimDir.getY() * cs));
+			float x = (float)(aimDir.getX() * cs - aimDir.getY() * sn);
+			float y = (float)(aimDir.getX() * sn + aimDir.getY() * cs);
 			
 			aimDir.setLocation(x, y);
 			
@@ -80,8 +80,7 @@ public class FlameTower extends Tower{
 				mProjectileManager.addProjectile(new FlameProjectile((int) mPosition.getX() - FlameProjectile.SIZE/2, 
 					(int) mPosition.getY() - FlameProjectile.SIZE/2, 
 					FLAME_DAMAGE,
-					mCurrentTarget,
-					aimDir));
+					mCurrentTarget));
 			}
 		}
 	}

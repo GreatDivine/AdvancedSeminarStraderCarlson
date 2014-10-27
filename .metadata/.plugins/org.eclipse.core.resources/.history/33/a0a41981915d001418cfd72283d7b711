@@ -72,8 +72,7 @@ public class RocketTower extends Tower {
 			mProjectileManager.addProjectile(new RocketProjectile((int)mPosition.getX(), 
 					(int)mPosition.getY(),  
 					mDamage,
-					mCurrentTarget,
-					aimDir));
+					mCurrentTarget));
 		}
 	}
 	

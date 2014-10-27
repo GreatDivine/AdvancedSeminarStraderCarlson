@@ -3,7 +3,6 @@ package gameItems.tower;
 import gameItems.zombie.Zombie;
 
 import java.awt.Color;
-import java.awt.geom.Point2D;
 
 import util.GameSettings;
 
@@ -13,9 +12,9 @@ public class FlameProjectile extends Projectile
 	public static final int SIZE = 10;
 	public static final int DIST_TO_FINAL_STATE = 200;
 
-	public FlameProjectile(int xPos, int yPos, int dmg, Zombie target, Point2D.Float vel) 
+	public FlameProjectile(int xPos, int yPos, int dmg, Zombie target) 
 	{
-		super(xPos, yPos, dmg, target, COLOR, SIZE, vel);
+		super(xPos, yPos, dmg, target, COLOR, SIZE);
 	}
 	
 	@Override
