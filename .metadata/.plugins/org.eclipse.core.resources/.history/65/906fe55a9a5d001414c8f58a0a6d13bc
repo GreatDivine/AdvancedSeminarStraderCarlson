@@ -2,18 +2,18 @@ package gameItems.tower;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.List;
 
 import waves.WaveManager;
 
 public class TowerManager 
 {
 	
-	private CopyOnWriteArrayList<Tower> mTowers;
+	private List<Tower> mTowers;
 	
 	public TowerManager()
 	{
-		mTowers = new CopyOnWriteArrayList<Tower>();
+		mTowers = new ArrayList<Tower>();
 	}
 	
 	public void addMGTower(int x, int y, int w, int h, int fireRad, WaveManager waves)

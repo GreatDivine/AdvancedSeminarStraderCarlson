@@ -10,7 +10,7 @@ import util.GameSettings;
 public class FlameProjectile extends Projectile 
 {
 	public static final Color COLOR = Color.YELLOW;
-	public static final int SIZE = 7;
+	public static final int SIZE = 5;
 	public static final int DIST_TO_FINAL_STATE = 200;
 
 	public FlameProjectile(int xPos, int yPos, int dmg, Zombie target, Point2D.Float vel) 

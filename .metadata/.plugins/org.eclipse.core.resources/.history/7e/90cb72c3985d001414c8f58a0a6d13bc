@@ -3,18 +3,19 @@ package gameItems.tower;
 import gameItems.zombie.Zombie;
 
 import java.awt.Graphics;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.ArrayList;
+import java.util.List;
 
 import waves.WaveManager;
 
 public class ProjectileManager 
 {
 	
-	private CopyOnWriteArrayList<Projectile> mProjectiles;
+	private static List<Projectile> mProjectiles;
 	
 	public ProjectileManager()
 	{
-		mProjectiles = new CopyOnWriteArrayList<Projectile>();
+		mProjectiles = new ArrayList<Projectile>();
 	}
 	
 	public void addProjectile(Projectile proj)

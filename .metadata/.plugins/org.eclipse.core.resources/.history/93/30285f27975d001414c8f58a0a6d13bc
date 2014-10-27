@@ -92,7 +92,7 @@ public abstract class Tower extends GameItem{
 			mCurrentTarget = null;
 			z.setIsTargeted(false);
 		}
-		if (mCurrentTarget != null && (mCurrentTarget.isDead() || mCurrentTarget.isOffscreen()))
+		else if (mCurrentTarget != null && (mCurrentTarget.isDead() || mCurrentTarget.isOffscreen()))
 		{
 			mCurrentTarget = null;
 			z.setIsTargeted(false);
