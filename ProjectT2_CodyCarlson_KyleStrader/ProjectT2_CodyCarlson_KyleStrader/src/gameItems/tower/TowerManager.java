@@ -1,7 +1,6 @@
 package gameItems.tower;
 
 import java.awt.Graphics;
-import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import waves.WaveManager;

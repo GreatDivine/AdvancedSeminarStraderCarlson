@@ -9,7 +9,6 @@ import java.awt.Rectangle;
 import javax.swing.JPanel;
 
 import menus.BuildMenu;
-import menus.Menu;
 import menus.TowerMenu;
 import util.GameSettings;
 
@@ -64,11 +63,13 @@ public class Tile extends JPanel {
 	{
 		if (!mHasTower && !mIsPath)
 		{
+			@SuppressWarnings("unused")
 			BuildMenu bm = new BuildMenu(this);
 			return "Build Menu";
 		}
 		else if (!mIsPath && mHasTower)
 		{
+			@SuppressWarnings("unused")
 			TowerMenu tm = new TowerMenu(this);
 			return "Tower Menu";
 		}

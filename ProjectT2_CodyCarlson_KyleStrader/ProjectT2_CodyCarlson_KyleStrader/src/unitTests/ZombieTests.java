@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import player.Player;
 import tiles.Level;
-import util.GameSettings;
 import waves.Wave;
 import waves.WaveManager;
 

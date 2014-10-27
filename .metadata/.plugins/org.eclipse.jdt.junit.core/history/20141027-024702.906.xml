@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="unitTests" project="ProjectT1_CodyCarlson_KyleStrader" tests="21" started="21" failures="0" errors="0" ignored="0">
+  <testsuite name="unitTests.UpgradeTests" time="0.001">
+    <testcase name="testUpgradeDecorator" classname="unitTests.UpgradeTests" time="0.001"/>
+  </testsuite>
+  <testsuite name="unitTests.TowerTests" time="0.112">
+    <testcase name="testSwitchTarget" classname="unitTests.TowerTests" time="0.048"/>
+    <testcase name="testAddTower" classname="unitTests.TowerTests" time="0.02"/>
+    <testcase name="testTargetAcquired" classname="unitTests.TowerTests" time="0.019"/>
+    <testcase name="testTargetLost" classname="unitTests.TowerTests" time="0.013"/>
+    <testcase name="testDamageTarget" classname="unitTests.TowerTests" time="0.012"/>
+  </testsuite>
+  <testsuite name="unitTests.WaveManagerTests" time="0.031">
+    <testcase name="testAddWaves" classname="unitTests.WaveManagerTests" time="0.01"/>
+    <testcase name="testGetWave" classname="unitTests.WaveManagerTests" time="0.011"/>
+    <testcase name="testPopulateWave" classname="unitTests.WaveManagerTests" time="0.01"/>
+  </testsuite>
+  <testsuite name="unitTests.ProjectileManagerTests" time="0.02">
+    <testcase name="testRemoveProjectile" classname="unitTests.ProjectileManagerTests" time="0.001"/>
+    <testcase name="testProjectileCollision" classname="unitTests.ProjectileManagerTests" time="0.009"/>
+    <testcase name="testProjectileMovement" classname="unitTests.ProjectileManagerTests" time="0.0"/>
+    <testcase name="testAddProjectile" classname="unitTests.ProjectileManagerTests" time="0.0"/>
+    <testcase name="testOffScreen" classname="unitTests.ProjectileManagerTests" time="0.01"/>
+  </testsuite>
+  <testsuite name="unitTests.ZombieTests" time="0.037">
+    <testcase name="testIsTargeted" classname="unitTests.ZombieTests" time="0.01"/>
+    <testcase name="testZombieMove" classname="unitTests.ZombieTests" time="0.0"/>
+    <testcase name="testZombieRemoval" classname="unitTests.ZombieTests" time="0.009"/>
+    <testcase name="testZombieDeath" classname="unitTests.ZombieTests" time="0.0"/>
+    <testcase name="testDamageZombie" classname="unitTests.ZombieTests" time="0.0"/>
+    <testcase name="testAddZombie" classname="unitTests.ZombieTests" time="0.009"/>
+    <testcase name="testGetZombie" classname="unitTests.ZombieTests" time="0.009"/>
+  </testsuite>
+</testrun>

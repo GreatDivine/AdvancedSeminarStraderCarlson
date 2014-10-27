@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import main.Room;
 import tiles.Tile;
 
+@SuppressWarnings("serial")
 public class TowerMenu extends Menu {
 	Tile mParentTile;
 	Room mRoom;

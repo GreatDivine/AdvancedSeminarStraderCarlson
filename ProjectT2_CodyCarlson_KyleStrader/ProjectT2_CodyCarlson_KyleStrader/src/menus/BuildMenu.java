@@ -13,6 +13,7 @@ import main.Room;
 import tiles.Tile;
 import util.GameSettings;
 
+@SuppressWarnings("serial")
 public class BuildMenu extends Menu{
 	
 	Tile mParentTile;

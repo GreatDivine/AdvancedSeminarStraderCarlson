@@ -55,7 +55,7 @@ public class WaveManagerTests
 		WaveManager wm = new WaveManager(level, p);
 		
 		Wave w = wm.addWave();
-		Wave w2 = wm.addWave();
+		wm.addWave();
 		
 		boolean wavesAreEqual = (w == wm.getWave(0)); // since the wavemanager adds a wave automatically, our new wave should be in the 2nd index, 1.
 		boolean wavesAreNotEqual = (w == wm.getWave(1)); // as such, the first index should not equal w

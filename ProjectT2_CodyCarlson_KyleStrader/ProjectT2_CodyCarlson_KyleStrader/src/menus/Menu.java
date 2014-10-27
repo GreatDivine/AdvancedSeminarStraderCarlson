@@ -5,8 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import util.GameSettings;
-
+@SuppressWarnings("serial")
 public class Menu extends JFrame {
 	
 	private final int MENU_WIDTH = 200;
