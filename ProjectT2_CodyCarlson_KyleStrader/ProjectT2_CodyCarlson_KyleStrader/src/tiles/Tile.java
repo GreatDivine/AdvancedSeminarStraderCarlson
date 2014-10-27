@@ -9,6 +9,7 @@ import java.awt.Rectangle;
 import javax.swing.JPanel;
 
 import menus.BuildMenu;
+import menus.Menu;
 import menus.TowerMenu;
 import util.GameSettings;
 
@@ -59,16 +60,20 @@ public class Tile extends JPanel {
 		mHasTower = val;
 	}
 	
-	public void buttonClicked()
+	public String buttonClicked()
 	{
 		if (!mHasTower && !mIsPath)
 		{
 			BuildMenu bm = new BuildMenu(this);
+			return "Build Menu";
 		}
 		else if (!mIsPath && mHasTower)
 		{
 			TowerMenu tm = new TowerMenu(this);
+			return "Tower Menu";
 		}
+		
+		return "No Menu";
 	}
 	
 	public void paint(Graphics g)

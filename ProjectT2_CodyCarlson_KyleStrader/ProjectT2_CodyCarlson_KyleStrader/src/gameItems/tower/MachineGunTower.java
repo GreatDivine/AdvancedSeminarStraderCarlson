@@ -10,7 +10,7 @@ import waves.WaveManager;
 public class MachineGunTower extends Tower 
 {	
 	private static final float MACHINE_GUN_DELAY = .3f;
-	private static final int MG_DAMAGE = 50;
+	public static final int MG_DAMAGE = 50;
 	private static final int MG_UPGRADE_COST_START = 100;
 	public static final int MG_BUY_COST = 500;
 	
