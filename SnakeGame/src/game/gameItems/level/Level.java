@@ -1,0 +1,60 @@
+package game.gameItems.level;
+
+import java.awt.Graphics;
+import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Float;
+
+import game.gameItems.GameItem;
+import game.util.GameSettings;
+
+public class Level implements GameItem {
+	
+	Tile[][] mTiles = new Tile[GameSettings.GRID_SIZE][GameSettings.GRID_SIZE];
+	
+	public Level()
+	{
+		initTiles();
+	}
+	
+	private void initTiles()
+	{
+		for (int i = 0; i < GameSettings.GRID_SIZE; i++)
+		{
+			for (int j = 0; j < GameSettings.GRID_SIZE; j++)
+			{
+				Tile t = new Tile(j, i);
+				
+				mTiles[j][i] = t;
+				//System.out.println("Created tile at: " + j + ", " + i);
+			}
+		}
+	}
+
+	@Override
+	public void paint(Graphics g) 
+	{
+		for (int i = 0; i < GameSettings.GRID_SIZE; i++)
+		{
+			for (int j = 0; j < GameSettings.GRID_SIZE; j++)
+			{
+				mTiles[j][i].paint(g);
+			}
+		}
+	}
+
+	@Override
+	public void update() 
+	{
+		
+	}
+
+	public void spawnFoodOnTile(int tileX, int tileY) 
+	{
+		mTiles[tileX][tileY].setHasFood(true);
+		
+		/* Testing */
+		//System.out.println("Tile.hasFood() = " + mTiles[tileX][tileY].hasFood());
+		/*---------*/
+	}
+
+}

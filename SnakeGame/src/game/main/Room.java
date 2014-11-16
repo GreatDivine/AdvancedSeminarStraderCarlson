@@ -1,6 +1,8 @@
 package game.main;
 
 import game.gameItems.GameItem;
+import game.gameItems.food.FoodFactory;
+import game.gameItems.level.Level;
 import game.gameItems.snake.Snake;
 import game.util.GameSettings;
 
@@ -15,6 +17,7 @@ import javax.swing.JPanel;
 public class Room extends JPanel implements KeyListener {
 	
 	private ArrayList<GameItem> mObjects;
+	private Level mLevel;
 	
 	private Snake testSnake;
 	
@@ -22,12 +25,27 @@ public class Room extends JPanel implements KeyListener {
 	{
 		mObjects = new ArrayList<GameItem>();
 		
+		mLevel = new Level();
+		addObject(mLevel);
+		
 		testSnake = new Snake();
 		addObject(testSnake);
 		
+		spawnFoodOnTile(5, 5);
+			
 		addKeyListener(this);
 		this.setFocusable(true);
 		this.requestFocusInWindow();
+	}
+	
+	public void spawnFoodOnTile(int tileX, int tileY)
+	{
+		addObject(FoodFactory.createFood(tileX, tileY));
+		mLevel.spawnFoodOnTile(tileX, tileY);
+		
+		/* Testing */
+		//System.out.println("Spawned food on tile: " + tileX + ", " + tileY);
+		/*---------*/
 	}
 	
 	public void addObject(GameItem obj)
@@ -51,12 +69,9 @@ public class Room extends JPanel implements KeyListener {
 			o.paint(g);
 		}
 	}
-
-	@Override
-	public void keyPressed(KeyEvent e) 
+	
+	public void changeSnakeDirection(int keyCode)
 	{
-		int keyCode = e.getKeyCode();
-		
 		switch(keyCode)
 		{
 		case KeyEvent.VK_UP:
@@ -72,6 +87,13 @@ public class Room extends JPanel implements KeyListener {
 			testSnake.setSnakeDirection(GameSettings.SnakeDirection.RIGHT);
 			break;
 		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) 
+	{
+		int keyCode = e.getKeyCode();
+		changeSnakeDirection(keyCode);
 	}
 
 	@Override

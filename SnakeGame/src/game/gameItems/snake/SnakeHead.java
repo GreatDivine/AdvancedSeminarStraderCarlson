@@ -32,7 +32,21 @@ public class SnakeHead extends SnakeBodyPart {
 	
 	public void setDirection(SnakeDirection newDir)
 	{
-		mDir = newDir;
+		switch(newDir)
+		{
+		case RIGHT:
+			if (mDir != SnakeDirection.LEFT) mDir = newDir;
+			break;
+		case LEFT:
+			if (mDir != SnakeDirection.RIGHT) mDir = newDir;
+			break;
+		case UP:
+			if (mDir != SnakeDirection.DOWN) mDir = newDir;
+			break;
+		case DOWN:
+			if (mDir != SnakeDirection.UP) mDir = newDir;
+			break;
+		}
 	}
 
 	@Override
