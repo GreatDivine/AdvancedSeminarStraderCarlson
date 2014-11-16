@@ -51,10 +51,11 @@ public class Level implements GameItem {
 	public void spawnFoodOnTile(int tileX, int tileY) 
 	{
 		mTiles[tileX][tileY].setHasFood(true);
-		
-		/* Testing */
-		//System.out.println("Tile.hasFood() = " + mTiles[tileX][tileY].hasFood());
-		/*---------*/
+	}
+	
+	public void removeFoodOnTile(int tileX, int tileY) 
+	{
+		mTiles[tileX][tileY].setHasFood(false);
 	}
 
 }

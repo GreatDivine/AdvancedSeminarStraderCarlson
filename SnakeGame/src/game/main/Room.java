@@ -1,7 +1,6 @@
 package game.main;
 
 import game.gameItems.GameItem;
-import game.gameItems.food.FoodFactory;
 import game.gameItems.level.Level;
 import game.gameItems.snake.Snake;
 import game.util.GameSettings;
@@ -31,21 +30,11 @@ public class Room extends JPanel implements KeyListener {
 		testSnake = new Snake(1, 1, 500);
 		addObject(testSnake);
 		
-		spawnFoodOnTile(5, 5);
-			
+		mLevel.spawnFoodOnTile(5, 5);
+
 		addKeyListener(this);
 		this.setFocusable(true);
 		this.requestFocusInWindow();
-	}
-	
-	public void spawnFoodOnTile(int tileX, int tileY)
-	{
-		addObject(FoodFactory.createFood(tileX, tileY));
-		mLevel.spawnFoodOnTile(tileX, tileY);
-		
-		/* Testing */
-		//System.out.println("Spawned food on tile: " + tileX + ", " + tileY);
-		/*---------*/
 	}
 	
 	public void addObject(GameItem obj)
