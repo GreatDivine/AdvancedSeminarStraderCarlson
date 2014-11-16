@@ -45,12 +45,6 @@ public class Snake implements GameItem {
 		SnakeHead head = (SnakeHead)mSnakeBody.get(0);
 		head.setDirection(dir);
 	}
-	
-	public GameSettings.SnakeDirection getSnakeDirection()
-	{
-		SnakeHead head = (SnakeHead)mSnakeBody.get(0);
-		return head.getDirection();
-	}
 
 	@Override
 	public void paint(Graphics g) 

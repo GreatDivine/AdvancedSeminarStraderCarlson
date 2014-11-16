@@ -5,7 +5,7 @@ import game.util.GameSettings;
 
 import java.awt.Color;
 import java.awt.Graphics;
-
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
@@ -38,7 +38,7 @@ public class SnakeBodyPart implements GameItem {
 	{
 		//g.drawImage(mSprite, (int)mPos.getX(), (int)mPos.getY(), null);
 		g.setColor(Color.orange);
-		g.fillOval((int)mPos.getX(), (int)mPos.getY(), GameSettings.TILE_SIZE - 2, GameSettings.TILE_SIZE - 2);
+		g.fillRect((int)mPos.getX(), (int)mPos.getY(), GameSettings.TILE_SIZE - 2, GameSettings.TILE_SIZE - 2);
 	}
 
 	@Override
