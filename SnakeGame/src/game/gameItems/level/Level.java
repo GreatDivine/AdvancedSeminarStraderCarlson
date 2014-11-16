@@ -1,8 +1,6 @@
 package game.gameItems.level;
 
 import java.awt.Graphics;
-import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Float;
 
 import game.gameItems.GameItem;
 import game.util.GameSettings;
@@ -25,9 +23,13 @@ public class Level implements GameItem {
 				Tile t = new Tile(j, i);
 				
 				mTiles[j][i] = t;
-				//System.out.println("Created tile at: " + j + ", " + i);
 			}
 		}
+	}
+	
+	public Tile[][] getTiles()
+	{
+		return mTiles;
 	}
 
 	@Override
@@ -51,10 +53,11 @@ public class Level implements GameItem {
 	public void spawnFoodOnTile(int tileX, int tileY) 
 	{
 		mTiles[tileX][tileY].setHasFood(true);
-		
-		/* Testing */
-		//System.out.println("Tile.hasFood() = " + mTiles[tileX][tileY].hasFood());
-		/*---------*/
+	}
+	
+	public void removeFoodOnTile(int tileX, int tileY)
+	{
+		mTiles[tileX][tileY].setHasFood(false);
 	}
 
 }

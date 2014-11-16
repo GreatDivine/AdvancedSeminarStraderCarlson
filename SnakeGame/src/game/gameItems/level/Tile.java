@@ -2,8 +2,6 @@ package game.gameItems.level;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.geom.Point2D;
-
 import game.gameItems.GameItem;
 import game.util.GameSettings;
 
@@ -53,6 +51,12 @@ public class Tile implements GameItem {
 	{
 		g.setColor(Color.black);
 		g.drawRect(mPosX, mPosY, GameSettings.TILE_SIZE, GameSettings.TILE_SIZE);
+		
+		if (mHasFood)
+		{
+			g.setColor(Color.green);
+			g.fillOval(mPosX + (GameSettings.TILE_SIZE / 4), mPosY + (GameSettings.TILE_SIZE / 4), GameSettings.FOOD_SIZE, GameSettings.FOOD_SIZE);
+		}
 	}
 
 	@Override

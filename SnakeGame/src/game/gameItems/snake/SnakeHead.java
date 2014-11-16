@@ -1,11 +1,6 @@
 package game.gameItems.snake;
 
-import game.util.GameSettings;
-
-import java.awt.Graphics;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import game.util.GameSettings.SnakeDirection;;
 
@@ -47,6 +42,11 @@ public class SnakeHead extends SnakeBodyPart {
 			if (mDir != SnakeDirection.UP) mDir = newDir;
 			break;
 		}
+	}
+	
+	public SnakeDirection getDirection()
+	{
+		return mDir;
 	}
 
 	@Override
