@@ -28,7 +28,7 @@ public class Room extends JPanel implements KeyListener {
 		mLevel = new Level();
 		addObject(mLevel);
 		
-		testSnake = new Snake();
+		testSnake = new Snake(1, 1, 500);
 		addObject(testSnake);
 		
 		spawnFoodOnTile(5, 5);

@@ -12,24 +12,18 @@ import java.awt.image.BufferedImage;
 public class SnakeBodyPart implements GameItem {
 	
 	BufferedImage mSprite;
-	Point2D.Float mPos;
-	float mSpeed;
 	
 	int mTileX;
 	int mTileY;
+	int mPosXPix;
+	int mPosYPix;
 	
-	public SnakeBodyPart(int tileX, int tileY, float speed, BufferedImage sprite)
+	public SnakeBodyPart(int tileX, int tileY, BufferedImage sprite)
 	{
 		mTileX = tileX;
 		mTileY = tileY;
-		mSpeed = speed;
-		mSprite = sprite;
-	}
-	
-	public SnakeBodyPart(Point2D.Float pos, float speed, BufferedImage sprite)
-	{
-		mPos = pos;
-		mSpeed = speed;
+		mPosXPix = tileX * GameSettings.TILE_SIZE;
+		mPosYPix = tileY * GameSettings.TILE_SIZE;
 		mSprite = sprite;
 	}
 
@@ -38,7 +32,7 @@ public class SnakeBodyPart implements GameItem {
 	{
 		//g.drawImage(mSprite, (int)mPos.getX(), (int)mPos.getY(), null);
 		g.setColor(Color.orange);
-		g.fillRect((int)mPos.getX(), (int)mPos.getY(), GameSettings.TILE_SIZE - 2, GameSettings.TILE_SIZE - 2);
+		g.fillRect(mPosXPix, mPosYPix, GameSettings.TILE_SIZE - 2, GameSettings.TILE_SIZE - 2);
 	}
 
 	@Override

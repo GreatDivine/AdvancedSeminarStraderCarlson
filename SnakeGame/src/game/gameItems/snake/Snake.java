@@ -19,12 +19,25 @@ public class Snake implements GameItem {
 	private BufferedImage mHeadSprite;
 	private BufferedImage mBodySprite;
 	
-	public Snake()
+	//update time variables
+	int mSnakeUpdateSpeed;
+	float mUpdateStartTime;
+	float mUpdateCurTime;
+	float mUpdateTimePassed;
+	boolean newCycle;
+	
+	public Snake(int tileX, int tileY, int speed)
 	{
 		mSnakeBody = new ArrayList<SnakeBodyPart>();
-		loadSprites();
+		//loadSprites();
 		
-		mSnakeBody.add(new SnakeHead(new Point2D.Float(0,0), 1, mHeadSprite));
+		mSnakeBody.add(new SnakeHead(tileX, tileY, null));
+		
+		mSnakeUpdateSpeed = speed;
+		mUpdateStartTime = 0;
+		mUpdateCurTime = 0;
+		mUpdateTimePassed = 0;
+		newCycle = true;
 	}
 	
 	public void loadSprites()
@@ -58,9 +71,26 @@ public class Snake implements GameItem {
 	@Override
 	public void update() 
 	{
-		for (SnakeBodyPart p:mSnakeBody)
+		if (newCycle)
 		{
-			p.update();
+			mUpdateStartTime = (float)(System.nanoTime() / GameSettings.NANOSECONDS_TO_MILLISECONDS);
+			newCycle = false;
+			for (SnakeBodyPart p:mSnakeBody)
+			{
+				p.update();
+			}
+		}
+		
+		else
+		{
+			mUpdateCurTime = (float)(System.nanoTime() / GameSettings.NANOSECONDS_TO_MILLISECONDS);
+			mUpdateTimePassed = mUpdateCurTime - mUpdateStartTime;
+			
+			if(mUpdateTimePassed >= mSnakeUpdateSpeed)
+			{
+				mUpdateStartTime = 0;
+				newCycle = true;
+			}
 		}
 	}
 

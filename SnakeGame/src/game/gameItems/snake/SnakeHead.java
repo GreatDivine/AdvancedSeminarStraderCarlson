@@ -22,10 +22,10 @@ import game.util.GameSettings.SnakeDirection;;
 public class SnakeHead extends SnakeBodyPart {
 	
 	SnakeDirection mDir;
-	
-	public SnakeHead(Point2D.Float pos, float speed, BufferedImage sprite)
+
+	public SnakeHead(int tileX, int tileY, BufferedImage sprite)
 	{
-		super(pos, speed, sprite);
+		super(tileX, tileY, sprite);
 		
 		mDir = SnakeDirection.RIGHT;
 	}
@@ -53,6 +53,7 @@ public class SnakeHead extends SnakeBodyPart {
 	public void update() 
 	{
 		move();
+		
 	}
 	
 	public void move()
@@ -60,18 +61,21 @@ public class SnakeHead extends SnakeBodyPart {
 		switch(mDir)
 		{
 		case RIGHT:
-			mPos.setLocation(new Point2D.Float((float)mPos.getX() + mSpeed, (float)mPos.getY()));
+			mTileX++;
 			break;
 		case LEFT:
-			mPos.setLocation(new Point2D.Float((float)mPos.getX() - mSpeed, (float)mPos.getY()));
+			mTileX--;		
 			break;
 		case UP:
-			mPos.setLocation(new Point2D.Float((float)mPos.getX(), (float)mPos.getY() - mSpeed));
+			mTileY--;
 			break;
 		case DOWN:
-			mPos.setLocation(new Point2D.Float((float)mPos.getX(), (float)mPos.getY() + mSpeed));
+			mTileY++;
 			break;
 		}
+		
+		mPosXPix = mTileX * GameSettings.TILE_SIZE;		
+		mPosYPix = mTileY * GameSettings.TILE_SIZE;
 	}
 
 }
