@@ -29,13 +29,23 @@ public class Room extends JPanel implements KeyListener {
 		
 		testSnake = new Snake(1, 1, 500, mLevel);
 		addObject(testSnake);
-		
+
+		mLevel.spawnFoodOnTile(0, 0);
+		mLevel.spawnFoodOnTile(1, 1);
+		mLevel.spawnFoodOnTile(2, 2);
+		mLevel.spawnFoodOnTile(3, 3);
+		mLevel.spawnFoodOnTile(4, 4);
 		mLevel.spawnFoodOnTile(5, 5);
-		mLevel.spawnFoodOnTile(8, 4);
 		mLevel.spawnFoodOnTile(6, 6);
 		mLevel.spawnFoodOnTile(7, 7);
 		mLevel.spawnFoodOnTile(8, 8);
 		mLevel.spawnFoodOnTile(9, 9);
+		mLevel.spawnFoodOnTile(10, 10);
+		mLevel.spawnFoodOnTile(11, 11);
+		mLevel.spawnFoodOnTile(12, 12);
+		mLevel.spawnFoodOnTile(13, 13);
+		mLevel.spawnFoodOnTile(14, 14);
+		mLevel.spawnFoodOnTile(15, 15);
 
 		addKeyListener(this);
 		this.setFocusable(true);

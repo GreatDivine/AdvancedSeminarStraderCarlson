@@ -15,6 +15,8 @@ public class GameSettings {
 	
 	public static final int FOOD_SIZE = 16;
 	
+	public static final float SPEED_INCREASE_FRACTION = .95f;
+	
 	public static enum SnakeDirection
 	{
 		NONE,

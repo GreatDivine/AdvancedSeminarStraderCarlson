@@ -22,6 +22,7 @@ public class Snake implements GameItem {
 	private BufferedImage mBodySprite;
 	
 	Level mLevel;
+	boolean mIsAlive;
 	
 	//update time variables
 	int mSnakeUpdateSpeed;
@@ -32,6 +33,7 @@ public class Snake implements GameItem {
 	
 	public Snake(int tileX, int tileY, int speed, Level level)
 	{
+		mIsAlive = true;
 		mSnakeBody = new ArrayList<SnakeBodyPart>();
 		//loadSprites();
 		
@@ -77,38 +79,49 @@ public class Snake implements GameItem {
 	@Override
 	public void update() 
 	{
-		if (newCycle)
+		if (mIsAlive)
 		{
-			mUpdateStartTime = (float)(System.nanoTime() / GameSettings.NANOSECONDS_TO_MILLISECONDS);
-			newCycle = false;
-			for (SnakeBodyPart p:mSnakeBody)
+			if (newCycle)
 			{
-				p.update(); 
+				mUpdateStartTime = (float)(System.nanoTime() / GameSettings.NANOSECONDS_TO_MILLISECONDS);
+				newCycle = false;
+				for (SnakeBodyPart p:mSnakeBody)
+				{
+					p.update(); 
+				}
+				
+				int headTileX = mSnakeBody.get(0).getTileX();
+				int headTileY = mSnakeBody.get(0).getTileY();
+				
+				if (headTileX >= GameSettings.GRID_SIZE || headTileX < 0 || headTileY >= GameSettings.GRID_SIZE || headTileY < 0)
+				{
+					mIsAlive = false;
+				}
+				
+				else
+				{
+					if (mLevel.getTile(headTileX, headTileY).hasFood())
+					{
+						int posX = mSnakeBody.get(mSnakeBody.size() - 1).getTileX(); 
+						int posY = mSnakeBody.get(mSnakeBody.size() - 1).getTileY();  
+						mSnakeBody.add(new SnakeBodyPart(posX, posY, mSnakeBody, null));
+						mSnakeUpdateSpeed = (int)(mSnakeUpdateSpeed * GameSettings.SPEED_INCREASE_FRACTION);
+						mLevel.getTile(headTileX, headTileY).setHasFood(false);
+					}
+				}
 			}
 			
-			int headTileX = mSnakeBody.get(0).getTileX();
-			int headTileY = mSnakeBody.get(0).getTileY();
-			
-			if (mLevel.getTile(headTileX, headTileY).hasFood())
+			else
 			{
-				int posX = mSnakeBody.get(mSnakeBody.size() - 1).getTileX(); 
-				int posY = mSnakeBody.get(mSnakeBody.size() - 1).getTileY();  
-				mSnakeBody.add(new SnakeBodyPart(posX, posY, mSnakeBody, null));
-				mLevel.getTile(headTileX, headTileY).setHasFood(false);
-			}
-		}
-		
-		else
-		{
-			mUpdateCurTime = (float)(System.nanoTime() / GameSettings.NANOSECONDS_TO_MILLISECONDS);
-			mUpdateTimePassed = mUpdateCurTime - mUpdateStartTime;
-			
-			if(mUpdateTimePassed >= mSnakeUpdateSpeed)
-			{
-				mUpdateStartTime = 0;
-				newCycle = true;
+				mUpdateCurTime = (float)(System.nanoTime() / GameSettings.NANOSECONDS_TO_MILLISECONDS);
+				mUpdateTimePassed = mUpdateCurTime - mUpdateStartTime;
+				
+				if(mUpdateTimePassed >= mSnakeUpdateSpeed)
+				{
+					mUpdateStartTime = 0;
+					newCycle = true;
+				}
 			}
 		}
 	}
-
 }
