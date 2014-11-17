@@ -7,6 +7,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
 import game.util.GameSettings.SnakeDirection;;
 
 /*
@@ -20,12 +22,13 @@ import game.util.GameSettings.SnakeDirection;;
  */
 
 public class SnakeHead extends SnakeBodyPart {
-	
-	SnakeDirection mDir;
 
-	public SnakeHead(int tileX, int tileY, BufferedImage sprite)
+	int mX_Vel;
+	int mY_Vel;
+
+	public SnakeHead(int tileX, int tileY, ArrayList<SnakeBodyPart> snakeBody, BufferedImage sprite)
 	{
-		super(tileX, tileY, sprite);
+		super(tileX, tileY, snakeBody, sprite);
 		
 		mDir = SnakeDirection.RIGHT;
 	}
@@ -35,16 +38,16 @@ public class SnakeHead extends SnakeBodyPart {
 		switch(newDir)
 		{
 		case RIGHT:
-			if (mDir != SnakeDirection.LEFT) mDir = newDir;
+			if (mX_Vel != -1) mDir = newDir;
 			break;
 		case LEFT:
-			if (mDir != SnakeDirection.RIGHT) mDir = newDir;
+			if (mX_Vel != 1) mDir = newDir;
 			break;
 		case UP:
-			if (mDir != SnakeDirection.DOWN) mDir = newDir;
+			if (mY_Vel != 1) mDir = newDir;
 			break;
 		case DOWN:
-			if (mDir != SnakeDirection.UP) mDir = newDir;
+			if (mY_Vel != -1) mDir = newDir;
 			break;
 		}
 	}
@@ -52,8 +55,8 @@ public class SnakeHead extends SnakeBodyPart {
 	@Override
 	public void update() 
 	{
-		move();
-		
+		move();	
+		mPrevDir = mDir;
 	}
 	
 	public void move()
@@ -62,15 +65,23 @@ public class SnakeHead extends SnakeBodyPart {
 		{
 		case RIGHT:
 			mTileX++;
+			mX_Vel = 1;
+			mY_Vel = 0;
 			break;
 		case LEFT:
-			mTileX--;		
+			mTileX--;
+			mX_Vel = -1;	
+			mY_Vel = 0;	
 			break;
 		case UP:
 			mTileY--;
+			mY_Vel = -1;
+			mX_Vel = 0;
 			break;
 		case DOWN:
 			mTileY++;
+			mY_Vel = 1;
+			mX_Vel = 0;
 			break;
 		}
 		

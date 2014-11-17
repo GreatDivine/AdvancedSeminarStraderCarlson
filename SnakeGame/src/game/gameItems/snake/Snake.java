@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import game.gameItems.GameItem;
+import game.gameItems.level.Level;
+import game.gameItems.level.Tile;
 import game.util.GameSettings;
 
 public class Snake implements GameItem {
@@ -19,6 +21,8 @@ public class Snake implements GameItem {
 	private BufferedImage mHeadSprite;
 	private BufferedImage mBodySprite;
 	
+	Level mLevel;
+	
 	//update time variables
 	int mSnakeUpdateSpeed;
 	float mUpdateStartTime;
@@ -26,12 +30,14 @@ public class Snake implements GameItem {
 	float mUpdateTimePassed;
 	boolean newCycle;
 	
-	public Snake(int tileX, int tileY, int speed)
+	public Snake(int tileX, int tileY, int speed, Level level)
 	{
 		mSnakeBody = new ArrayList<SnakeBodyPart>();
 		//loadSprites();
 		
-		mSnakeBody.add(new SnakeHead(tileX, tileY, null));
+		mSnakeBody.add(new SnakeHead(tileX, tileY, mSnakeBody,null));
+		
+		mLevel = level;
 		
 		mSnakeUpdateSpeed = speed;
 		mUpdateStartTime = 0;
@@ -77,7 +83,18 @@ public class Snake implements GameItem {
 			newCycle = false;
 			for (SnakeBodyPart p:mSnakeBody)
 			{
-				p.update();
+				p.update(); 
+			}
+			
+			int headTileX = mSnakeBody.get(0).getTileX();
+			int headTileY = mSnakeBody.get(0).getTileY();
+			
+			if (mLevel.getTile(headTileX, headTileY).hasFood())
+			{
+				int posX = mSnakeBody.get(mSnakeBody.size() - 1).getTileX(); 
+				int posY = mSnakeBody.get(mSnakeBody.size() - 1).getTileY();  
+				mSnakeBody.add(new SnakeBodyPart(posX, posY, mSnakeBody, null));
+				mLevel.getTile(headTileX, headTileY).setHasFood(false);
 			}
 		}
 		

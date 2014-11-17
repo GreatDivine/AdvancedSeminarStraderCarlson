@@ -17,6 +17,7 @@ public class GameSettings {
 	
 	public static enum SnakeDirection
 	{
+		NONE,
 		UP,
 		DOWN,
 		RIGHT,

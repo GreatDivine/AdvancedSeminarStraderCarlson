@@ -29,7 +29,12 @@ public class Level implements GameItem {
 			}
 		}
 	}
-
+	
+	public Tile getTile(int x, int y)
+	{
+		return mTiles[x][y];
+	}
+	
 	@Override
 	public void paint(Graphics g) 
 	{
