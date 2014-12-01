@@ -54,9 +54,17 @@ public class Level implements GameItem {
 		
 	}
 
-	public void spawnFoodOnTile(int tileX, int tileY) 
+	public void spawnFoodOnTile(int tileX, int tileY, FoodType type) 
 	{
-		mTiles[tileX][tileY].addFood(FoodType.REGULAR);
+		switch(type)
+		{
+		case REGULAR:
+			mTiles[tileX][tileY].addFood(FoodType.REGULAR);
+			break;
+		case POISON:
+			mTiles[tileX][tileY].addFood(FoodType.POISON);
+			break;
+		}
 	}
 	
 	public void removeFoodOnTile(int tileX, int tileY) 

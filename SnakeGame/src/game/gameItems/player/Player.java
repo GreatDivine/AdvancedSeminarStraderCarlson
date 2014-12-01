@@ -41,7 +41,7 @@ public class Player implements Observable, GameItem {
 		return mScore;
 	}
 	
-	public void increaseScore(int amount)
+	public void modifyScore(int amount)
 	{
 		mScore += amount;
 		sendMessage(MessageType.SCORE_MESSAGE);

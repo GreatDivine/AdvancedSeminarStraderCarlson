@@ -6,15 +6,11 @@ import game.util.GameSettings.SnakeDirection;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class SnakeBodyPart implements GameItem {
-	
-	BufferedImage mSprite;
-	
+
 	int mTileX;
 	int mTileY;
 	int mPosXPix;
@@ -26,14 +22,13 @@ public class SnakeBodyPart implements GameItem {
 	SnakeDirection mDir;
 	SnakeDirection mPrevDir;
 	
-	public SnakeBodyPart(int tileX, int tileY, ArrayList<SnakeBodyPart> snakeBody, BufferedImage sprite)
+	public SnakeBodyPart(int tileX, int tileY, ArrayList<SnakeBodyPart> snakeBody)
 	{
 		mTileX = tileX;
 		mTileY = tileY;
 		mPosXPix = tileX * GameSettings.TILE_SIZE;
 		mPosYPix = tileY * GameSettings.TILE_SIZE;
-		mSprite = sprite;
-		
+
 		mBodyIndex = snakeBody.size();
 		mSnakeBody = snakeBody;
 		
@@ -58,7 +53,6 @@ public class SnakeBodyPart implements GameItem {
 	@Override
 	public void paint(Graphics g) 
 	{
-		//g.drawImage(mSprite, (int)mPos.getX(), (int)mPos.getY(), null);
 		g.setColor(Color.orange);
 		g.fillRect(mPosXPix, mPosYPix, GameSettings.TILE_SIZE - 2, GameSettings.TILE_SIZE - 2);
 	}

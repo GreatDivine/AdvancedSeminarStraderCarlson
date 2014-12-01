@@ -19,9 +19,6 @@ public class Snake implements GameItem {
 	
 	private ArrayList<SnakeBodyPart> mSnakeBody;
 	
-	private BufferedImage mHeadSprite;
-	private BufferedImage mBodySprite;
-	
 	private Player mParent;
 	
 	Level mLevel;
@@ -38,9 +35,8 @@ public class Snake implements GameItem {
 	{
 		mIsAlive = true;
 		mSnakeBody = new ArrayList<SnakeBodyPart>();
-		//loadSprites();
 		
-		mSnakeBody.add(new SnakeHead(tileX, tileY, mSnakeBody,null));
+		mSnakeBody.add(new SnakeHead(tileX, tileY, mSnakeBody));
 		
 		mLevel = level;
 		
@@ -55,9 +51,8 @@ public class Snake implements GameItem {
 	{
 		mIsAlive = true;
 		mSnakeBody = new ArrayList<SnakeBodyPart>();
-		//loadSprites();
 		
-		mSnakeBody.add(new SnakeHead(tileX, tileY, mSnakeBody,null));
+		mSnakeBody.add(new SnakeHead(tileX, tileY, mSnakeBody));
 		
 		mLevel = level;
 		
@@ -69,22 +64,9 @@ public class Snake implements GameItem {
 		newCycle = true;
 	}
 	
-	public void increaseScore(int amount)
+	public void modifyScore(int amount)
 	{
-		mParent.increaseScore(amount);
-	}
-	
-	public void loadSprites()
-	{
-		try 
-		{
-			mHeadSprite = ImageIO.read(new File("E:/tmp/SnakeGame/src/assets/narwhal.png"));
-			mBodySprite = ImageIO.read(new File("E:/tmp/SnakeGame/src/assets/narwhal.png"));
-		}
-		catch (IOException e)
-		{
-			System.out.println("Error loading snake sprites!");
-		}
+		mParent.modifyScore(amount);
 	}
 	
 	public void setSnakeDirection(GameSettings.SnakeDirection dir)
@@ -102,15 +84,29 @@ public class Snake implements GameItem {
 		}
 	}
 	
-	public void addSnakePart(int headTileX, int headTileY)
+	public void addSnakePart()
 	{
 		int posX = mSnakeBody.get(mSnakeBody.size() - 1).getTileX(); 
 		int posY = mSnakeBody.get(mSnakeBody.size() - 1).getTileY();  
-		mSnakeBody.add(new SnakeBodyPart(posX, posY, mSnakeBody, null));
+		mSnakeBody.add(SnakePartFactory.createBodyPart(posX, posY, mSnakeBody));
 		mSnakeUpdateSpeed = (int)(mSnakeUpdateSpeed * GameSettings.SPEED_INCREASE_FRACTION);
-		mLevel.getTile(headTileX, headTileY).removeFood();
+	}
+	
+	public void processFood(int headTileX, int headTileY)
+	{
+		int pointsChange = mLevel.getTile(headTileX, headTileY).consumeFood();
 		
-		increaseScore(GameSettings.FOOD_SCORE_DEFAULT);
+		if (pointsChange > 0)
+		{
+			addSnakePart();
+		}
+		else
+		{
+			addSnakePart();
+			addSnakePart();
+		}
+		
+		modifyScore(pointsChange);
 	}
 
 	@Override
@@ -139,7 +135,7 @@ public class Snake implements GameItem {
 				{
 					if (mLevel.getTile(headTileX, headTileY).hasFood())
 					{
-						addSnakePart(headTileX, headTileY);
+						processFood(headTileX, headTileY);
 					}
 				}
 			}

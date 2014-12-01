@@ -1,6 +1,7 @@
 package tests;
 
 import static org.junit.Assert.*;
+import game.gameItems.food.Food.FoodType;
 import game.gameItems.hud.HUD;
 import game.gameItems.level.Level;
 import game.gameItems.player.Player;
@@ -17,11 +18,13 @@ public class PlayerTest {
 		
 		assertEquals(0, player.getScore());
 		
-		player.increaseScore(100);
+		player.modifyScore(100);
 		
 		assertEquals(100, player.getScore());
 		
-		player.getSnake().addSnakePart(0, 0);
+		level.spawnFoodOnTile(0, 0, FoodType.REGULAR);
+		
+		player.getSnake().processFood(0, 0);
 		
 		assertEquals(200, player.getScore());
 	}
@@ -38,7 +41,7 @@ public class PlayerTest {
 		
 		assertEquals(0, hud.getScoreDisplay());
 		
-		player.increaseScore(100);
+		player.modifyScore(100);
 		
 		assertEquals(100, hud.getScoreDisplay());
 	}

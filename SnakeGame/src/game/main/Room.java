@@ -1,6 +1,7 @@
 package game.main;
 
 import game.gameItems.GameItem;
+import game.gameItems.food.Food.FoodType;
 import game.gameItems.hud.HUD;
 import game.gameItems.level.Level;
 import game.gameItems.player.Player;
@@ -37,22 +38,22 @@ public class Room extends JPanel implements KeyListener {
 		
 		mPlayer.addObserver(mHUD);
 		
-		mLevel.spawnFoodOnTile(0, 0);
-		mLevel.spawnFoodOnTile(1, 1);
-		mLevel.spawnFoodOnTile(2, 2);
-		mLevel.spawnFoodOnTile(3, 3);
-		mLevel.spawnFoodOnTile(4, 4);
-		mLevel.spawnFoodOnTile(5, 5);
-		mLevel.spawnFoodOnTile(6, 6);
-		mLevel.spawnFoodOnTile(7, 7);
-		mLevel.spawnFoodOnTile(8, 8);
-		mLevel.spawnFoodOnTile(9, 9);
-		mLevel.spawnFoodOnTile(10, 10);
-		mLevel.spawnFoodOnTile(11, 11);
-		mLevel.spawnFoodOnTile(12, 12);
-		mLevel.spawnFoodOnTile(13, 13);
-		mLevel.spawnFoodOnTile(14, 14);
-		mLevel.spawnFoodOnTile(15, 15);
+		mLevel.spawnFoodOnTile(0, 0, FoodType.REGULAR);
+		mLevel.spawnFoodOnTile(1, 1, FoodType.REGULAR);
+		mLevel.spawnFoodOnTile(2, 2, FoodType.REGULAR);
+		mLevel.spawnFoodOnTile(3, 3, FoodType.POISON);
+		mLevel.spawnFoodOnTile(4, 4, FoodType.REGULAR);
+		mLevel.spawnFoodOnTile(5, 5, FoodType.REGULAR);
+		mLevel.spawnFoodOnTile(6, 6, FoodType.REGULAR);
+		mLevel.spawnFoodOnTile(7, 7, FoodType.REGULAR);
+		mLevel.spawnFoodOnTile(8, 8, FoodType.REGULAR);
+		mLevel.spawnFoodOnTile(9, 9, FoodType.REGULAR);
+		mLevel.spawnFoodOnTile(10, 10, FoodType.REGULAR);
+		mLevel.spawnFoodOnTile(11, 11, FoodType.REGULAR);
+		mLevel.spawnFoodOnTile(12, 12, FoodType.REGULAR);
+		mLevel.spawnFoodOnTile(13, 13, FoodType.REGULAR);
+		mLevel.spawnFoodOnTile(14, 14, FoodType.REGULAR);
+		mLevel.spawnFoodOnTile(15, 15, FoodType.REGULAR);
 
 		addKeyListener(this);
 		this.setFocusable(true);

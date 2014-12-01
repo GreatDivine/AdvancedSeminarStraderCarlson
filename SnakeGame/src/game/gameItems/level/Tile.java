@@ -63,6 +63,19 @@ public class Tile implements GameItem {
 		}
 	}
 	
+	public int consumeFood()
+	{
+		if (mHasFood)
+		{
+			mHasFood = false;
+			int points = mFood.processEaten();
+			mFood = null;
+			return points;
+		}
+		
+		return 0;
+	}
+	
 	public void removeFood()
 	{
 		if (mHasFood)
@@ -80,8 +93,7 @@ public class Tile implements GameItem {
 		
 		if (mHasFood)
 		{
-			g.setColor(Color.green);
-			g.fillOval(mPosX + (GameSettings.TILE_SIZE / 4), mPosY + (GameSettings.TILE_SIZE / 4), GameSettings.FOOD_SIZE, GameSettings.FOOD_SIZE);
+			mFood.paint(g);
 		}
 	}
 

@@ -26,9 +26,9 @@ public class SnakeHead extends SnakeBodyPart {
 	int mX_Vel;
 	int mY_Vel;
 
-	public SnakeHead(int tileX, int tileY, ArrayList<SnakeBodyPart> snakeBody, BufferedImage sprite)
+	public SnakeHead(int tileX, int tileY, ArrayList<SnakeBodyPart> snakeBody)
 	{
-		super(tileX, tileY, snakeBody, sprite);
+		super(tileX, tileY, snakeBody);
 		
 		mDir = SnakeDirection.RIGHT;
 	}
