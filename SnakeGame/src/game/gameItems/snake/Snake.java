@@ -16,6 +16,7 @@ import game.gameItems.level.Level;
 import game.gameItems.level.Tile;
 import game.gameItems.player.Player;
 import game.util.GameSettings;
+import game.util.GameSettings.SnakeDirection;
 
 public class Snake implements GameItem {
 	
@@ -71,15 +72,42 @@ public class Snake implements GameItem {
 		return mIsAlive;
 	}
 	
+	public SnakeHead getHead()
+	{
+		return (SnakeHead)mSnakeBody.get(0);
+	}
+	
+	public int getSnakeSize()
+	{
+		return mSnakeBody.size();
+	}
+	
 	public void modifyScore(int amount)
 	{
 		mParent.modifyScore(amount);
+	}
+	
+	public boolean checkBodyCollision(int tileX, int tileY)
+	{
+		for (SnakeBodyPart p:mSnakeBody)
+		{
+			if (tileX == p.getTileX() 
+					&& tileY == p.getTileY()
+					&& p.getBodyIndex() != 0)
+				return true;
+		}
+		return false;
 	}
 	
 	public void setSnakeDirection(GameSettings.SnakeDirection dir)
 	{
 		SnakeHead head = (SnakeHead)mSnakeBody.get(0);
 		head.setDirection(dir);
+	}
+	
+	public SnakeDirection getSnakeDirection()
+	{
+		return getHead().getDirection();
 	}
 
 	@Override
@@ -142,6 +170,18 @@ public class Snake implements GameItem {
 			mLevel.spawnFoodOnTile(x, y, type);
 		}
 	}
+	
+	public boolean checkOutOfBounds(int tileX, int tileY)
+	{
+		if (tileX >= GameSettings.GRID_SIZE 
+				|| tileX < 0 
+				|| tileY >= GameSettings.GRID_SIZE 
+				|| tileY < 0)
+		{
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public void update() 
@@ -160,7 +200,7 @@ public class Snake implements GameItem {
 				int headTileX = mSnakeBody.get(0).getTileX();
 				int headTileY = mSnakeBody.get(0).getTileY();
 				
-				if (headTileX >= GameSettings.GRID_SIZE || headTileX < 0 || headTileY >= GameSettings.GRID_SIZE || headTileY < 0)
+				if (checkOutOfBounds(headTileX, headTileY) == true || checkBodyCollision(headTileX, headTileY) == true)
 				{
 					mIsAlive = false;
 				}

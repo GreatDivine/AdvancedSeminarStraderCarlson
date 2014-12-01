@@ -35,6 +35,16 @@ public class SnakeBodyPart implements GameItem {
 		mDir = GameSettings.SnakeDirection.NONE;
 	}
 	
+	public SnakeDirection getDirection()
+	{
+		return mDir;
+	}
+	
+	public int getBodyIndex()
+	{
+		return mBodyIndex;
+	}
+	
 	public SnakeDirection getPrevDirection()
 	{
 		return mPrevDir;
