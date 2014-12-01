@@ -1,0 +1,51 @@
+package tests;
+
+package tests;
+
+import static org.junit.Assert.*;
+import game.gameItems.food.Food.FoodType;
+import game.gameItems.hud.HUD;
+import game.gameItems.level.Level;
+import game.gameItems.player.Player;
+
+import org.junit.Test;
+
+public class MomentoTests {
+	
+	@Test
+	public void increaseScoreTest()
+	{
+		Level level = new Level();
+		Player player = new Player(level, 0);
+		
+		assertEquals(0, player.getScore());
+		
+		player.modifyScore(100);
+		
+		assertEquals(100, player.getScore());
+		
+		level.spawnFoodOnTile(0, 0, FoodType.REGULAR);
+		
+		player.getSnake().processFood(0, 0);
+		
+		assertEquals(200, player.getScore());
+	}
+	
+	@Test
+	public void scoreMessageTest()
+	{
+		Level level = new Level();
+		Player player = new Player(level, 0);
+		
+		HUD hud = new HUD(0);
+		
+		player.addObserver(hud);
+		
+		assertEquals(0, hud.getScoreDisplay());
+		
+		player.modifyScore(100);
+		
+		assertEquals(100, hud.getScoreDisplay());
+	}
+
+}

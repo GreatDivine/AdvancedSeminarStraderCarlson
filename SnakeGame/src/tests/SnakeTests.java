@@ -11,6 +11,7 @@ import game.gameItems.snake.Snake;
 import game.gameItems.snake.SnakeBodyPart;
 import game.gameItems.snake.SnakePartFactory;
 import game.util.GameSettings;
+import game.util.GameSettings.SnakeDirection;
 
 import org.junit.Test;
 
@@ -57,9 +58,13 @@ public class SnakeTests {
 		
 		assertTrue(s.isAlive());
 		
-		// TODO: Fix this test!
-	
-		//assertFalse(s.isAlive());
+		s.setSnakeDirection(SnakeDirection.NONE);
+		
+		s.addSnakePart();
+		
+		s.update();
+		
+		assertFalse(s.isAlive());
 	}
 	
 	@Test

@@ -1,15 +1,17 @@
 package game.util.momento;
 
+import java.util.List;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class CareTaker {
 
-	private GameSaveMomento mMomento; 
+	private List<GameSaveMomento> mMomentos; 
 	
 	private String mFileSysUrl;
 	private boolean mSaveAppend;
@@ -18,16 +20,17 @@ public class CareTaker {
 	{
 		mFileSysUrl = fileURL;
 		mSaveAppend = shouldAppend;
+		mMomentos = new ArrayList<GameSaveMomento>();
 	}
 	
 	public void add(GameSaveMomento state)
 	{
-		mMomento = state;
+		mMomentos.add(state);
 	}
 	
 	public GameSaveMomento getCurMomento()
 	{
-		return mMomento;
+		return mMomentos.get(mMomentos.size() - 1);
 	}
 	
 	public void load(String fileName) throws IOException
@@ -45,14 +48,16 @@ public class CareTaker {
 				fileReader.close();
 				System.out.println("Contents of file:");
 				System.out.println(stringBuffer.toString());
-				mMomento = new GameSaveMomento(line);
+				GameSaveMomento state = new GameSaveMomento(line);
+				mMomentos.add(state);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 		else
 		{
-			mMomento = new GameSaveMomento("0");
+			GameSaveMomento state = new GameSaveMomento("0");
+			mMomentos.add(state);
 		}
 	}
 	
@@ -61,7 +66,7 @@ public class CareTaker {
 		FileWriter write = new FileWriter(mFileSysUrl, mSaveAppend);
 		PrintWriter print_line = new PrintWriter(write);
 		
-		print_line.printf("%s" + "%n", mMomento.getStateStr());
+		print_line.printf("%s" + "%n", getCurMomento().getStateStr());
 		
 		print_line.close();
 	}

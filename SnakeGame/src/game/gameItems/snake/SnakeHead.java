@@ -49,6 +49,11 @@ public class SnakeHead extends SnakeBodyPart {
 		case DOWN:
 			if (mY_Vel != -1) mDir = newDir;
 			break;
+		case NONE:
+			mY_Vel = 0;
+			mX_Vel = 0;
+			mDir = newDir;
+			break;
 		}
 	}
 
@@ -81,6 +86,10 @@ public class SnakeHead extends SnakeBodyPart {
 		case DOWN:
 			mTileY++;
 			mY_Vel = 1;
+			mX_Vel = 0;
+			break;
+		case NONE:
+			mY_Vel = 0;
 			mX_Vel = 0;
 			break;
 		}

@@ -3,4 +3,7 @@
 <fullyQualifiedTypeName name="gameItems.tower.FlameTower"/>
 <fullyQualifiedTypeName name="java.awt.geom.Point2D.Float"/>
 <fullyQualifiedTypeName name="waves.Wave.mZombieType"/>
+<fullyQualifiedTypeName name="game.util.GameSettings.SnakeDirection"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
 </qualifiedTypeNameHistroy>

@@ -1,0 +1,36 @@
+package tests;
+
+import static org.junit.Assert.assertEquals;
+import game.gameItems.hud.HUD;
+import game.gameItems.level.Level;
+import game.gameItems.player.Player;
+import game.util.momento.Originator;
+
+import org.junit.Test;
+
+public class MomentoTests {
+	
+	@Test
+	public void saveStateToMomentoTest()
+	{
+		Originator o = new Originator();
+	}
+	
+	@Test
+	public void scoreMessageTest()
+	{
+		Level level = new Level();
+		Player player = new Player(level, 0);
+		
+		HUD hud = new HUD(0);
+		
+		player.addObserver(hud);
+		
+		assertEquals(0, hud.getScoreDisplay());
+		
+		player.modifyScore(100);
+		
+		assertEquals(100, hud.getScoreDisplay());
+	}
+
+}

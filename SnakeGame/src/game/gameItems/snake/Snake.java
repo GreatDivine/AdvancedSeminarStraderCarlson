@@ -77,6 +77,11 @@ public class Snake implements GameItem {
 		return (SnakeHead)mSnakeBody.get(0);
 	}
 	
+	public ArrayList<SnakeBodyPart> getSnakeBody()
+	{
+		return mSnakeBody;
+	}
+	
 	public int getSnakeSize()
 	{
 		return mSnakeBody.size();
@@ -87,22 +92,9 @@ public class Snake implements GameItem {
 		mParent.modifyScore(amount);
 	}
 	
-	public boolean checkBodyCollision(int tileX, int tileY)
-	{
-		for (SnakeBodyPart p:mSnakeBody)
-		{
-			if (tileX == p.getTileX() 
-					&& tileY == p.getTileY()
-					&& p.getBodyIndex() != 0)
-				return true;
-		}
-		return false;
-	}
-	
 	public void setSnakeDirection(GameSettings.SnakeDirection dir)
 	{
-		SnakeHead head = (SnakeHead)mSnakeBody.get(0);
-		head.setDirection(dir);
+		((SnakeHead) mSnakeBody.get(0)).setDirection(dir);
 	}
 	
 	public SnakeDirection getSnakeDirection()
@@ -169,6 +161,18 @@ public class Snake implements GameItem {
 			
 			mLevel.spawnFoodOnTile(x, y, type);
 		}
+	}
+	
+	public boolean checkBodyCollision(int tileX, int tileY)
+	{
+		for (SnakeBodyPart p:mSnakeBody)
+		{
+			if (tileX == p.getTileX() 
+					&& tileY == p.getTileY()
+					&& p.getBodyIndex() != 0)
+				return true;
+		}
+		return false;
 	}
 	
 	public boolean checkOutOfBounds(int tileX, int tileY)

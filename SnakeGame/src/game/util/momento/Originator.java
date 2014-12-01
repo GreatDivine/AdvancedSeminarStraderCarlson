@@ -1,7 +1,5 @@
 package game.util.momento;
 
-import java.util.ArrayList;
-
 public class Originator {
 	
 	private String mState;
