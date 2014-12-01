@@ -6,10 +6,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
 import game.gameItems.GameItem;
+import game.gameItems.food.Food.FoodType;
 import game.gameItems.level.Level;
 import game.gameItems.level.Tile;
 import game.gameItems.player.Player;
@@ -107,6 +109,30 @@ public class Snake implements GameItem {
 		}
 		
 		modifyScore(pointsChange);
+		
+		generateNewFood();
+	}
+	
+	public void generateNewFood()
+	{
+		Random rand = new Random();
+		
+		int x = rand.nextInt(GameSettings.GRID_SIZE);
+		int y = rand.nextInt(GameSettings.GRID_SIZE);
+		int t = rand.nextInt(2);
+		
+		
+		FoodType type;
+		if (t == 0)
+		{
+			type = FoodType.REGULAR;
+		}
+		else
+		{
+			type = FoodType.POISON;
+		}
+		
+		mLevel.spawnFoodOnTile(x, y, type);
 	}
 
 	@Override
