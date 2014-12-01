@@ -119,6 +119,26 @@ public class Room extends JPanel implements KeyListener {
 			break;
 		}
 	}
+	
+	public CareTaker getCareTaker()
+	{
+		return mCareTaker;
+	}
+	
+	public Originator getOriginator()
+	{
+		return mOriginator;
+	}
+	
+	public Player getPlayer()
+	{
+		return mPlayer;
+	}
+	
+	public Level getLevel()
+	{
+		return mLevel;
+	}
 
 	@Override
 	public void keyPressed(KeyEvent e) 

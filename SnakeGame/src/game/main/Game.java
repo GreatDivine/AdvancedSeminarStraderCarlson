@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 import game.util.GameSettings;
 
+@SuppressWarnings("serial")
 public class Game extends JFrame {
 	
 	public static Room mRoom;
@@ -56,6 +57,7 @@ public class Game extends JFrame {
 					catch(InterruptedException e)
 					{
 						//we got an error
+						e.printStackTrace();
 					}
 				}
 			}

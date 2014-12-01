@@ -2,7 +2,7 @@ package game.util.messages;
 
 public class LevelChangeMessage extends Message {
 	
-	int mNewLevel;
+	private int mNewLevel;
 
 	public LevelChangeMessage(int level) 
 	{

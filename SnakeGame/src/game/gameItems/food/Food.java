@@ -6,8 +6,8 @@ import game.gameItems.GameItem;
 
 public abstract class Food implements GameItem {
 	
-	int mTileX;
-	int mTileY;
+	protected int mTileX;
+	protected int mTileY;
 	
 	public enum FoodType
 	{

@@ -19,8 +19,8 @@ public class Originator {
 		return new GameSaveMomento(mState);
 	}
 	
-	public void getStateFromMomento(GameSaveMomento momento)
+	public String getStateFromMomento(GameSaveMomento momento)
 	{
-		mState = momento.getStateStr();
+		return mState = momento.getStateStr();
 	}
 }

@@ -12,10 +12,10 @@ import game.util.GameSettings;
 
 public class Tile implements GameItem {
 	
-	int mIndexX;
-	int mIndexY;
-	int mPosX;
-	int mPosY;
+	private int mIndexX;
+	private int mIndexY;
+	private int mPosX;
+	private int mPosY;
 	
 	boolean mHasFood;
 	Food mFood;

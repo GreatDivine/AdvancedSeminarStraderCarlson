@@ -23,8 +23,8 @@ import game.util.GameSettings.SnakeDirection;;
 
 public class SnakeHead extends SnakeBodyPart {
 
-	int mX_Vel;
-	int mY_Vel;
+	private int mX_Vel;
+	private int mY_Vel;
 
 	public SnakeHead(int tileX, int tileY, ArrayList<SnakeBodyPart> snakeBody)
 	{

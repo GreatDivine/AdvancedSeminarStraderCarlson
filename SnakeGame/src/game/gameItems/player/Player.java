@@ -15,18 +15,14 @@ import game.util.messages.ScoreMessage;
 
 public class Player implements Observable, GameItem {
 	
-	int mScore;
-	int mLevel;
-	int mHighScore;
-	boolean mIsAlive;
-	Snake mSnake;
+	private int mScore;
+	private int mLevel;
+	private int mHighScore;
+	private boolean mIsAlive;
+	private Snake mSnake;
 	
-	ArrayList<Observer> mObservers;
+	private ArrayList<Observer> mObservers;
 	
-	/* I would possibly like to remove the need to pass the level to the Player.
-	 * It "smells" of coupling, as we need to have a level existing in order to 
-	 * create a player. Would prefer not to have to do that.
-	 */
 	public Player(Level level, int highScore)
 	{
 		mHighScore = highScore; 
@@ -35,6 +31,17 @@ public class Player implements Observable, GameItem {
 		mLevel = GameSettings.LEVEL_DEFAULT;
 		
 		mSnake = new Snake(1, 1, 500, level, this);
+		mIsAlive = mSnake.isAlive();
+	}
+	
+	public Player(int x, int y, Level level, int highScore)
+	{
+		mHighScore = highScore; 
+		mObservers = new ArrayList<Observer>();
+		mScore = GameSettings.PLAYER_SCORE_DEFAULT;
+		mLevel = GameSettings.LEVEL_DEFAULT;
+		
+		mSnake = new Snake(x, y, 500, level, this);
 		mIsAlive = mSnake.isAlive();
 	}
 	

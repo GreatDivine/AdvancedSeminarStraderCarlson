@@ -2,7 +2,7 @@ package game.util.messages;
 
 public class ScoreMessage extends Message {
 	
-	int mNewScore;
+	private int mNewScore;
 	
 	public ScoreMessage(int newScore)
 	{

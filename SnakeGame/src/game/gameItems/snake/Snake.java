@@ -24,15 +24,15 @@ public class Snake implements GameItem {
 	
 	private Player mParent;
 	
-	Level mLevel;
-	boolean mIsAlive;
+	private Level mLevel;
+	private boolean mIsAlive;
 	
 	//update time variables
-	int mSnakeUpdateSpeed;
-	float mUpdateStartTime;
-	float mUpdateCurTime;
-	float mUpdateTimePassed;
-	boolean newCycle;
+	private int mSnakeUpdateSpeed;
+	private float mUpdateStartTime;
+	private float mUpdateCurTime;
+	private float mUpdateTimePassed;
+	private boolean newCycle;
 	
 	public Snake(int tileX, int tileY, int speed, Level level)
 	{
@@ -135,32 +135,7 @@ public class Snake implements GameItem {
 		
 		modifyScore(pointsChange);
 		
-		generateNewFood();
-	}
-	
-	public void generateNewFood()
-	{
-		Random rand = new Random();
-		
-		for (int i = 0; i < mParent.getLevel(); i++)
-		{
-			int x = rand.nextInt(GameSettings.GRID_SIZE);
-			int y = rand.nextInt(GameSettings.GRID_SIZE);
-			int t = rand.nextInt(10);
-			
-			
-			FoodType type;
-			if (t <= 3 && mParent.getLevel() != 1)
-			{
-				type = FoodType.POISON;
-			}
-			else
-			{
-				type = FoodType.REGULAR;
-			}
-			
-			mLevel.spawnFoodOnTile(x, y, type);
-		}
+		mLevel.generateNewFood(mParent.getLevel());
 	}
 	
 	public boolean checkBodyCollision(int tileX, int tileY)

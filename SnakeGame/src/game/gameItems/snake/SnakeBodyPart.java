@@ -11,16 +11,16 @@ import java.util.ArrayList;
 
 public class SnakeBodyPart implements GameItem {
 
-	int mTileX;
-	int mTileY;
-	int mPosXPix;
-	int mPosYPix;
+	protected int mTileX;
+	protected int mTileY;
+	protected int mPosXPix;
+	protected int mPosYPix;
 	
-	int mBodyIndex;
-	ArrayList<SnakeBodyPart> mSnakeBody;
+	protected int mBodyIndex;
+	protected ArrayList<SnakeBodyPart> mSnakeBody;
 	
-	SnakeDirection mDir;
-	SnakeDirection mPrevDir;
+	protected SnakeDirection mDir;
+	protected SnakeDirection mPrevDir;
 	
 	public SnakeBodyPart(int tileX, int tileY, ArrayList<SnakeBodyPart> snakeBody)
 	{
@@ -90,6 +90,8 @@ public class SnakeBodyPart implements GameItem {
 			break;
 		case DOWN:
 			mTileY++;
+			break;
+		default:
 			break;
 		}
 		

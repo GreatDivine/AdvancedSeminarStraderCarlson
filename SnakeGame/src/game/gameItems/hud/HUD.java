@@ -11,9 +11,9 @@ import game.util.messages.ScoreMessage;
 
 public class HUD implements GameItem, Observer{
 	
-	int mScoreDisplay;
-	int mHighScoreDisplay;
-	int mLevelDisplay;
+	private int mScoreDisplay;
+	private int mHighScoreDisplay;
+	private int mLevelDisplay;
 	
 	public HUD(int highScore)
 	{
