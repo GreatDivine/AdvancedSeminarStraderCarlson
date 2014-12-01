@@ -1,21 +1,60 @@
 package game.gameItems.player;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 
+import game.gameItems.GameItem;
+import game.gameItems.level.Level;
+import game.gameItems.snake.Snake;
+import game.util.GameSettings;
 import game.util.Observable;
 import game.util.Observer;
 import game.util.messages.Message.MessageType;
 import game.util.messages.ScoreMessage;
 
-public class Player implements Observable {
+public class Player implements Observable, GameItem {
 	
 	int mScore;
+	Snake mSnake;
 	
 	ArrayList<Observer> mObservers;
 	
-	public Player()
+	/* I would possibly like to remove the need to pass the level to the Player.
+	 * It "smells" of coupling, as we need to have a level existing in order to 
+	 * create a player. Would prefer not to have to do that.
+	 */
+	public Player(Level level)
 	{
 		mObservers = new ArrayList<Observer>();
+		mScore = GameSettings.PLAYER_SCORE_DEFAULT;
+		
+		mSnake = new Snake(1, 1, 500, level, this);
+	}
+	
+	public Snake getSnake()
+	{
+		return mSnake;
+	}
+	
+	public int getScore()
+	{
+		return mScore;
+	}
+	
+	public void increaseScore(int amount)
+	{
+		mScore += amount;
+		sendMessage(MessageType.SCORE_MESSAGE);
+	}
+	
+	public void addObserver(Observer o)
+	{
+		mObservers.add(o);
+	}
+	
+	public void setSnakeDirection(GameSettings.SnakeDirection dir)
+	{
+		mSnake.setSnakeDirection(dir);
 	}
 
 	@Override
@@ -29,6 +68,18 @@ public class Player implements Observable {
 				o.processMessage(msg);
 			}
 		}
+	}
+
+	@Override
+	public void paint(Graphics g) 
+	{
+		mSnake.paint(g);
+	}
+
+	@Override
+	public void update() 
+	{
+		mSnake.update();
 	}
 
 }

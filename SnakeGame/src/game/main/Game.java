@@ -11,13 +11,11 @@ public class Game extends JFrame {
 	public static Room mRoom;
 	
 	public boolean mKeepGoing;
-	public boolean mReset;
 	
 	public Game()
 	{
 		mRoom = new Room();
 		mKeepGoing = true;
-		mReset = false;
 	}
 
 	public void init()
@@ -32,7 +30,6 @@ public class Game extends JFrame {
 	public void update() 
 	{
 		mRoom.update();
-		//mReset = mRoom.shouldReset();
 	}
 	
 	public void gameLoop()

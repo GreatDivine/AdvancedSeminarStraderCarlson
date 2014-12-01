@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import game.gameItems.GameItem;
 import game.gameItems.level.Level;
 import game.gameItems.level.Tile;
+import game.gameItems.player.Player;
 import game.util.GameSettings;
 
 public class Snake implements GameItem {
@@ -20,6 +21,8 @@ public class Snake implements GameItem {
 	
 	private BufferedImage mHeadSprite;
 	private BufferedImage mBodySprite;
+	
+	private Player mParent;
 	
 	Level mLevel;
 	boolean mIsAlive;
@@ -46,6 +49,29 @@ public class Snake implements GameItem {
 		mUpdateCurTime = 0;
 		mUpdateTimePassed = 0;
 		newCycle = true;
+	}
+	
+	public Snake(int tileX, int tileY, int speed, Level level, Player playerParent)
+	{
+		mIsAlive = true;
+		mSnakeBody = new ArrayList<SnakeBodyPart>();
+		//loadSprites();
+		
+		mSnakeBody.add(new SnakeHead(tileX, tileY, mSnakeBody,null));
+		
+		mLevel = level;
+		
+		mSnakeUpdateSpeed = speed;
+		mUpdateStartTime = 0;
+		mUpdateCurTime = 0;
+		mUpdateTimePassed = 0;
+		mParent = playerParent;
+		newCycle = true;
+	}
+	
+	public void increaseScore(int amount)
+	{
+		mParent.increaseScore(amount);
 	}
 	
 	public void loadSprites()
@@ -75,6 +101,17 @@ public class Snake implements GameItem {
 			p.paint(g);
 		}
 	}
+	
+	public void addSnakePart(int headTileX, int headTileY)
+	{
+		int posX = mSnakeBody.get(mSnakeBody.size() - 1).getTileX(); 
+		int posY = mSnakeBody.get(mSnakeBody.size() - 1).getTileY();  
+		mSnakeBody.add(new SnakeBodyPart(posX, posY, mSnakeBody, null));
+		mSnakeUpdateSpeed = (int)(mSnakeUpdateSpeed * GameSettings.SPEED_INCREASE_FRACTION);
+		mLevel.getTile(headTileX, headTileY).removeFood();
+		
+		increaseScore(GameSettings.FOOD_SCORE_DEFAULT);
+	}
 
 	@Override
 	public void update() 
@@ -102,11 +139,7 @@ public class Snake implements GameItem {
 				{
 					if (mLevel.getTile(headTileX, headTileY).hasFood())
 					{
-						int posX = mSnakeBody.get(mSnakeBody.size() - 1).getTileX(); 
-						int posY = mSnakeBody.get(mSnakeBody.size() - 1).getTileY();  
-						mSnakeBody.add(new SnakeBodyPart(posX, posY, mSnakeBody, null));
-						mSnakeUpdateSpeed = (int)(mSnakeUpdateSpeed * GameSettings.SPEED_INCREASE_FRACTION);
-						mLevel.getTile(headTileX, headTileY).setHasFood(false);
+						addSnakePart(headTileX, headTileY);
 					}
 				}
 			}

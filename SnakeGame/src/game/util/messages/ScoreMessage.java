@@ -11,7 +11,7 @@ public class ScoreMessage extends Message {
 		mNewScore = newScore;
 	}
 	
-	public int getModifier()
+	public int getScore()
 	{
 		return mNewScore;
 	}

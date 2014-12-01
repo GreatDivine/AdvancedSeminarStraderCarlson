@@ -17,6 +17,11 @@ public class GameSettings {
 	
 	public static final float SPEED_INCREASE_FRACTION = .95f;
 	
+	public static final int PLAYER_SCORE_DEFAULT = 0;
+	public static final int LEVEL_DEFAULT = 1;
+	
+	public static final int FOOD_SCORE_DEFAULT = 100;
+	
 	public static enum SnakeDirection
 	{
 		NONE,
@@ -25,7 +30,4 @@ public class GameSettings {
 		RIGHT,
 		LEFT
 	}
-	
-	public static String SAVE_FILE_NAME = "save.txt"; 
-	
 }

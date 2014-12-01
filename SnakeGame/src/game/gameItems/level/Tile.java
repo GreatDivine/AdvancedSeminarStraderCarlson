@@ -5,6 +5,9 @@ import java.awt.Graphics;
 import java.awt.geom.Point2D;
 
 import game.gameItems.GameItem;
+import game.gameItems.food.Food;
+import game.gameItems.food.FoodFactory;
+import game.gameItems.food.Food.FoodType;
 import game.util.GameSettings;
 
 public class Tile implements GameItem {
@@ -15,6 +18,7 @@ public class Tile implements GameItem {
 	int mPosY;
 	
 	boolean mHasFood;
+	Food mFood;
 	
 	public Tile()
 	{
@@ -25,6 +29,7 @@ public class Tile implements GameItem {
 		mPosY = mIndexY * GameSettings.TILE_SIZE;
 		
 		mHasFood = false;
+		mFood = null;
 	}
 	
 	public Tile(int indexX, int indexY)
@@ -43,9 +48,28 @@ public class Tile implements GameItem {
 		return mHasFood;
 	}
 	
-	public void setHasFood(boolean val)
+	public void addFood(FoodType type)
 	{
-		mHasFood = val;
+		mHasFood = true;
+		
+		switch(type)
+		{
+		case REGULAR:
+			mFood = FoodFactory.createRegularFood(mIndexX, mIndexY);
+			break;
+		case POISON:
+			mFood = FoodFactory.createPoisonFood(mIndexX, mIndexY);
+			break;
+		}
+	}
+	
+	public void removeFood()
+	{
+		if (mHasFood)
+		{
+			mHasFood = false;
+			mFood = null;
+		}
 	}
 
 	@Override

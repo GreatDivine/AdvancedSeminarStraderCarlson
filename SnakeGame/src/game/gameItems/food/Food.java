@@ -11,6 +11,12 @@ public class Food implements GameItem {
 	int mTileX;
 	int mTileY;
 	
+	public enum FoodType
+	{
+		REGULAR,
+		POISON
+	}
+	
 	public Food(int tileX, int tileY)
 	{
 		mTileX = tileX;

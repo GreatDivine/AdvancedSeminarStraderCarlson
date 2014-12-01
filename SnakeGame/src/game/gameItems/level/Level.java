@@ -5,6 +5,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Float;
 
 import game.gameItems.GameItem;
+import game.gameItems.food.Food.FoodType;
 import game.util.GameSettings;
 
 public class Level implements GameItem {
@@ -55,12 +56,12 @@ public class Level implements GameItem {
 
 	public void spawnFoodOnTile(int tileX, int tileY) 
 	{
-		mTiles[tileX][tileY].setHasFood(true);
+		mTiles[tileX][tileY].addFood(FoodType.REGULAR);
 	}
 	
 	public void removeFoodOnTile(int tileX, int tileY) 
 	{
-		mTiles[tileX][tileY].setHasFood(false);
+		mTiles[tileX][tileY].removeFood();
 	}
 
 }
