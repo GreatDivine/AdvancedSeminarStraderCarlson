@@ -118,7 +118,7 @@ public class Player implements Observable, GameItem {
 	{
 		mSnake.update();
 		
-		if (mScore > 1000 * mLevel)
+		if (mScore >= GameSettings.POINTS_FOR_LEVEL * mLevel)
 		{
 			increaseLevel();
 		}

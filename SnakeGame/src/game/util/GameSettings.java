@@ -24,6 +24,8 @@ public class GameSettings {
 	
 	public static final String GAME_SAVE_FILE = "highscore.txt";
 	
+	public static final int POINTS_FOR_LEVEL = 500;
+	
 	public static enum SnakeDirection
 	{
 		NONE,
