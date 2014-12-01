@@ -11,15 +11,16 @@ import waves.WaveManager;
 public class FlameTower extends Tower{
 	private static final float FIRE_DELAY = .01f;
 	private static final float CONE = 30.0f;
-	private static final int FLAME_DAMAGE = 2;
+	private static final int FLAME_DAMAGE = 4;
 	private static final int FLAME_UPGRADE_COST_START = 100;
 	public static final int FLAME_BUY_COST = 500;
+	private static final int FLAME_RADIUS = 100;
 	
 	private Random mRand;
 	
 	public FlameTower(int x, int y, int w, int h, int fireRad, WaveManager waves)
 	{
-		super(x, y, w, h, fireRad, FIRE_DELAY, waves, FLAME_DAMAGE, FLAME_UPGRADE_COST_START, FLAME_BUY_COST);
+		super(x, y, w, h, FLAME_RADIUS, FIRE_DELAY, waves, FLAME_DAMAGE, FLAME_UPGRADE_COST_START, FLAME_BUY_COST);
 		mRand = new Random();
 	}
 	
@@ -79,9 +80,10 @@ public class FlameTower extends Tower{
 				// fire projectile in direction
 				mProjectileManager.addProjectile(new FlameProjectile((int) mPosition.getX() - FlameProjectile.SIZE/2, 
 					(int) mPosition.getY() - FlameProjectile.SIZE/2, 
-					FLAME_DAMAGE,
+					mDamage,
 					mCurrentTarget,
-					aimDir));
+					aimDir,
+					mFireRadius));
 			}
 		}
 	}
@@ -103,6 +105,10 @@ public class FlameTower extends Tower{
 		}
 		
 		drawTargettingRadius(g, (int)mPosition.getX(), (int)mPosition.getY(), mFireRadius);
+		
+		g.setColor(Color.white);
+		
+		g.drawString(Integer.toString(mLevel), (int)mPosition.getX(), (int)mPosition.getY() + (int)(mDimensions.getY() / 4));
 		
 		mProjectileManager.paint(g);
 	}

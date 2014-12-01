@@ -13,10 +13,11 @@ public class MachineGunTower extends Tower
 	public static final int MG_DAMAGE = 50;
 	private static final int MG_UPGRADE_COST_START = 100;
 	public static final int MG_BUY_COST = 500;
+	private static final int MG_RADIUS = 150;
 	
 	public MachineGunTower(int x, int y, int w, int h, int fireRad, WaveManager waves)
 	{
-		super(x, y, w, h, fireRad, MACHINE_GUN_DELAY, waves, MG_DAMAGE, MG_UPGRADE_COST_START, MG_BUY_COST);
+		super(x, y, w, h, MG_RADIUS, MACHINE_GUN_DELAY, waves, MG_DAMAGE, MG_UPGRADE_COST_START, MG_BUY_COST);
 	}
 	
 	public MachineGunTower(Tower tmp) 
@@ -80,6 +81,10 @@ public class MachineGunTower extends Tower
 		}
 		
 		drawTargettingRadius(g, (int)mPosition.getX(), (int)mPosition.getY(), mFireRadius);
+		
+		g.setColor(Color.white);
+		
+		g.drawString(Integer.toString(mLevel), (int)mPosition.getX(), (int)mPosition.getY() + (int)(mDimensions.getY() / 4));
 		
 		mProjectileManager.paint(g);
 	}

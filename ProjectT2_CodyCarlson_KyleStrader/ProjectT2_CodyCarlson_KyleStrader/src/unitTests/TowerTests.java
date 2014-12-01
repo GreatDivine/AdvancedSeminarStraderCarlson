@@ -55,10 +55,10 @@ public class TowerTests
 		Level level = new Level();
 		Player p = new Player();
 		WaveManager wm = new WaveManager(level,p);
-		int towerRadius = 100;
+		int towerRadius = 150;
 		MachineGunTower t = new MachineGunTower(0,0,20,20,towerRadius,wm);
 		
-		Walker w = new Walker(99,0); // spawn a walker at x = 99. Since the walker y is equal to the towers, moving right 2 units will place the walker out of the target radius
+		Walker w = new Walker(149,0); // spawn a walker at x = 99. Since the walker y is equal to the towers, moving right 2 units will place the walker out of the target radius
 		
 		t.checkIfTargettable(w); // tower sees the walker and targets it
 		

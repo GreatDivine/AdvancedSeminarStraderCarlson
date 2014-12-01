@@ -22,6 +22,7 @@ public abstract class Tower extends GameItem{
 	protected int mBuyCost;
 	protected int mUpgradeCost;
 	protected int mDamage;
+	protected int mLevel;
 	
 	public Tower(int x, int y, int w, int h, int fireRad, float shotDelay, WaveManager waves)
 	{
@@ -35,6 +36,7 @@ public abstract class Tower extends GameItem{
 		mCurTime = mStartTime;
 		mPrevTime = 0;
 		mWaves = waves;
+		mLevel = 1;
 	}
 	
 	public Tower(int x, int y, int w, int h, int fireRad, float shotDelay, WaveManager waves, int damage, int upCost, int buyCost)
@@ -52,6 +54,7 @@ public abstract class Tower extends GameItem{
 		mUpgradeCost = upCost;
 		mBuyCost = buyCost;
 		mDamage = damage;
+		mLevel = 1;
 	}
 	
 	// Constructor for decorator upgrading
@@ -59,7 +62,7 @@ public abstract class Tower extends GameItem{
 	{
 		super((int)originalTower.getPosition().getX(), (int)originalTower.getPosition().getY(), (int)originalTower.getDimensions().getX(), (int)originalTower.getDimensions().getY());
 		
-		mFireRadius = originalTower.mFireRadius;
+		mFireRadius = originalTower.mFireRadius + 10;
 		mShotDelay = originalTower.mShotDelay;
 		mProjectileManager = originalTower.mProjectileManager;
 		mTimePassed = 0;
@@ -70,6 +73,7 @@ public abstract class Tower extends GameItem{
 		mUpgradeCost = originalTower.mUpgradeCost * 2;
 		mBuyCost = originalTower.mBuyCost;
 		mDamage = (int) (originalTower.mDamage + (originalTower.mDamage * .25));
+		mLevel = originalTower.mLevel + 1;
 	}
 	
 	public abstract void update(long timens);
@@ -97,6 +101,16 @@ public abstract class Tower extends GameItem{
 			mCurrentTarget = null;
 			z.setIsTargeted(false);
 		}
+	}
+	
+	public int getLevel()
+	{
+		return mLevel;
+	}
+	
+	public void increaseLevel()
+	{
+		mLevel++;
 	}
 	
 	public Zombie getCurrentTarget()

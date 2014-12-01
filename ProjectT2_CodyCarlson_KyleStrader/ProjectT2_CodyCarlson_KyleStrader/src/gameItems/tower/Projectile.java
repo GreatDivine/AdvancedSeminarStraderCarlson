@@ -16,7 +16,7 @@ public class Projectile extends GameItem
 	private int projDamage;
 	public boolean isOffscreen;
 	private Zombie mTarget;
-	protected Color mColor;
+	protected Color mColor; 
 	protected int mSize;
 	
 	protected Point2D.Float mVelocity; //normalized velocity vector

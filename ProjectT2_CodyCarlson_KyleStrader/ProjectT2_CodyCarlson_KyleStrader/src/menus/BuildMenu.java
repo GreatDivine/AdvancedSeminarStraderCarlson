@@ -112,6 +112,7 @@ public class BuildMenu extends Menu{
 		mRoom.getPlayer().modCash(FlameTower.FLAME_BUY_COST * -1);
 		
 		mParentTile.setHasTower(true);
+		mParentTile.setMenuOpen(false);
 		this.dispose();
 	}
 	
@@ -125,6 +126,7 @@ public class BuildMenu extends Menu{
 		mRoom.getPlayer().modCash(MachineGunTower.MG_BUY_COST * -1);
 		
 		mParentTile.setHasTower(true);
+		mParentTile.setMenuOpen(false);
 		this.dispose();
 	}
 	
@@ -138,6 +140,7 @@ public class BuildMenu extends Menu{
 		mRoom.getPlayer().modCash(RocketTower.ROCKET_BUY_COST * -1);
 		
 		mParentTile.setHasTower(true);
+		mParentTile.setMenuOpen(false);
 		this.dispose();
 	}
 

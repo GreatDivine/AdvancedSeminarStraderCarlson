@@ -21,6 +21,7 @@ public class Tile extends JPanel {
 	private int mHeight;
 	
 	private boolean mIsPath;
+	private boolean mMenuOpen;
 	
 	private Rectangle mTileRect;
 	
@@ -40,6 +41,7 @@ public class Tile extends JPanel {
 		
 		mHasTower = false;
 		mTower = null;
+		mMenuOpen = false;
 
 		mTileRect = new Rectangle(mPosX, mPosY, mWidth, mHeight);
 	}
@@ -61,16 +63,18 @@ public class Tile extends JPanel {
 	
 	public String buttonClicked()
 	{
-		if (!mHasTower && !mIsPath)
+		if (!mHasTower && !mIsPath && !mMenuOpen)
 		{
 			@SuppressWarnings("unused")
 			BuildMenu bm = new BuildMenu(this);
+			mMenuOpen = true;
 			return "Build Menu";
 		}
-		else if (!mIsPath && mHasTower)
+		else if (!mIsPath && mHasTower && !mMenuOpen)
 		{
 			@SuppressWarnings("unused")
 			TowerMenu tm = new TowerMenu(this);
+			mMenuOpen = true;
 			return "Tower Menu";
 		}
 		
@@ -87,6 +91,16 @@ public class Tile extends JPanel {
 		
 		g.setColor(Color.black);
 		g.drawRect(mPosX, mPosY, mWidth, mHeight);
+	}
+	
+	public void setMenuOpen(boolean val)
+	{
+		mMenuOpen = val;
+	}
+	
+	public boolean getMenuOpen()
+	{
+		return mMenuOpen;
 	}
 	
 	public int getXPos()

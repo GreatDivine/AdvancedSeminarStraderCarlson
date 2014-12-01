@@ -11,22 +11,25 @@ public class FlameProjectile extends Projectile
 {
 	public static final Color COLOR = Color.YELLOW;
 	public static final int SIZE = 7;
-	public static final int DIST_TO_FINAL_STATE = 200;
+	//public static final int DIST_TO_FINAL_STATE = 200;
+	
+	private int distToFinalState;
 
-	public FlameProjectile(int xPos, int yPos, int dmg, Zombie target, Point2D.Float vel) 
+	public FlameProjectile(int xPos, int yPos, int dmg, Zombie target, Point2D.Float vel, int toFinalState) 
 	{
 		super(xPos, yPos, dmg, target, COLOR, SIZE, vel);
+		distToFinalState = toFinalState;
 	}
 	
 	@Override
 	public void update(long timeNS)
 	{
 		float distance = (float)mStartPosition.distance(mPosition);
-		if (distance > DIST_TO_FINAL_STATE)
+		if (distance > distToFinalState)
 		{
-			distance = DIST_TO_FINAL_STATE;
+			distance = distToFinalState;
 		}
-		mColor = new Color(255, (int)(255 * (distance / DIST_TO_FINAL_STATE)), 0, (int)(255 - (255 * (distance / DIST_TO_FINAL_STATE))));
+		mColor = new Color(255, (int)(255 * (distance / distToFinalState)), 0, (int)(255 - (255 * (distance / distToFinalState))));
 		mPosition.setLocation(mPosition.getX() + (mVelocity.getX() * PROJECTILE_SPEED), 
 				mPosition.getY() + (mVelocity.getY() * PROJECTILE_SPEED));
 		
@@ -43,7 +46,7 @@ public class FlameProjectile extends Projectile
 		{
 			isOffscreen = true;
 		}
-		else if (distance >= DIST_TO_FINAL_STATE)
+		else if (distance >= distToFinalState)
 		{
 			isOffscreen = true;
 		}

@@ -64,13 +64,11 @@ public class TowerMenu extends Menu {
 			case("upgrade"):
 			{
 				upgradeTower();
-				System.out.println("Clicked Upgrade Button");
 				break;
 			}
 			case("sell"):
 			{
 				sellTower();
-				System.out.println("Clicked Sell Button");
 				break;
 			}
 		}
@@ -100,7 +98,9 @@ public class TowerMenu extends Menu {
 			mRoom.getTowerManager().addFlameTower((FlameTower)tmp);
 		}
 		
+		System.out.println(tmp.getDamage());
 		mParentTile.setTower(tmp);
+		mParentTile.setMenuOpen(false);
 		this.dispose();
 	}
 	
@@ -109,6 +109,7 @@ public class TowerMenu extends Menu {
 		mRoom.getPlayer().modCash(mParentTile.getTower().getCost() / 2);
 		mRoom.getTowerManager().removeTower(mParentTile.getTower());
 		mParentTile.setHasTower(false);
+		mParentTile.setMenuOpen(false);
 		this.dispose();
 	}
 

@@ -1,0 +1,8 @@
+Reviewers: Jack and David
+
+Nice use of the menu for upgrading and making towers;
+Nice UI;
+
+Might want to use some factories to make the towers and units;
+
+You can have multiple menus open for the same tile. Allowing you to build multiple towers on one tile, or getting cheap upgrades. But you can only sell the top tile -> *Fixed before submission! Thanks guys!*

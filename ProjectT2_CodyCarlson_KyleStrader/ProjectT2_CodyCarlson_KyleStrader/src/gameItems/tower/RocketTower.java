@@ -13,10 +13,11 @@ public class RocketTower extends Tower {
 	private static final int ROCKET_DAMAGE = 200;
 	private static final int ROCKET_UPGRADE_COST_START = 200;
 	public static final int ROCKET_BUY_COST = 1000;
+	private static final int ROCKET_RADIUS = 150;
 	
 	public RocketTower(int x, int y, int w, int h, int fireRad, WaveManager waves) 
 	{
-		super(x, y, w, h, fireRad, ROCKET_SHOT_DELAY, waves, ROCKET_DAMAGE, ROCKET_UPGRADE_COST_START, ROCKET_BUY_COST);
+		super(x, y, w, h, ROCKET_RADIUS, ROCKET_SHOT_DELAY, waves, ROCKET_DAMAGE, ROCKET_UPGRADE_COST_START, ROCKET_BUY_COST);
 	}
 
 	public RocketTower(Tower tmp) 
@@ -51,6 +52,10 @@ public class RocketTower extends Tower {
 				(int) mDimensions.getY());
 		
 		drawTargettingRadius(g, (int)mPosition.getX(), (int)mPosition.getY(), mFireRadius);
+		
+		g.setColor(Color.white);
+		
+		g.drawString(Integer.toString(mLevel), (int)mPosition.getX(), (int)mPosition.getY() + (int)(mDimensions.getY() / 4));
 		
 		mProjectileManager.paint(g);
 	}
