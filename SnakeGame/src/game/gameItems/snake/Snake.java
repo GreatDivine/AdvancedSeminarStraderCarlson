@@ -66,6 +66,11 @@ public class Snake implements GameItem {
 		newCycle = true;
 	}
 	
+	public boolean isAlive()
+	{
+		return mIsAlive;
+	}
+	
 	public void modifyScore(int amount)
 	{
 		mParent.modifyScore(amount);

@@ -1,0 +1,60 @@
+package game.util.momento;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class CareTaker {
+
+	private GameSaveMomento mMomento; 
+	
+	private String mFileSysUrl;
+	private boolean mSaveAppend;
+	
+	public CareTaker(String fileURL, boolean shouldAppend)
+	{
+		mFileSysUrl = fileURL;
+		mSaveAppend = shouldAppend;
+	}
+	
+	public void add(GameSaveMomento state)
+	{
+		mMomento = state;
+	}
+	
+	public GameSaveMomento getCurMomento()
+	{
+		return mMomento;
+	}
+	
+	public void load(String fileName) throws IOException
+	{
+	    BufferedReader br = new BufferedReader(new FileReader(fileName));
+	    try {
+	        StringBuilder sb = new StringBuilder();
+	        String line = br.readLine();
+
+	        while (line != null) {
+	            sb.append(line);
+	            sb.append("\n");
+	            line = br.readLine();
+	        }
+	        mMomento = new GameSaveMomento(br.toString());
+	    } finally {
+	        br.close();
+	    }
+	}
+	
+	public void save() throws IOException
+	{
+		FileWriter write = new FileWriter(mFileSysUrl, mSaveAppend);
+		PrintWriter print_line = new PrintWriter(write);
+		
+		print_line.printf("%s" + "%n", mMomento.getStateStr());
+		
+		print_line.close();
+	}
+}

@@ -15,6 +15,8 @@ import game.util.messages.ScoreMessage;
 public class Player implements Observable, GameItem {
 	
 	int mScore;
+	int mHighScore;
+	boolean mIsAlive;
 	Snake mSnake;
 	
 	ArrayList<Observer> mObservers;
@@ -23,12 +25,19 @@ public class Player implements Observable, GameItem {
 	 * It "smells" of coupling, as we need to have a level existing in order to 
 	 * create a player. Would prefer not to have to do that.
 	 */
-	public Player(Level level)
+	public Player(Level level, int highScore)
 	{
+		mHighScore = highScore; 
 		mObservers = new ArrayList<Observer>();
 		mScore = GameSettings.PLAYER_SCORE_DEFAULT;
 		
 		mSnake = new Snake(1, 1, 500, level, this);
+		mIsAlive = mSnake.isAlive();
+	}
+	
+	public boolean isAlive()
+	{
+		return mIsAlive;
 	}
 	
 	public Snake getSnake()
@@ -39,6 +48,11 @@ public class Player implements Observable, GameItem {
 	public int getScore()
 	{
 		return mScore;
+	}
+	
+	public int getHighScore()
+	{
+		return mHighScore;
 	}
 	
 	public void modifyScore(int amount)
@@ -74,6 +88,7 @@ public class Player implements Observable, GameItem {
 	public void paint(Graphics g) 
 	{
 		mSnake.paint(g);
+		mIsAlive = mSnake.isAlive();
 	}
 
 	@Override

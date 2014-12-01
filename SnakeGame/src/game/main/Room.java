@@ -7,10 +7,12 @@ import game.gameItems.level.Level;
 import game.gameItems.player.Player;
 import game.gameItems.snake.Snake;
 import game.util.GameSettings;
+import game.util.momento.*;
 
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -23,14 +25,33 @@ public class Room extends JPanel implements KeyListener {
 	private Player mPlayer;
 	private HUD mHUD;
 	
+	private CareTaker mCareTaker;
+	private Originator mOriginator;
+	
 	public Room()
+	{
+		initialize();
+		addKeyListener(this);
+		this.setFocusable(true);
+		this.requestFocusInWindow();
+	}
+	
+	public void initialize()
 	{
 		mObjects = new ArrayList<GameItem>();
 		
 		mLevel = new Level();
 		addObject(mLevel);
 		
-		mPlayer = new Player(mLevel);
+		mCareTaker = new CareTaker(GameSettings.GAME_SAVE_FILE, false);
+		try {
+			mCareTaker.load(GameSettings.GAME_SAVE_FILE);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		mOriginator = new Originator();
+		
+		mPlayer = new Player(mLevel, mCareTaker.getCurMomento().getStateInt());
 		addObject(mPlayer);
 		
 		mHUD = new HUD();
@@ -40,10 +61,6 @@ public class Room extends JPanel implements KeyListener {
 		
 		mLevel.spawnFoodOnTile(2, 2, FoodType.REGULAR);
 		mLevel.spawnFoodOnTile(3, 3, FoodType.POISON);
-
-		addKeyListener(this);
-		this.setFocusable(true);
-		this.requestFocusInWindow();
 	}
 	
 	public void addObject(GameItem obj)
@@ -56,6 +73,22 @@ public class Room extends JPanel implements KeyListener {
 		for (GameItem o:mObjects)
 		{
 			o.update();
+		}
+		
+		if (!mPlayer.isAlive())
+		{
+			if (mPlayer.getScore() > mCareTaker.getCurMomento().getStateInt());
+			{
+				mOriginator.setState(String.valueOf(mPlayer.getScore()));
+				mCareTaker.add(mOriginator.saveStateToMomento());
+				try {
+					mCareTaker.save();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			initialize();
 		}
 	}
 	

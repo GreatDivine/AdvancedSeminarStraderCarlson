@@ -22,6 +22,8 @@ public class GameSettings {
 	
 	public static final int FOOD_SCORE_DEFAULT = 100;
 	
+	public static final String GAME_SAVE_FILE = "highscore.txt";
+	
 	public static enum SnakeDirection
 	{
 		NONE,
