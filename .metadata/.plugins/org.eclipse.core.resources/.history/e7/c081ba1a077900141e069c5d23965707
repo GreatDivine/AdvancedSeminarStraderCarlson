@@ -1,0 +1,16 @@
+package game.util;
+
+public class CareTaker {
+
+	private GameSaveMomento mMomento;
+	
+	public void add(GameSaveMomento state)
+	{
+		mMomento = state;
+	}
+	
+	public GameSaveMomento getCurMomento(int index)
+	{
+		return mMomento;
+	}	
+}

@@ -1,0 +1,14 @@
+package game.util;
+
+import java.util.ArrayList;
+import java.util.List
+
+public class CareTaker {
+
+	private List<GameSaveMomento> momentoList;
+	
+	public void add(GameSaveMomento)
+	{
+		
+	}
+}

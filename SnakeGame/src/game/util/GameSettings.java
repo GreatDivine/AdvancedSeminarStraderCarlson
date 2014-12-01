@@ -25,4 +25,7 @@ public class GameSettings {
 		RIGHT,
 		LEFT
 	}
+	
+	public static String SAVE_FILE_NAME = "save.txt"; 
+	
 }

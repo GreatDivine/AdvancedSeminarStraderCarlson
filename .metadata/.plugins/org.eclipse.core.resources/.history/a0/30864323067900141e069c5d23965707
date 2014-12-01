@@ -1,0 +1,21 @@
+package game.util;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CareTaker {
+
+	private GameSaveMomento mMomento;
+	
+	public void add(GameSaveMomento state)
+	{
+		mMomento = state;
+	}
+	
+	public GameSaveMomento getCurMomento(int index)
+	{
+		return mMomento;
+	}
+	
+	
+}

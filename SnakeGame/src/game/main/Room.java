@@ -17,11 +17,14 @@ public class Room extends JPanel implements KeyListener {
 	
 	private ArrayList<GameItem> mObjects;
 	private Level mLevel;
+	private boolean mShouldReset;
 	
 	private Snake testSnake;
 	
 	public Room()
 	{
+		mShouldReset = false;
+		
 		mObjects = new ArrayList<GameItem>();
 		
 		mLevel = new Level();

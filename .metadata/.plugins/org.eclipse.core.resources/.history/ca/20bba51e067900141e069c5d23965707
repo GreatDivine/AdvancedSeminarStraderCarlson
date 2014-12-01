@@ -1,0 +1,26 @@
+package game.util;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CareTaker {
+
+	private List<GameSaveMomento> mMomentoList;
+	
+	public CareTaker()
+	{
+		mMomentoList = new ArrayList<GameSaveMomento>();
+	}
+	
+	public void add(GameSaveMomento state)
+	{
+		mMomentoList.add(state);
+	}
+	
+	public GameSaveMomento get(int index)
+	{
+		return mMomentoList.get(index);
+	}
+	
+	
+}
