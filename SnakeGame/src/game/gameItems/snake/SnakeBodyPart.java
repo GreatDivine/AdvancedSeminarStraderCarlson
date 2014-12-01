@@ -54,7 +54,7 @@ public class SnakeBodyPart implements GameItem {
 	public void paint(Graphics g) 
 	{
 		g.setColor(Color.orange);
-		g.fillRect(mPosXPix, mPosYPix, GameSettings.TILE_SIZE - 2, GameSettings.TILE_SIZE - 2);
+		g.fillRect(mPosXPix + 1, mPosYPix + 1, GameSettings.TILE_SIZE - 2, GameSettings.TILE_SIZE - 2);
 	}
 
 	@Override

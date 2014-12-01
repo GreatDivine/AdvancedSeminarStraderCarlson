@@ -12,12 +12,14 @@ import game.util.messages.ScoreMessage;
 public class HUD implements GameItem, Observer{
 	
 	int mScoreDisplay;
+	int mHighScoreDisplay;
 	int mLevelDisplay;
 	
-	public HUD()
+	public HUD(int highScore)
 	{
 		mScoreDisplay = GameSettings.PLAYER_SCORE_DEFAULT;
 		mLevelDisplay = GameSettings.LEVEL_DEFAULT;
+		mHighScoreDisplay = highScore;
 	}
 
 	@Override
@@ -43,16 +45,18 @@ public class HUD implements GameItem, Observer{
 	public void paint(Graphics g) 
 	{
 		String scoreString = "Score: " + Integer.toString(mScoreDisplay);
+		String highScoreString = "High Score: " + Integer.toString(mHighScoreDisplay);
 		String levelString = "Level: " + Integer.toString(mLevelDisplay);
 		
 		g.setColor(new Color(0, 0, 0, 155)); // Set color to a slightly transparent black for bg rectangle
 		
-		g.fillRect(5, 5, 75, 50);
+		g.fillRect(5, 5, 100, 75);
 		
 		g.setColor(Color.white); // set color to white for text
 		
 		g.drawString(scoreString, 10, 20);
-		g.drawString(levelString, 10, 40);
+		g.drawString(highScoreString, 10, 45);
+		g.drawString(levelString, 10, 70);
 	}
 
 	@Override

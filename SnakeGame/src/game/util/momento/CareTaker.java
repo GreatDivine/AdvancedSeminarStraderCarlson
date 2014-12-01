@@ -40,10 +40,8 @@ public class CareTaker {
 				BufferedReader bufferedReader = new BufferedReader(fileReader);
 				StringBuffer stringBuffer = new StringBuffer();
 				String line;
-				while ((line = bufferedReader.readLine()) != null) {
-					stringBuffer.append(line);
-					stringBuffer.append("\n");
-				}
+				line = bufferedReader.readLine();
+				stringBuffer.append(line);
 				fileReader.close();
 				System.out.println("Contents of file:");
 				System.out.println(stringBuffer.toString());

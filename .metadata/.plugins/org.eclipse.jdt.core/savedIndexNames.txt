@@ -1,19 +1,18 @@
-INDEX VERSION 1.127+C:\Users\Abbey\Documents\Kyle - Programming\AdvancedSeminarStraderCarlson\.metadata\.plugins\org.eclipse.jdt.core
-3015671029.index
-1144188029.index
-2708239607.index
-4149142647.index
+INDEX VERSION 1.127+E:\Documents\College Documents\Semester 5\Advanced Seminar\AdvancedSeminarStraderCarlson\.metadata\.plugins\org.eclipse.jdt.core
+3133528496.index
+1498219845.index
+4155206848.index
 2558661053.index
-2706502329.index
-683184654.index
-3256372620.index
-3521617142.index
-3626931047.index
-384216248.index
+305854171.index
+3065916431.index
+30765161.index
 1919008977.index
-1075156909.index
-728132027.index
-1820024274.index
-739078005.index
-4018706093.index
 304559366.index
+1299022128.index
+163172794.index
+3974580528.index
+573543369.index
+4108727661.index
+4041092966.index
+1995173708.index
+1115467115.index

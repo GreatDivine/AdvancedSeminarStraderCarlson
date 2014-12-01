@@ -44,17 +44,19 @@ public class Room extends JPanel implements KeyListener {
 		addObject(mLevel);
 		
 		mCareTaker = new CareTaker(GameSettings.GAME_SAVE_FILE, false);
+		
 		try {
 			mCareTaker.load(GameSettings.GAME_SAVE_FILE);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		mOriginator = new Originator();
 		
 		mPlayer = new Player(mLevel, mCareTaker.getCurMomento().getStateInt());
 		addObject(mPlayer);
 		
-		mHUD = new HUD();
+		mHUD = new HUD(mCareTaker.getCurMomento().getStateInt());
 		addObject(mHUD);
 		
 		mPlayer.addObserver(mHUD);
@@ -77,7 +79,7 @@ public class Room extends JPanel implements KeyListener {
 		
 		if (!mPlayer.isAlive())
 		{
-			if (mPlayer.getScore() > mCareTaker.getCurMomento().getStateInt());
+			if (mPlayer.getScore() > mCareTaker.getCurMomento().getStateInt())
 			{
 				mOriginator.setState(String.valueOf(mPlayer.getScore()));
 				mCareTaker.add(mOriginator.saveStateToMomento());

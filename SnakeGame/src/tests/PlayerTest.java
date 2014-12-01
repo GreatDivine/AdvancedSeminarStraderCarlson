@@ -14,7 +14,7 @@ public class PlayerTest {
 	public void increaseScoreTest()
 	{
 		Level level = new Level();
-		Player player = new Player(level);
+		Player player = new Player(level, 0);
 		
 		assertEquals(0, player.getScore());
 		
@@ -33,7 +33,7 @@ public class PlayerTest {
 	public void scoreMessageTest()
 	{
 		Level level = new Level();
-		Player player = new Player(level);
+		Player player = new Player(level, 0);
 		
 		HUD hud = new HUD();
 		
