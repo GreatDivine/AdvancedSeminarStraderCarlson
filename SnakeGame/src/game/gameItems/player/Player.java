@@ -9,12 +9,14 @@ import game.gameItems.snake.Snake;
 import game.util.GameSettings;
 import game.util.Observable;
 import game.util.Observer;
+import game.util.messages.LevelChangeMessage;
 import game.util.messages.Message.MessageType;
 import game.util.messages.ScoreMessage;
 
 public class Player implements Observable, GameItem {
 	
 	int mScore;
+	int mLevel;
 	int mHighScore;
 	boolean mIsAlive;
 	Snake mSnake;
@@ -30,6 +32,7 @@ public class Player implements Observable, GameItem {
 		mHighScore = highScore; 
 		mObservers = new ArrayList<Observer>();
 		mScore = GameSettings.PLAYER_SCORE_DEFAULT;
+		mLevel = GameSettings.LEVEL_DEFAULT;
 		
 		mSnake = new Snake(1, 1, 500, level, this);
 		mIsAlive = mSnake.isAlive();
@@ -50,6 +53,11 @@ public class Player implements Observable, GameItem {
 		return mScore;
 	}
 	
+	public int getLevel()
+	{
+		return mLevel;
+	}
+	
 	public int getHighScore()
 	{
 		return mHighScore;
@@ -59,6 +67,12 @@ public class Player implements Observable, GameItem {
 	{
 		mScore += amount;
 		sendMessage(MessageType.SCORE_MESSAGE);
+	}
+	
+	public void increaseLevel()
+	{
+		mLevel++;
+		sendMessage(MessageType.LEVEL_CHANGE_MESSAGE);
 	}
 	
 	public void addObserver(Observer o)
@@ -82,6 +96,14 @@ public class Player implements Observable, GameItem {
 				o.processMessage(msg);
 			}
 		}
+		else if (type == MessageType.LEVEL_CHANGE_MESSAGE)
+		{
+			for (Observer o:mObservers)
+			{
+				LevelChangeMessage msg = new LevelChangeMessage(mLevel);
+				o.processMessage(msg);
+			}
+		}
 	}
 
 	@Override
@@ -95,6 +117,11 @@ public class Player implements Observable, GameItem {
 	public void update() 
 	{
 		mSnake.update();
+		
+		if (mScore > 1000 * mLevel)
+		{
+			increaseLevel();
+		}
 	}
 
 }

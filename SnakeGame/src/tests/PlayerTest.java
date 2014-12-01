@@ -35,7 +35,7 @@ public class PlayerTest {
 		Level level = new Level();
 		Player player = new Player(level, 0);
 		
-		HUD hud = new HUD();
+		HUD hud = new HUD(0);
 		
 		player.addObserver(hud);
 		

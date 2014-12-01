@@ -107,7 +107,7 @@ public class Snake implements GameItem {
 		{
 			addSnakePart();
 		}
-		else
+		else if (pointsChange < 0)
 		{
 			addSnakePart();
 			addSnakePart();
@@ -122,22 +122,25 @@ public class Snake implements GameItem {
 	{
 		Random rand = new Random();
 		
-		int x = rand.nextInt(GameSettings.GRID_SIZE);
-		int y = rand.nextInt(GameSettings.GRID_SIZE);
-		int t = rand.nextInt(2);
-		
-		
-		FoodType type;
-		if (t == 0)
+		for (int i = 0; i < mParent.getLevel(); i++)
 		{
-			type = FoodType.REGULAR;
+			int x = rand.nextInt(GameSettings.GRID_SIZE);
+			int y = rand.nextInt(GameSettings.GRID_SIZE);
+			int t = rand.nextInt(10);
+			
+			
+			FoodType type;
+			if (t <= 3 && mParent.getLevel() != 1)
+			{
+				type = FoodType.POISON;
+			}
+			else
+			{
+				type = FoodType.REGULAR;
+			}
+			
+			mLevel.spawnFoodOnTile(x, y, type);
 		}
-		else
-		{
-			type = FoodType.POISON;
-		}
-		
-		mLevel.spawnFoodOnTile(x, y, type);
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package game.util;
 public class GameSettings {
 	
 	public final static int FRAME_WIDTH = 512;
-	public final static int FRAME_HEIGHT = 512;
+	public final static int FRAME_HEIGHT = 544;
 	
 	public static final double NANOSECONDS_TO_MILLISECONDS = 1000000.0; //1.0E6 nanoseconds per 1 millisecond
 	public static final double NANOSECONDS_TO_SECONDS = 1000000000.0; //1.0E9 nanoseconds per 1 second

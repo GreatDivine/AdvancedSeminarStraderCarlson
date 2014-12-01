@@ -5,7 +5,6 @@ import game.gameItems.food.Food.FoodType;
 import game.gameItems.hud.HUD;
 import game.gameItems.level.Level;
 import game.gameItems.player.Player;
-import game.gameItems.snake.Snake;
 import game.util.GameSettings;
 import game.util.momento.*;
 
@@ -62,7 +61,6 @@ public class Room extends JPanel implements KeyListener {
 		mPlayer.addObserver(mHUD);
 		
 		mLevel.spawnFoodOnTile(2, 2, FoodType.REGULAR);
-		mLevel.spawnFoodOnTile(3, 3, FoodType.POISON);
 	}
 	
 	public void addObject(GameItem obj)
